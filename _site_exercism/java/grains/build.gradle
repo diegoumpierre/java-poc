@@ -1,0 +1,24 @@
+plugins {
+    id "java"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.junit', name: 'junit-bom', version: '5.8.1', ext: 'pom'
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
+
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        exceptionFormat = "full"
+        showStandardStreams = true
+        events = ["passed", "failed", "skipped"]
+    }
+}
