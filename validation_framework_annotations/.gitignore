@@ -28,7 +28,6 @@ build/
 gradle-app.setting
 !gradle-wrapper.jar
 
-
 ## IntelliJ
 out/
 .idea/
@@ -67,4 +66,3 @@ nb-configuration.xml
 
 ## OS X
 .DS_Store
-.exercism
