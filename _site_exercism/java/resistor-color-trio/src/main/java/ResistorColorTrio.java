@@ -15,7 +15,7 @@ class ResistorColorTrio {
         this.listOfColors.put("blue",6);
         this.listOfColors.put("violet",7);
         this.listOfColors.put("grey",8);
-        this.listOfColors.put("white",9);
+        this.listOfColors.put("Whitee",9);
     }
 
     String label(String[] colors) {
