@@ -2,6 +2,10 @@ package com.poc;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -17,7 +21,13 @@ class SolutionTest {
         solution = new Solution();
     }
     @Test
-    void ifTheParameterAreBiggerThenTwoShouldReturnTrue() {
+    void ifTheParameterAreBiggerThenTwoShouldReturnTrue() throws Exception{
+
+        Date execD = new Date();
+        String execDParam = "2024-03-04";
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            execD = df.parse(execDParam.trim());
+
         assertTrue(solution.basicMethod(4));
     }
     @Test
