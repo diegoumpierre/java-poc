@@ -1,20 +1,25 @@
 package com.poc.domain.validation;
 
+import com.poc.domain.Person;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class AnnotationValidationTest {
+
+
+    AnnotationValidation annotationValidation = new AnnotationValidation();
+
     @Test
-    void ifTheParameterAreBiggerThenTwoShouldReturnTrue() throws Exception{
+    void validatePessoaNotNullAgeShouldFail() throws Exception {
+
+        Person person = new Person();
+        person.setName("JOA");
+
+        annotationValidation.validate(person);
+
+        //expects a exception
 
 
+/*
         public void readClass(Object object) {
             String className = object.getClass().getName();
 
@@ -57,6 +62,10 @@ class AnnotationValidationTest {
             return Arrays.asList(alias.otherFieldNames().split(","));
         }
 
+
+    }
+
+ */
 
     }
 }
