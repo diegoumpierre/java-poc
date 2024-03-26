@@ -29,6 +29,12 @@ public class AnnotationValidation {
         return false;
     }
 
+
+    private boolean isValidName(String value){
+        if (value.isEmpty()) return false;
+        return true;
+    }
+
     private static final int[] WeightCPF = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 
     public boolean isValidCPF(String cpf) {
