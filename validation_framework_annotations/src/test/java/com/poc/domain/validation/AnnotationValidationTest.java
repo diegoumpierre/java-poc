@@ -1,6 +1,7 @@
 package com.poc.domain.validation;
 
 import com.poc.domain.Person;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 class AnnotationValidationTest {
@@ -18,5 +19,17 @@ class AnnotationValidationTest {
 
         //expects a exception
 
+    }
+
+    @Test
+    void isValidCPFShouldSucces() {
+        String cpf = "81401310087";
+        Assert.assertTrue(annotationValidation.isValidCPF(cpf));
+    }
+
+    @Test
+    void isValidCPFShouldFail() {
+        String cpf = "81401320087";
+        Assert.assertFalse(annotationValidation.isValidCPF(cpf));
     }
 }
