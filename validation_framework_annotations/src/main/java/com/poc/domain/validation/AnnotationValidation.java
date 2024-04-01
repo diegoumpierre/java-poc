@@ -22,7 +22,7 @@ public class AnnotationValidation {
 
     }
 
-    private boolean isValidateNotNull(String value){
+    protected boolean isValidateNotNull(String value){
         if (value != null && !value.isEmpty()){
             return true;
         }
@@ -30,7 +30,7 @@ public class AnnotationValidation {
     }
 
 
-    private boolean isValidName(String value){
+    protected boolean isValidName(String value){
         if (value.isEmpty()) return false;
         return true;
     }
