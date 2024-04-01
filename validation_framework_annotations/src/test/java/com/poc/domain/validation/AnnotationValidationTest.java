@@ -32,4 +32,19 @@ class AnnotationValidationTest {
         String cpf = "81401320087";
         Assert.assertFalse(annotationValidation.isValidCPF(cpf));
     }
+
+    @Test
+    void isNotNullShouldFail() {
+        String name = "";
+        Assert.assertFalse(annotationValidation.isValidName(name));
+    }
+
+    @Test
+    void isNotNullShouldSuccess() {
+        String name = "Dieg";
+        Assert.assertTrue(annotationValidation.isValidName(name));
+    }
+
+
+
 }
