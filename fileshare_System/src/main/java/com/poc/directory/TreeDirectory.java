@@ -9,4 +9,8 @@ public class TreeDirectory {
         return null;
     }
 
+    boolean isFileExists(String fileName){
+        return false;
+    }
+
 }
