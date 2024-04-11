@@ -17,5 +17,9 @@ public class TreeDirectory {
         return true;
     }
 
+    boolean removeFile(String filename){
+        return false;
+    }
+
 
 }
