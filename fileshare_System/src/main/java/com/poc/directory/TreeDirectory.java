@@ -13,4 +13,9 @@ public class TreeDirectory {
         return false;
     }
 
+    boolean createNewFile(String fileName, String content){
+        return true;
+    }
+
+
 }
