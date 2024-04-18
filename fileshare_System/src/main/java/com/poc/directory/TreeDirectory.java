@@ -1,15 +1,34 @@
 package com.poc.directory;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TreeDirectory {
 
-    List<String> listAllFiles(){
-
-        return null;
+    Set<String> listAllFiles(String dir) throws IOException {
+        try (Stream<Path> stream = Files.list(Paths.get(dir))) {
+            return stream
+                    .filter(file -> !Files.isDirectory(file))
+                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .collect(Collectors.toSet());
+        }
     }
 
     boolean isFileExists(String fileName){
+
+        File f = new File(fileName);
+        if(f.exists() && !f.isDirectory()) {
+            return true;
+        }
+
         return false;
     }
 
