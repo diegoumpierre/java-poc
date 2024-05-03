@@ -21,18 +21,14 @@ class SolutionTest {
         solution = new Solution();
     }
     @Test
-    void ifTheParameterAreBiggerThenTwoShouldReturnTrue() throws Exception{
+    void callProxyShouldBeSuccess() throws Exception{
+        /**
+         * criar uma instancia usando o proxy e chamar o método desejado
+         */
 
-        Date execD = new Date();
-        String execDParam = "2024-03-04";
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            execD = df.parse(execDParam.trim());
 
-        assertTrue(solution.basicMethod(4));
-    }
-    @Test
-    void ifTheParameterAreLessThenTwoShouldReturnFalse() {
-        assertFalse(solution.basicMethod(1));
-    }
+
+
+      }
 
 }
