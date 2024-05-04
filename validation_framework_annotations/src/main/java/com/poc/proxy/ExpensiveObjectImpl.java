@@ -11,7 +11,7 @@ public class ExpensiveObjectImpl implements ExpensiveObject {
 
     @Override
     public void process() {
-        LOGGER.info("processing complete.");
+        LOGGER.info("processing 1 complete.");
     }
 
     private void heavyInitialConfiguration() {
