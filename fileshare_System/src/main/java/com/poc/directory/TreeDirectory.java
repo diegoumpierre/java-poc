@@ -33,6 +33,15 @@ public class TreeDirectory {
     }
 
     boolean createNewFile(String fileName, String content){
+        try {
+            java.io.File arquivo = new java.io.File("c://", fileName);
+            boolean statusArq = arquivo.createNewFile();
+            System.out.print(statusArq);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         return true;
     }
 
