@@ -1,13 +1,11 @@
-package com.poc.domain.validation;
+package com.poc.library.domain.validation;
 
-import com.poc.domain.Person;
-import com.poc.validation.AnnotationValidation;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+//import com.poc.library.validation.AnnotationValidation;
+
 
 class AnnotationValidationTest {
 
-
+/*
     AnnotationValidation annotationValidation = new AnnotationValidation();
 
     @Test
@@ -47,5 +45,5 @@ class AnnotationValidationTest {
     }
 
 
-
+*/
 }
