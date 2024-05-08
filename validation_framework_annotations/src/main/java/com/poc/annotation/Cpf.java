@@ -1,4 +1,4 @@
-package com.poc.domain.annotation;
+package com.poc.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

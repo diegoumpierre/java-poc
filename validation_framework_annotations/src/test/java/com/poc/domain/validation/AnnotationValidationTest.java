@@ -1,6 +1,7 @@
 package com.poc.domain.validation;
 
 import com.poc.domain.Person;
+import com.poc.validation.AnnotationValidation;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 

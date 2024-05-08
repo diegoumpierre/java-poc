@@ -1,4 +1,4 @@
-package com.poc.domain.validation;
+package com.poc.validation;
 
 public class NotNullValidation  implements AnnotationValidationInterface{
     @Override

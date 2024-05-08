@@ -1,7 +1,7 @@
-package com.poc.domain.validation;
+package com.poc.validation;
 
 import com.poc.domain.Person;
-import com.poc.domain.annotation.NotNull;
+import com.poc.annotation.NotNull;
 
 import java.lang.reflect.Field;
 

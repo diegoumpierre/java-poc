@@ -1,8 +1,8 @@
 package com.poc.domain;
 
-import com.poc.domain.annotation.Cpf;
-import com.poc.domain.annotation.Name;
-import com.poc.domain.annotation.NotNull;
+import com.poc.annotation.Cpf;
+import com.poc.annotation.Name;
+import com.poc.annotation.NotNull;
 
 public class Person {
 
