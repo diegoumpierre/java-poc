@@ -1,43 +1,11 @@
-package com.poc.validation;
+package com.poc.library.validation;
 
-import com.poc.domain.Person;
-import com.poc.annotation.NotNull;
-
-import java.lang.reflect.Field;
-
-public class AnnotationValidation {
-    public void validate(Person person) {
-
-//        String className = person.getClass().getName();
-        Field[] fields = person.getClass().getDeclaredFields();
-        try {
-            for (Field field : fields) {
-                //check if the field have the alias
-                String notNull= String.valueOf(field.getAnnotation(NotNull.class));
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    protected boolean isValidateNotNull(String value){
-        if (value != null && !value.isEmpty()){
-            return true;
-        }
-        return false;
-    }
-
-
-    protected boolean isValidName(String value){
-        if (value.isEmpty()) return false;
-        return true;
-    }
+public class CpfValidation implements AnnotationValidationInterface{
 
     private static final int[] WeightCPF = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 
-    public boolean isValidCPF(String cpf) {
+    @Override
+    public boolean isValid(String cpf) {
         cpf = cpf.trim().replace(".", "").replace("-", "");
         if (cpf.length() != 11) return false;
 

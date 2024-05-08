@@ -1,17 +1,20 @@
-package com.poc.domain;
+package com.poc.client.client2.domain;
 
-import com.poc.annotation.Cpf;
-import com.poc.annotation.Name;
-import com.poc.annotation.NotNull;
+import com.poc.library.annotation.Name;
+import com.poc.library.annotation.NotNull;
 
-public class Person {
+public class Car {
 
+    public Car(){
+    }
+    public Car(String name, Integer age){
+        this.name = name;
+        this.age = age;
+    }
+
+    @NotNull
     @Name
     private String name;
-
-    @Cpf
-    private String cpf;
-
 
     @NotNull
     private Integer age;
@@ -23,14 +26,6 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public Integer getAge() {
