@@ -2,6 +2,8 @@ package com.poc.client;
 
 import com.poc.client.client1.domain.Person;
 import com.poc.client.client1.service.PersonServiceHelper;
+import com.poc.client.client2.domain.Car;
+import com.poc.client.client2.service.CarServiceHelper;
 
 public class Main {
 
@@ -14,8 +16,9 @@ public class Main {
         personServiceHelper.doSomeProcess(person);
 
         //client2
-
-
+        Car car = new Car("Tubarao", 10);
+        CarServiceHelper carServiceHelper = new CarServiceHelper();
+        carServiceHelper.howManyProcess(car);
 
     }
 
