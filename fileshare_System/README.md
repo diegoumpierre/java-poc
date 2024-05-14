@@ -4,3 +4,5 @@ lista os arquivos
 upload 
 download 
 excluir 
+
+Adicionar o status atual para conseguir parar
