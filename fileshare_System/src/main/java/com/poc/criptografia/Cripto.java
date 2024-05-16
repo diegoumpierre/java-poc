@@ -1,10 +1,5 @@
 package com.poc.criptografia;
 
-//import org.apache.commons.configuration2.FileBasedConfiguration;
-//import org.apache.commons.configuration2.PropertiesConfiguration;
-//import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
-//import org.apache.commons.configuration2.builder.fluent.Parameters;
-//import org.apache.commons.configuration2.ex.ConfigurationException;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -97,20 +92,7 @@ public class Cripto {
     public static String loadKeySecret() {
 
         String key = "";
-//        Parameters params = new Parameters();
-//        FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
-//                new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
-//                        .configure(params.properties()
-//                                .setFileName("application.yml"));
-//        try {
-//            org.apache.commons.configuration2.Configuration config = builder.getConfiguration();
-//
-//            key =  config.getString("encryption-key");
-//
-//        } catch (ConfigurationException cex) {
-//            System.out.println(cex.getMessage());
-//
-//        }
+
 
         return key;
     }
