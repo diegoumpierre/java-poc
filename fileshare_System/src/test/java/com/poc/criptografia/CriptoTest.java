@@ -24,4 +24,19 @@ class CriptoTest {
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    void setKey() {
+    }
+
+    @Test
+    void testEncrypt() {
+    }
+
+    @Test
+    void testDecrypt() {
+    }
+
+    @Test
+    void loadKeySecret() {
+    }
 }

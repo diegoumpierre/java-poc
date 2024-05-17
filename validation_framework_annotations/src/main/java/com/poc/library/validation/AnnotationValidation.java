@@ -19,23 +19,22 @@ public class AnnotationValidation {
             for (Field field : fields) {
 
                 field.setAccessible(true);
-                Object fieldValueObject = field.get(objectToValidate);
-                String fieldValue = String.valueOf(fieldValueObject);
+                Object fieldValue = field.get(objectToValidate);
 
                 if (field.getAnnotation(NotNull.class) != null) {
-                    if (!notNullValidation.isValid(fieldValue)){
+                    if (!notNullValidation.isValid((String) fieldValue)){
                         throw new Exception("The field "+field.getName()+" can't be null!");
                     }
                 }
 
                 if (field.getAnnotation(Name.class) != null) {
-                    if (!nameValidation.isValid(fieldValue)){
+                    if (!nameValidation.isValid((String) fieldValue)){
                         throw new Exception("The field "+field.getName()+" need have 3 letters in the minimum!");
                     }
                 }
 
                 if (field.getAnnotation(Cpf.class) != null) {
-                    if (!cpfValidation.isValid(fieldValue)){
+                    if (!cpfValidation.isValid((String) fieldValue)){
                         throw new Exception("The field "+field.getName()+" have a invalid CPF!");
                     }
                 }
