@@ -6,6 +6,9 @@ import com.poc.library.annotation.NotNull;
 
 public class Person {
 
+    public Person(){
+
+    }
     public Person(String name,Integer age,String cpf){
         this.name = name;
         this.age = age;

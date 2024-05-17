@@ -5,6 +5,8 @@ import com.poc.library.annotation.NotNull;
 
 public class Car {
 
+    public Car(){
+    }
     public Car(String name, Integer age){
         this.name = name;
         this.age = age;
