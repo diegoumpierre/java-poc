@@ -49,4 +49,20 @@ class TreeDirectoryTest {
     void testRemoveFile() {
         treeDirectory.removeFile("");
     }
+
+    @Test
+    void testListAllFiles1() {
+    }
+
+    @Test
+    void testIsFileExists1() {
+    }
+
+    @Test
+    void testCreateNewFile1() {
+    }
+
+    @Test
+    void testRemoveFile1() {
+    }
 }
