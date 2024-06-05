@@ -1,6 +1,15 @@
 # Solution
-lista todos os diretorios
-lista os arquivos 
-upload 
-download 
-excluir 
+
+To run
+    mvn clean install
+
+    mvn spring-boot: run
+
+
+
+# Features
+- list all directorys
+- List all files in some directory
+- Upload a file
+- Download a file
+- Delete a file
