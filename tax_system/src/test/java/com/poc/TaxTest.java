@@ -2,7 +2,9 @@ package com.poc;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * The proposal for the class it is show the basic structure for a test class.
@@ -10,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author diegoUmpierre
  * @since Sep 12 2023
  */
-class SolutionTest {
-    private Solution solution;
+class TaxTest {
+    private Tax solution;
     @BeforeEach
     void init(){
-        solution = new Solution();
+        solution = new Tax();
     }
     @Test
     void ifTheParameterAreBiggerThenTwoShouldReturnTrue() {

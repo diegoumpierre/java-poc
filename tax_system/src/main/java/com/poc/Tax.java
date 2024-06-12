@@ -6,7 +6,7 @@ package com.poc;
  * @author diegoUmpierre
  * @since Sep 12 2023
  */
-public class Solution {
+public class Tax {
     public boolean basicMethod(int number){
         if (number > 2 ) return true;
         return false;
