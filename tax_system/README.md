@@ -1,2 +1,7 @@
 # Solution
 (1) Build a TAX system where different products have different tax per state and year.
+
+
+use Map for state
+use Map for the year
+
