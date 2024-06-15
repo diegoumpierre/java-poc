@@ -13,10 +13,10 @@ import static org.junit.Assert.assertTrue;
  * @since Sep 12 2023
  */
 class TaxTest {
-    private Tax solution;
+    private TaxMain solution;
     @BeforeEach
     void init(){
-        solution = new Tax();
+        solution = new TaxMain();
     }
     @Test
     void ifTheParameterAreBiggerThenTwoShouldReturnTrue() {
