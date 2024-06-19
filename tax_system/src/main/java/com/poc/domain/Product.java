@@ -1,6 +1,5 @@
 package com.poc.domain;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Product {
@@ -10,7 +9,7 @@ public class Product {
 
 
 
-    public Double getTax(String state, Integer year){
+    public Double getTax(Estate state, Integer year){
 
         if (taxList != null && !taxList.isEmpty()){
             for(Tax taxItem : taxList){
