@@ -2,15 +2,15 @@ package com.poc.domain;
 
 public class Tax {
 
-    private String state;
+    private Estate state;
     private Double value;
     private Integer year;
 
-    public String getState() {
+    public Estate getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Estate state) {
         this.state = state;
     }
 

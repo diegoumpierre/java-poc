@@ -7,8 +7,12 @@ package com.poc;
  * @since Sep 12 2023
  */
 public class TaxMain {
-    public boolean basicMethod(int number){
-        if (number > 2 ) return true;
-        return false;
-    }
+
+
+    //I need create like an API
+
+    //or can use a main
+
+
+
 }
