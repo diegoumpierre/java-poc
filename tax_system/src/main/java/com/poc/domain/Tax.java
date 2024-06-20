@@ -2,15 +2,15 @@ package com.poc.domain;
 
 public class Tax {
 
-    private Estate state;
+    private StateEnum state;
     private Double value;
     private Integer year;
 
-    public Estate getState() {
+    public StateEnum getState() {
         return state;
     }
 
-    public void setState(Estate state) {
+    public void setState(StateEnum state) {
         this.state = state;
     }
 
@@ -29,4 +29,14 @@ public class Tax {
     public void setYear(Integer year) {
         this.year = year;
     }
+
+
+    public enum StateEnum {
+        RS,
+        SC,
+        RJ,
+        SP
+    }
+
+
 }
