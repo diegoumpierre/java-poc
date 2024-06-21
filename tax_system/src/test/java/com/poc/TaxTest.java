@@ -27,16 +27,6 @@ class TaxTest {
     @Test
     void createProductAndTax() {
 
-        List<Product> productList = new ArrayList<>();
-
-        Tax tax = new Tax();
-        tax.setState();
-
-        Product product = new Product();
-        product.set
-
-
-
 
 
     }
