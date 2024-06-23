@@ -11,33 +11,25 @@ public class TestData {
 
 
 
+    public Tax gimmeTax(Tax.StateEnum stateEnum, Integer year, Double value){
+        Tax tax = new Tax();
+        tax.setState(stateEnum);
+        tax.setYear(year);
+        tax.setValue(value);
+        return tax;
+    }
     public List<Tax> gimmeListTax() {
 
         List<Tax> taxList = new ArrayList<>();
+        taxList.add(gimmeTax(Tax.StateEnum.RS,2015, 20.3));
+        taxList.add(gimmeTax(Tax.StateEnum.RS,2010, 30.3));
+        taxList.add(gimmeTax(Tax.StateEnum.RS,2009, 50.3));
+        taxList.add(gimmeTax(Tax.StateEnum.RJ,2010, 60.3));
+        taxList.add(gimmeTax(Tax.StateEnum.RJ,2011, 20.7));
+        taxList.add(gimmeTax(Tax.StateEnum.RJ,2009, 20.8));
+        taxList.add(gimmeTax(Tax.StateEnum.SC,2010, 24.3));
+        taxList.add(gimmeTax(Tax.StateEnum.SC,2011, 22.3));
 
-        Tax tax = new Tax();
-        tax.setState(Tax.StateEnum.RS);
-        tax.setYear(2010);
-        tax.setValue(20.3);
-        taxList.add(tax);
-
-        Tax tax1 = new Tax();
-        tax1.setState(Tax.StateEnum.RS);
-        tax1.setYear(2010);
-        tax1.setValue(20.3);
-        taxList.add(tax1);
-
-        Tax tax2 = new Tax();
-        tax2.setState(Tax.StateEnum.RS);
-        tax2.setYear(2010);
-        tax2.setValue(20.3);
-        taxList.add(tax2);
-
-        Tax tax3 = new Tax();
-        tax3.setState(Tax.StateEnum.RS);
-        tax3.setYear(2010);
-        tax3.setValue(20.3);
-        taxList.add(tax3);
 
         return taxList;
     }
