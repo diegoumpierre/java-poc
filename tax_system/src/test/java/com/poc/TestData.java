@@ -29,7 +29,10 @@ public class TestData {
         taxList.add(gimmeTax(Tax.StateEnum.RJ,2009, 20.8));
         taxList.add(gimmeTax(Tax.StateEnum.SC,2010, 24.3));
         taxList.add(gimmeTax(Tax.StateEnum.SC,2011, 22.3));
-
+        taxList.add(gimmeTax(Tax.StateEnum.SC,2010, 24.3));
+        taxList.add(gimmeTax(Tax.StateEnum.SC,2011, 22.3));
+        taxList.add(gimmeTax(Tax.StateEnum.SC,2010, 24.3));
+        taxList.add(gimmeTax(Tax.StateEnum.SC,2011, 22.3));
 
         return taxList;
     }
