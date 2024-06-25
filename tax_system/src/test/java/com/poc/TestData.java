@@ -11,14 +11,14 @@ public class TestData {
 
 
 
-    public Tax gimmeTax(Tax.StateEnum stateEnum, Integer year, Double value){
+    public static Tax gimmeTax(Tax.StateEnum stateEnum, Integer year, Double value){
         Tax tax = new Tax();
         tax.setState(stateEnum);
         tax.setYear(year);
         tax.setValue(value);
         return tax;
     }
-    public List<Tax> gimmeListTax() {
+    public static List<Tax> gimmeListTax() {
 
         List<Tax> taxList = new ArrayList<>();
         taxList.add(gimmeTax(Tax.StateEnum.RS,2015, 20.3));
@@ -36,10 +36,7 @@ public class TestData {
         taxList.add(gimmeTax(Tax.StateEnum.SC,2010, 24.3));
         taxList.add(gimmeTax(Tax.StateEnum.SC,2011, 22.3));
         taxList.add(gimmeTax(Tax.StateEnum.SC,2010, 24.3));
-        taxList.add(gimmeTax(Tax.StateEnum.SC,2011, 22.3));taxList.add(gimmeTax(Tax.StateEnum.SC,2010, 24.3));
-        taxList.add(gimmeTax(Tax.StateEnum.SC,2011, 22.3));
-        taxList.add(gimmeTax(Tax.StateEnum.SC,2010, 24.3));
-        taxList.add(gimmeTax(Tax.StateEnum.SC,2011, 22.3));
+
         return taxList;
     }
 

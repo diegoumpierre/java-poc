@@ -26,6 +26,9 @@ class TaxTest {
 
     @Test
     void createProductAndTax() {
+        Product p1 = new Product();
+        p1.setName("product 1");
+        p1.setTaxList(TestData.gimmeListTax());
 
 
 
