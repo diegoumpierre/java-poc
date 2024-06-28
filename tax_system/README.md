@@ -4,11 +4,14 @@
 - Use like an API
 - provide one swagger for the tests
 
+# Design for the solution patterns 
+- Specification
+- Chain
 
-pra tua POC… faz duas soluções usando os patterns Specification and Chain
-
-quero poder adicionar os taxes de um ano seguinte, ex: adicionar todos os taxes de 2025. Isto tem que ser uma manutenção super simples de fazer no código, tem que pensar na forma mais simples de fazer isso, ou seja, mexer o menos possível no código pra adicionar taxes.
-quero poder remover taxes de anos anteriores de forma super simples, com o menor esforço possível.
-não pode usar qualquer tipo de persistência de dados, os dados estão presente nas classes.
+# Features
+- adicionar os taxes de um ano seguinte, 
+  - ex: adicionar todos os taxes de 2025. Isto tem que ser uma manutenção super simples de fazer no código, tem que pensar na forma mais simples de fazer isso, ou seja, mexer o menos possível no código pra adicionar taxes.
+- remover taxes de anos anteriores de forma super simples, com o menor esforço possível.
+- não pode usar qualquer tipo de persistência de dados, os dados estão presente nas classes.
 
 
