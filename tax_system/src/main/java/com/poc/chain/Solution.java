@@ -6,4 +6,9 @@ public class Solution {
     public void addTax(){
 
     }
+
+    public void removeTax(){
+
+    }
+
 }
