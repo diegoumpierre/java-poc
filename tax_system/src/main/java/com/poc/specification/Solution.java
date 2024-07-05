@@ -9,12 +9,16 @@ import java.util.Map;
 
 public class Solution {
 
-    private Map<String, List<Tax>> listMap = new HashMap<>();
+    private Map<Long, Tax> listMap = new HashMap<>();
 
-    public void addTax(String year, Tax tax){
+    public void addTax(Long year, Tax tax){
 
-        listMap.getOrDefault(year,new ArrayList<>());
+        listMap.getOrDefault(year,new Tax());
 
+    }
+
+    public Tax searchByYear(Long year){
+        return listMap.getOrDefault(year,new Tax());
     }
 
     public void removeTax(){
