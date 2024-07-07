@@ -21,7 +21,10 @@ public class Solution {
         return listMap.getOrDefault(year,new Tax());
     }
 
-    public void removeTax(){
+    public void removeTax(Long year, Tax.MonthEnum month ){
+
+        //chave valor
+
 
     }
 }

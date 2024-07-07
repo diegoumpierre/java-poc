@@ -9,6 +9,21 @@ public class Tax {
         SP
     }
 
+    public enum MonthEnum {
+        JAN,
+        FEV,
+        MAR,
+        APR,
+        MAY,
+        JUN,
+        JUL,
+        AUG,
+        SET,
+        OUT,
+        NOV,
+        DEC;
+    }
+
     private StateEnum state;
     private Integer year;
 
