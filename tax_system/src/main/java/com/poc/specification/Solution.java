@@ -17,14 +17,16 @@ public class Solution {
 
     }
 
+
+
+
     public Tax searchByYear(Long year){
         return listMap.getOrDefault(year,new Tax());
     }
 
     public void removeTax(Long year, Tax.MonthEnum month ){
 
-        //chave valor
-
-
+        Tax tax = listMap.get(year);
+        tax.getApr().equals(month);
     }
 }
