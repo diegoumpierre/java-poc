@@ -28,5 +28,6 @@ public class Solution {
 
         Tax tax = listMap.get(year);
         tax.getApr().equals(month);
+        listMap.remove(year);
     }
 }
