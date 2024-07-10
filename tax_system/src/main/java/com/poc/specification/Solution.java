@@ -13,7 +13,9 @@ public class Solution {
 
     public void addTax(Long year, Tax tax){
 
-        listMap.getOrDefault(year,new Tax());
+        Tax tax1 = listMap.getOrDefault(year,new Tax());
+
+        if (tax1.getApr() != null) tax1.setYear(2009);
 
     }
 
