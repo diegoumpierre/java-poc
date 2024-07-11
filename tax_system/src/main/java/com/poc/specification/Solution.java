@@ -11,13 +11,6 @@ public class Solution {
 
     private Map<Long, Tax> listMap = new HashMap<>();
 
-    public void addTax(Long year, Tax tax){
-
-        Tax tax1 = listMap.getOrDefault(year,new Tax());
-
-        if (tax1.getApr() != null) tax1.setYear(2009);
-
-    }
 
 
 
