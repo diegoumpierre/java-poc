@@ -11,13 +11,7 @@ public class Product {
 
     public Double getTax(Estate state, Integer year){
 
-        if (taxList != null && !taxList.isEmpty()){
-            for(Tax taxItem : taxList){
-                if (taxItem.getState().equals(state) && taxItem.getYear().equals(year)){
-                    return taxItem.getValue();
-                }
-            }
-        }
+
         return null;
     }
 
