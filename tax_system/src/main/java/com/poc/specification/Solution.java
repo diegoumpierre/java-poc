@@ -9,7 +9,4 @@ import java.util.Map;
 
 public class Solution {
 
-    private Map<Long, Tax> listMap = new HashMap<>();
-
-
-}
+   ]
