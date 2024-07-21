@@ -20,6 +20,7 @@
 - add taxes per year
 - remove taxes before the year in parameter
 
-
-
-
+# Versão 2
+- Estudar o padrão specification
+- Nada de controller nem subir servidor com o padrão specification
+- core com no máximo 4 a 5 classes
