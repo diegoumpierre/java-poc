@@ -18,8 +18,27 @@ class SolutionTest {
     }
 
     @Test
-    void allocate4queens() {
-        assertTrue(solution.basicMethod(4));
+    void allocate1queens() {
+        assertTrue(solution.solutionQueen(1));
     }
 
+    @Test
+    void allocate2queens() {
+        assertFalse(solution.solutionQueen(2));
+    }
+
+    @Test
+    void allocate3queens() {
+        assertFalse(solution.solutionQueen(3));
+    }
+
+    @Test
+    void allocate4queens() {
+        assertTrue(solution.solutionQueen(4));
+    }
+
+    @Test
+    void allocate12queens() {
+        assertTrue(solution.solutionQueen(12));
+    }
 }
