@@ -32,6 +32,8 @@ class FeeServiceTest {
 
     @Test
     void removeAllTaxesBefore() {
+        //need add a lot of taxes and product
+        feeService.removeAllTaxesBefore(2020);
     }
 
     @Test
