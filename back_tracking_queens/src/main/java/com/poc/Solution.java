@@ -9,45 +9,77 @@ package com.poc;
 public class Solution {
 
    private int[][] chessboard;
-
    private int allocatedQueens = 0;
+   private int numberOfQueens;
 
-   public boolean basicMethod(int nQueens){
+   public boolean solutionQueen(int numberOfQueensToAllocate){
+       chessboard = new int[numberOfQueensToAllocate][numberOfQueensToAllocate];
+       numberOfQueens = numberOfQueensToAllocate;
 
-       initArrayNxN(nQueens);
+       if (solution(0) == false) {
+           System.out.printf("No Solution");
+           return false;
+       }
 
-       for (int column = 0; column < nQueens; column++){
-           if(allocatedQueens(column,nQueens)){
-               //allocated
+       printSolution();
+       return true;
+   }
+
+   public boolean solution(int columnToCheck){
+       //have allocatedAll
+       if (allocatedQueens >= numberOfQueens) return true;
+
+       //check all lines
+       for(int row=0; row < numberOfQueens; row++){
+           if(canAllocate(row, columnToCheck)){
+                chessboard[row][columnToCheck] = 1;
+                allocatedQueens +=1;
+                if (solution(columnToCheck +1)){
+                    return true;
+                }else {
+                    chessboard[row][columnToCheck] = 0;
+                    allocatedQueens -=1;
+                }
            }
        }
        return false;
    }
 
-   private void initArrayNxN(int nQueens){
-       for (int line=0;line<nQueens;line++){
-           for(int column=0;column<nQueens;column++){
-               chessboard[line][column] =0;
-           }
+
+   public boolean canAllocate(int rowToCheck, int columToCheck){
+
+       //check the columns before
+       for(int column=0; column < columToCheck; column++){
+           if(chessboard[rowToCheck][column] == 1) return false;
        }
+
+       //check the columns after
+       for(int column=columToCheck; column < numberOfQueens; column++){
+           if(chessboard[rowToCheck][column] == 1) return false;
+       }
+
+       // Check upper diagonal on left side
+       for (int row = rowToCheck, column = columToCheck; row >= 0 && column >= 0; row--, column--){
+           if (chessboard[row][column] == 1) return false;
+       }
+
+       // Check down diagonal on left side
+       for (int row = rowToCheck, column = columToCheck; row < numberOfQueens && column >= 0; row++, column--){
+           if (chessboard[row][column] == 1) return false;
+       }
+       return true;
    }
 
-
-    private boolean allocatedQueens(int column, int nQueens) {
-
-       if (allocatedQueens == nQueens) return true;
-
-       for (int line=0; line < nQueens; line++) {
-           if (canAllocate(line, column)) {
-               chessboard[line][column] = 1;
-               allocatedQueens++;
-           }
-       }
-        return false;
-    }
-
-    protected boolean canAllocate(int line, int column) {
-        if (chessboard[line][column] == 1) return false;
-        return true;
+    public void printSolution(){
+        for(int row=0; row < numberOfQueens; row++){
+            for (int column=0; column < numberOfQueens; column++){
+                if (chessboard[row][column]==1){
+                    System.out.print(" Q ");
+                }else{
+                    System.out.print(" . ");
+                }
+            }
+            System.out.println("");
+        }
     }
 }
