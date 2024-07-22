@@ -31,14 +31,6 @@ class FeeServiceTest {
     }
 
     @Test
-    void getFeeByStateAndYear() {
-    }
-
-    @Test
-    void getAll() {
-    }
-
-    @Test
     void removeAllTaxesBefore() {
     }
 
