@@ -36,7 +36,5 @@ class FeeServiceTest {
         feeService.removeAllTaxesBefore(2020);
     }
 
-    @Test
-    void insertTaxForTheYear() {
-    }
+
 }
