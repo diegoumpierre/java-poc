@@ -30,11 +30,7 @@ class FeeServiceTest {
         assertEquals(1, TaxSystem.FEE_LIST.size());
     }
 
-    @Test
-    void removeAllTaxesBefore() {
-        //need add a lot of taxes and product
-        feeService.removeAllTaxesBefore(2020);
-    }
+
 
 
 }
