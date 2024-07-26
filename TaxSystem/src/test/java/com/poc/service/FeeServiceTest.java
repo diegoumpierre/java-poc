@@ -31,6 +31,23 @@ class FeeServiceTest {
     }
 
 
+    @Test
+    void testInsert() {
+    }
 
+    @Test
+    void getFeeByStateAndYear() {
+    }
 
+    @Test
+    void getAll() {
+    }
+
+    @Test
+    void removeAllTaxesBefore() {
+    }
+
+    @Test
+    void insertTaxForTheYear() {
+    }
 }
