@@ -40,22 +40,5 @@ public class FeeService {
         return TaxSystem.FEE_LIST;
     }
 
-    public void removeAllTaxesBefore(Integer year){
-
-        //to remove a Fee we need sure remove from the product
-        for(Fee fee :TaxSystem.FEE_LIST){
-            if (fee.getYear() < year){
-                //remove from the product who has this fee
-                productService.removeFeeFromProduct(fee);
-                TaxSystem.FEE_LIST.remove(fee);
-            }
-        }
-    }
-
-    public void insertTaxForTheYear(Integer year, Double value){
-        Arrays.stream(StateEnum.values()).forEach(stateEnum -> {
-            insert(stateEnum,year,value);
-        });
-    }
 
 }
