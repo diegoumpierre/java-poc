@@ -36,9 +36,6 @@ public class FeeService {
         return null;
     }
 
-    public List<Fee> getAll(){
-        return TaxSystem.FEE_LIST;
-    }
 
 
 }
