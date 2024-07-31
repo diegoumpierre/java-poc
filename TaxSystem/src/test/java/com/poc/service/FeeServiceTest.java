@@ -42,12 +42,4 @@ class FeeServiceTest {
     @Test
     void getAll() {
     }
-
-    @Test
-    void removeAllTaxesBefore() {
-    }
-
-    @Test
-    void insertTaxForTheYear() {
-    }
 }
