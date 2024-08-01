@@ -35,11 +35,4 @@ class FeeServiceTest {
     void testInsert() {
     }
 
-    @Test
-    void getFeeByStateAndYear() {
-    }
-
-    @Test
-    void getAll() {
-    }
 }
