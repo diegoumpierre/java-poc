@@ -4,6 +4,7 @@ import com.poc.domain.Fee;
 import com.poc.domain.Product;
 import com.poc.domain.TaxSystem;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +13,15 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class ProductServiceTest {
 
-    ProductService productService = new ProductService();
+    @InjectMocks
+    ProductService productService;
+
+    @InjectMocks
+    FeeService feeService;
 
     @Test
     void insertProductShouldBeSuccess() {
