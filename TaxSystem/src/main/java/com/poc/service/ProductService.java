@@ -45,22 +45,22 @@ public class ProductService {
         TaxSystem.PRODUCT_LIST.forEach(product -> product.getFeeList().remove(fee));
     }
 
-//    public Product insert (String name, Double value, StateEnum stateEnum, Integer year){
-//
-//        //try get the fee, if don't exist create one
-//        Fee fee = feeService.getFeeByStateAndYear(stateEnum, year);
-//        if (fee == null){
-//            fee = feeService.insert(stateEnum,year,0d);
-//        }
-//
-//        Product product = new Product();
-//        product.setName(name);
-//        product.setValue(value);
-//        product.getFeeList().add(fee);
-//
-//        TaxSystem.PRODUCT_LIST.add(product);
-//        return product;
-//    }
+    public Product insert (String name, Double value, StateEnum stateEnum, Integer year){
+
+        //try get the fee, if don't exist create one
+        Fee fee = feeService.getFeeByStateAndYear(stateEnum, year);
+        if (fee == null){
+            fee = feeService.insert(stateEnum,year,0d);
+        }
+
+        Product product = new Product();
+        product.setName(name);
+        product.setValue(value);
+        product.getFeeList().add(fee);
+
+        TaxSystem.PRODUCT_LIST.add(product);
+        return product;
+    }
 
 
 
