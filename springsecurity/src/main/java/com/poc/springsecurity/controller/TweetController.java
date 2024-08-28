@@ -7,6 +7,7 @@ import com.poc.springsecurity.entity.Role;
 import com.poc.springsecurity.entity.Tweet;
 import com.poc.springsecurity.repository.TweetRepository;
 import com.poc.springsecurity.repository.UserRepository;
+import com.poc.springsecurity.service.TweetService;
 import org.apache.coyote.Response;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,13 +22,10 @@ import java.util.UUID;
 @RestController
 public class TweetController {
 
-    private final TweetRepository tweetRepository;
-    private final UserRepository userRepository;
+    private final TweetService tweetService;
 
-
-    public TweetController(TweetRepository tweetRepository, UserRepository userRepository) {
-        this.tweetRepository = tweetRepository;
-        this.userRepository = userRepository;
+    public TweetController(TweetService tweetService) {
+        this.tweetService = tweetService;
     }
 
     @GetMapping("/feed")
