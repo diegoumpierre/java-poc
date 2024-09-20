@@ -34,13 +34,13 @@ class FeeServiceTest {
     FeeService feeService = new FeeService();
 
     @Before
-    public void setUp(){
+    public void setUp() {
         initMocks(this);
     }
 
     @Test
     void insertShouldBeSuccess() {
-        Fee result = feeService.insert(StateEnum.SP.name(),2020,909.0d);
+        Fee result = feeService.insert(StateEnum.SP.name(), 2020, 909.0d);
 
         assertEquals(StateEnum.SP, result.getStateEnum());
         assertEquals(2020, result.getYear());
@@ -59,10 +59,10 @@ class FeeServiceTest {
         TaxSystem.FEE_LIST.addAll(DataTest.gimmeFeeList(20));
         TaxSystem.FEE_LIST.add(feeToRemove);
         assertThat(TaxSystem.FEE_LIST, hasItem(feeToRemove));
-      //  feeService.remove(StateEnum.RJ.name(),2050);
-     //   assertThat(TaxSystem.FEE_LIST, not(hasItem(feeToRemove)));
+        //  feeService.remove(StateEnum.RJ.name(),2050);
+        //   assertThat(TaxSystem.FEE_LIST, not(hasItem(feeToRemove)));
     }
-
+  
     @Test
     void getFeeByStateAndYear() {
 
@@ -99,13 +99,5 @@ class FeeServiceTest {
 
 
 
-    }
-
-    @Test
-    void removeAllTaxesBefore() {
-    }
-
-    @Test
-    void insertTaxForTheYear() {
     }
 }
