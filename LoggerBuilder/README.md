@@ -1,15 +1,3 @@
 ## Funcionalidades
-- Criar conta nova
-- Feed público
-- login
-- criação de tweet
-- deleçao de tweet
-
-
-
-
-cd src/main/resources
-
-openssl genrsa > app.key
-
-openssl rsa -in app.key -pubout -out app.pub
+Build a Logger Builder Router System where you can log into FS, ELK or any other log system where you can configure
+the logs to be sync or async using the same API.
