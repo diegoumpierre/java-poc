@@ -36,12 +36,14 @@ public class TweetService {
                                 tweet.getContent(),
                                 tweet.getUser().getUsername()
                         ));
-        return new FeedDto(
+        FeedDto dto =  new FeedDto(
                 tweets.getContent(),
                 page,
                 pageSize,
                 tweets.getTotalPages(),
                 tweets.getTotalElements());
+
+        return dto;
     }
 
     public void createNew(String userId, String content) throws Exception {
