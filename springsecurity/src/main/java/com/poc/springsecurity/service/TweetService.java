@@ -53,23 +53,4 @@ public class TweetService {
         tweetRepository.save(tweet);
 
     }
-
-    public boolean deleteTweet(String userId, Long tweetId) {
-        var userIdFromToken = UUID.fromString(userId);
-
-        var user = userRepository.findById(userIdFromToken);
-        var tweet = tweetRepository.findById(tweetId)
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        var isAdmin = user.get().getRoles()
-                .stream()
-                .anyMatch(role -> role.getName().equalsIgnoreCase(Role.Values.ADMIN.name()));
-
-        if (isAdmin || tweet.getUser().getUserId().equals(userIdFromToken)){
-            tweetRepository.deleteById(tweetId);
-        } else {
-            return false;
-        }
-        return true;
-    }
 }
