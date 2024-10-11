@@ -27,23 +27,21 @@ public class TweetService {
         this.userRepository = userRepository;
     }
 
-    public FeedDto findAll(int page, int pageSize){
+    public FeedDto findAll(int page, int pageSize) {
         var tweets = tweetRepository.findAll(
-                        PageRequest.of(page,pageSize, Sort.Direction.DESC,"createdTimestamp"))
+                        PageRequest.of(page, pageSize, Sort.Direction.DESC, "createdTimestamp"))
                 .map(tweet ->
                         new FeedItemDto(
                                 tweet.getTweetId(),
                                 tweet.getContent(),
                                 tweet.getUser().getUsername()
                         ));
-        FeedDto dto =  new FeedDto(
+        return new FeedDto(
                 tweets.getContent(),
                 page,
                 pageSize,
                 tweets.getTotalPages(),
                 tweets.getTotalElements());
-
-        return dto;
     }
 
     public void createNew(String userId, String content) throws Exception {
