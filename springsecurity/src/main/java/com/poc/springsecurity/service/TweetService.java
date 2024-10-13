@@ -44,13 +44,4 @@ public class TweetService {
                 tweets.getTotalElements());
     }
 
-    public void createNew(String userId, String content) throws Exception {
-        var user = userRepository.findById(UUID.fromString(userId));
-        if (user.isEmpty()) throw new Exception("User don't exists");
-        var tweet = new Tweet();
-        tweet.setUser(user.get());
-        tweet.setContent(content);
-        tweetRepository.save(tweet);
-
-    }
 }
