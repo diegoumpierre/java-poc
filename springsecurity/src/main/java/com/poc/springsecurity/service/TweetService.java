@@ -27,9 +27,9 @@ public class TweetService {
         this.userRepository = userRepository;
     }
 
-    public FeedDto findAll(int page, int pageSize) {
+    public FeedDto findAll(int page, int pageSize){
         var tweets = tweetRepository.findAll(
-                        PageRequest.of(page, pageSize, Sort.Direction.DESC, "createdTimestamp"))
+                        PageRequest.of(page,pageSize, Sort.Direction.DESC,"createdTimestamp"))
                 .map(tweet ->
                         new FeedItemDto(
                                 tweet.getTweetId(),
@@ -44,4 +44,32 @@ public class TweetService {
                 tweets.getTotalElements());
     }
 
+    public void createNew(String userId, String content) throws Exception {
+        var user = userRepository.findById(UUID.fromString(userId));
+        if (user.isEmpty()) throw new Exception("User don't exists");
+        var tweet = new Tweet();
+        tweet.setUser(user.get());
+        tweet.setContent(content);
+        tweetRepository.save(tweet);
+
+    }
+
+    public boolean deleteTweet(String userId, Long tweetId) {
+        var userIdFromToken = UUID.fromString(userId);
+
+        var user = userRepository.findById(userIdFromToken);
+        var tweet = tweetRepository.findById(tweetId)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        var isAdmin = user.get().getRoles()
+                .stream()
+                .anyMatch(role -> role.getName().equalsIgnoreCase(Role.Values.ADMIN.name()));
+
+        if (isAdmin || tweet.getUser().getUserId().equals(userIdFromToken)){
+            tweetRepository.deleteById(tweetId);
+        } else {
+            return false;
+        }
+        return true;
+    }
 }
