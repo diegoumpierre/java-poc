@@ -45,20 +45,4 @@ public class FeeService {
         return feeList;
     }
 
-    public Fee getFeeByStateAndYear(StateEnum stateEnum, Integer year){
-
-        return null;
-    }
-
-    //-----------------
-
-
-    public void insertTaxForTheYear(Integer year, Double value){
-        Arrays.stream(StateEnum.values()).forEach(stateEnum -> {
-            int i =1;
-            insert(stateEnum.name(),year,value);
-            i++;
-        });
-    }
-
 }
