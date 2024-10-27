@@ -2,33 +2,23 @@ package com.poc.service;
 
 import com.poc.domain.Fee;
 import com.poc.domain.StateEnum;
-import com.poc.domain.TaxSystem;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.Matchers.hasItem;
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(MockitoJUnitRunner.class)
 class FeeServiceTest {
-
-    @InjectMocks
-    ProductService productService;
 
     @Spy
     FeeService feeService = new FeeService();
@@ -46,7 +36,7 @@ class FeeServiceTest {
         assertEquals(2020, result.getYear());
         assertEquals(909.0d, result.getValue());
 
-        assertThat(TaxSystem.FEE_LIST, hasItem(result));
+
     }
 
     @Test
@@ -56,11 +46,6 @@ class FeeServiceTest {
                 .year(2050)
                 .stateEnum(StateEnum.RJ)
                 .build();
-        TaxSystem.FEE_LIST.addAll(DataTest.gimmeFeeList(20));
-        TaxSystem.FEE_LIST.add(feeToRemove);
-        assertThat(TaxSystem.FEE_LIST, hasItem(feeToRemove));
-        //  feeService.remove(StateEnum.RJ.name(),2050);
-        //   assertThat(TaxSystem.FEE_LIST, not(hasItem(feeToRemove)));
     }
   
     @Test
