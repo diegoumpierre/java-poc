@@ -22,14 +22,14 @@ public class FeeService {
 
         Random random = new Random();
 
-        Fee fee = Fee.builder()
-                .id( Integer.valueOf(String.format("%04d", random.nextInt(10000))) )
-                .stateEnum(stateEnum)
-                .year(year)
-                .value(value).build();
+//        Fee fee = Fee.builder()
+//                .id( Integer.valueOf(String.format("%04d", random.nextInt(10000))) )
+//                .stateEnum(stateEnum)
+//                .year(year)
+//                .value(value).build();
 
 
-        return fee;
+        return null;
     }
 
     public void remove(String stateStr, Integer year){

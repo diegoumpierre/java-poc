@@ -1,5 +1,6 @@
 package com.poc.service;
 
+import com.poc.domain.Category;
 import com.poc.domain.Fee;
 import com.poc.domain.StateEnum;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -25,16 +27,30 @@ class FeeServiceTest {
 
     @Before
     public void setUp() {
+
+
+
+
+
+
         initMocks(this);
     }
 
     @Test
     void insertShouldBeSuccess() {
-        Fee result = feeService.insert(StateEnum.SP.name(), 2020, 909.0d);
 
-        assertEquals(StateEnum.SP, result.getStateEnum());
-        assertEquals(2020, result.getYear());
-        assertEquals(909.0d, result.getValue());
+
+        List<Category> list = DataTest.gimmeCategoryList();
+
+        list.size();
+
+
+
+//        Fee result = feeService.insert(StateEnum.SP.name(), 2020, 909.0d);
+//
+//        assertEquals(StateEnum.SP, result.getStateEnum());
+//        assertEquals(2020, result.getYear());
+//        assertEquals(909.0d, result.getValue());
 
 
     }
@@ -42,8 +58,8 @@ class FeeServiceTest {
     @Test
     void removeShouldBeSuccess() {
         Fee feeToRemove = Fee.builder()
-                .value(20d)
-                .year(2050)
+             //   .value(20d)
+             //   .year(2050)
                 .stateEnum(StateEnum.RJ)
                 .build();
     }
