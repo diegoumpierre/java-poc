@@ -1,5 +1,7 @@
 package com.poc.domain;
 
+import java.util.Date;
+
 public class Transaction {
 
     private int id;
@@ -7,6 +9,6 @@ public class Transaction {
     private Category category;
 
     private Account account;
-
+    private Date date;
 
 }
