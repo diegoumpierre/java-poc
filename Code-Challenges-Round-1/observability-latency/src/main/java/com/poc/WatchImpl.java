@@ -39,7 +39,7 @@ public class WatchImpl implements WatchInterface{
                     if(dataCollected.getMethodName().equals(methodName)){
                         dataCollected.setEndTime(System.nanoTime());
                     }
-                })
+                });
                 
 
 
