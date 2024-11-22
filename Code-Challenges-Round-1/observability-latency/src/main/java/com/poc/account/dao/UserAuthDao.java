@@ -6,18 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserAuthDao {
-    private List<UserAuth> userAuthList = new ArrayList<>();
+    private static List<UserAuth> userAuthList = new ArrayList<>();
 
     public UserAuth save(UserAuth userAuth){
-        this.userAuthList.add(userAuth);
+        userAuthList.add(userAuth);
         return userAuth;
     }
 
     public List<UserAuth> findAll() {
         return userAuthList;
     }
-
-
-
-
 }
