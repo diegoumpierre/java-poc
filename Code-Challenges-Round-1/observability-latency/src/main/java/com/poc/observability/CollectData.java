@@ -1,4 +1,4 @@
-package com.poc;
+package com.poc.observability;
 
 import java.util.HashMap;
 import java.util.List;

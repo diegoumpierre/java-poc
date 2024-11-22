@@ -1,7 +1,6 @@
-package com.poc;
+package com.poc.observability;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class WatchImpl implements WatchInterface{
 
@@ -39,7 +38,7 @@ public class WatchImpl implements WatchInterface{
                     if(dataCollected.getMethodName().equals(methodName)){
                         dataCollected.setEndTime(System.nanoTime());
                     }
-                })
+                });
                 
 
 

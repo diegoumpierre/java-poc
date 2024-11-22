@@ -1,4 +1,4 @@
-package com.poc;
+package com.poc.observability;
 
 public class GenerateDataAnalysis {
 
