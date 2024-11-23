@@ -7,8 +7,8 @@ public class CollectedServiceImpl implements CollectedService {
 
     private CollectedDataDao collectedDataDao;
 
-    public CollectedServiceImpl(CollectedDataDao collectedDataDao) {
-        this.collectedDataDao = collectedDataDao;
+    public CollectedServiceImpl() {
+        this.collectedDataDao = new CollectedDataDao();
     }
 
     public void configure(String identifier, String method) {
@@ -18,6 +18,7 @@ public class CollectedServiceImpl implements CollectedService {
     public String getMethodByIdentifier(String identifier) {
         return collectedDataDao.getMethodByIdentifier(identifier);
     }
+
 
     public void start(String identifier) {
         CollectedData collectedData = new CollectedData();
@@ -37,4 +38,22 @@ public class CollectedServiceImpl implements CollectedService {
         }
         collectedDataDao.save(collectedData);
     }
+
+    @Override
+    public void printObservability() {
+
+        //how many calls the system have
+        //how many errors the system have
+        //look the readme
+        System.out.println("size--> "+collectedDataDao.findAll().size());
+
+        collectedDataDao.findAll().forEach(collectedData -> {
+            System.out.println(collectedData.toString());
+        });
+
+    }
+
+
+
+
 }

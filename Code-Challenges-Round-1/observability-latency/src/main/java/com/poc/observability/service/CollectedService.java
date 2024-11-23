@@ -9,4 +9,6 @@ public interface CollectedService {
     void start(String identifier);
 
     void end(String identifier, boolean isSuccess);
+
+    void printObservability();
 }

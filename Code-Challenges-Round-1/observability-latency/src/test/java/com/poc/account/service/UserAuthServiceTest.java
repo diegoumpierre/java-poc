@@ -17,7 +17,7 @@ class UserAuthServiceTest {
     @BeforeEach
     void setUp(){
         this.userAuthDao = new UserAuthDao();
-        this.userAuthService = new UserAuthService(userAuthDao);
+        this.userAuthService = new UserAuthService();
     }
 
     @Test
