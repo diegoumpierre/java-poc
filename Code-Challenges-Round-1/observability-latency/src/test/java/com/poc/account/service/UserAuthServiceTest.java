@@ -17,7 +17,7 @@ class UserAuthServiceTest {
     @BeforeEach
     void setUp(){
         this.userAuthDao = new UserAuthDao();
-        this.userAuthService = new UserAuthService(userAuthDao);
+        this.userAuthService = new UserAuthService();
     }
 
     @Test
@@ -42,7 +42,7 @@ class UserAuthServiceTest {
     }
 
     @Test
-    void processListShouldBeSucess(){
+    void processListShouldBeSucess() throws InterruptedException {
         //given
         UserAuth userAuth = new UserAuth();
         userAuth.setNome("name 1");
@@ -54,15 +54,11 @@ class UserAuthServiceTest {
         userAuthList.add(userAuth);
         userAuthList.add(userAuth1);
 
-
         //when
         //method under test
         assertFalse(userAuthService.processUserAuth(null));
         assertTrue(userAuthService.processUserAuth(userAuthList));
-
-
-
-
+        assertEquals(1,this.userAuthDao.findAll().size());
     }
 
 }

@@ -1,13 +1,31 @@
-package com.poc.observability;
+package com.poc.observability.model;
 
 
-public class DataCollected {
+public class CollectedData {
+
+    private String identifier;
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 
     private String methodName;
     private long startTime;
     private long endTime;
     private boolean error;
-    private boolean warning;
+    private boolean success;
 
     public String getMethodName() {
         return methodName;
@@ -42,10 +60,10 @@ public class DataCollected {
     }
 
     public boolean isWarning() {
-        return warning;
+        return success;
     }
 
     public void setWarning(boolean warning) {
-        this.warning = warning;
+        this.success = warning;
     }
 }
