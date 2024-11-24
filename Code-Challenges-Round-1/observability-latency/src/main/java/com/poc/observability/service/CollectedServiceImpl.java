@@ -48,7 +48,8 @@ public class CollectedServiceImpl implements CollectedService {
         System.out.println("size--> "+collectedDataDao.findAll().size());
 
         collectedDataDao.findAll().forEach(collectedData -> {
-            System.out.println(collectedData.toString());
+            System.out.print(collectedData.getIdentifier().toString());
+            System.out.println("--"+collectedData.getMethodName().toString());
         });
 
     }
