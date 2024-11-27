@@ -48,9 +48,12 @@ public class CollectedServiceImpl implements CollectedService {
         System.out.println("size--> "+collectedDataDao.findAll().size());
 
         collectedDataDao.findAll().forEach(collectedData -> {
-            System.out.print(collectedData.getIdentifier().toString());
-            System.out.print(collectedData.getStartTime());
-            System.out.print(collectedData.getEndTime());
+            System.out.print("Identifier-->"+ collectedData.getIdentifier().toString());
+            System.out.print("start-->"+collectedData.getStartTime());
+            System.out.print("end-->"+collectedData.getEndTime());
+
+            //System.out.print("Total time -->"+collectedData.getEndTime() - collectedData.getStartTime());
+
             System.out.println("--"+collectedData.getMethodName().toString());
         });
 
