@@ -42,6 +42,9 @@ public class CollectedServiceImpl implements CollectedService {
     @Override
     public void printObservability() {
 
+        //here I need use the class to have the observability
+
+
         //how many calls the system have
         //how many errors the system have
         //look the readme
