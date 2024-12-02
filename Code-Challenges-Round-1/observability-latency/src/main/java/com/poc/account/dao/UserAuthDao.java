@@ -8,17 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserAuthDao {
-    private static List<UserAuth> userAuthList = new ArrayList<>();
-    private CollectedService collectedService = new CollectedServiceImpl();
+    private final static List<UserAuth> userAuthList = new ArrayList<>();
+    private final CollectedService collectedService = new CollectedServiceImpl();
 
-    public UserAuth save(UserAuth userAuth){
+    public void insert(UserAuth userAuth){
         collectedService.start("UserAuthDao.save");
         userAuthList.add(userAuth);
         collectedService.end("UserAuthDao.save",true);
-        return userAuth;
     }
 
-    public List<UserAuth> findAll() {
+    public List<UserAuth> getAll() {
         collectedService.start("UserAuthDao.save");
         collectedService.end("UserAuthDao.save",true);
         return userAuthList;

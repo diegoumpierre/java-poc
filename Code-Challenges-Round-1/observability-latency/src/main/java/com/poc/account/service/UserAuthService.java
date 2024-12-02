@@ -27,7 +27,7 @@ public class UserAuthService {
             return false;
         }
 
-        userAuthDao.save(userAuth);
+        userAuthDao.insert(userAuth);
         collectedService.end("UserAuthService.createUserAuth",true);
         return true;
     }
@@ -54,7 +54,7 @@ public class UserAuthService {
                     collectedService.end("UserAuthService.processUserAuth",false);
                     return false;
                 }
-                this.userAuthDao.save(userAuth);
+                this.userAuthDao.insert(userAuth);
 
             }
         }
