@@ -33,11 +33,11 @@ class UserAuthDaoTest {
         expectedUserAuthList.add(userAuth1);
 
         //when
-        userAuthDao.save(userAuth);
-        userAuthDao.save(userAuth1);
+        userAuthDao.insert(userAuth);
+        userAuthDao.insert(userAuth1);
 
         //method under test
-        assertArrayEquals(expectedUserAuthList.toArray(),userAuthDao.findAll().toArray());
+        assertArrayEquals(expectedUserAuthList.toArray(),userAuthDao.getAll().toArray());
 
     }
 

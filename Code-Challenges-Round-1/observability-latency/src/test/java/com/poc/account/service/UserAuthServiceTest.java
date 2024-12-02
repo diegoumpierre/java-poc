@@ -58,7 +58,7 @@ class UserAuthServiceTest {
         //method under test
         assertFalse(userAuthService.processUserAuth(null));
         assertTrue(userAuthService.processUserAuth(userAuthList));
-        assertEquals(1,this.userAuthDao.findAll().size());
+        assertEquals(1,this.userAuthDao.getAll().size());
     }
 
 }
