@@ -46,10 +46,10 @@ public class UserAuthService {
             UserAuth userAuth = userAuthList.get(i);
 
             if (i % 2 == 0) {
-                sleep(rand.nextInt((9000 - 1000) + 1) + 1000);
+//                sleep(rand.nextInt((9000 - 1000) + 1) + 1000);
             }
             else {
-                sleep(rand.nextInt((10 - 1) + 1) + 1);
+//                sleep(rand.nextInt((10 - 1) + 1) + 1);
                 if (userAuth.getAge() > 30 && userAuth.getEmail().isEmpty()){
                     collectedService.end("UserAuthService.processUserAuth",false);
                     return false;

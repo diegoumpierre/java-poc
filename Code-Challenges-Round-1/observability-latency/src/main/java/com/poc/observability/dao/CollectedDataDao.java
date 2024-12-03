@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class CollectedDataDao {
 
-    private static List<CollectedData> collectData = new ArrayList<>();
+    private final static List<CollectedData> collectData = new ArrayList<>();
 
-    private static Map<String, String> methodMap = new HashMap<>();
+    private final static Map<String, String> methodMap = new HashMap<>();
 
 
     public void configure(String identifier, String method){
