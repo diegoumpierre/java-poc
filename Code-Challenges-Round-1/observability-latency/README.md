@@ -18,3 +18,4 @@ tipos de erro
 --add a collector class
 --add a expose class
 --all need work by rest api
+
