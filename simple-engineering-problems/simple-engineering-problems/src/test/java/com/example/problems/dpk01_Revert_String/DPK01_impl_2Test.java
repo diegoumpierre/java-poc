@@ -8,11 +8,11 @@ class DPK01_impl_2Test {
 
     @Test
     void nullShouldBeSuccess() {
-        assertEquals(null, DPK01_impl_2.revert(null));
+        assertNull(DPK01_impl_2.revert(null));
     }
 
     @Test
-    void helloShouldBeSucess() {
+    void helloShouldBeSuccess() {
         assertEquals("olleh", DPK01_impl_2.revert("hello"));
     }
 }

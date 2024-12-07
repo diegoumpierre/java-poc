@@ -2,15 +2,16 @@ package com.example.problems.dpk01_Revert_String;
 
 public class DPK01_impl_4 {
 
-    public String revert(String input){
-        if (input == null){
-            return null;
+
+    public static String revert(String input) {
+        if (null != input){
+            StringBuilder result = new StringBuilder();
+            for (int i = input.length()-1; i >= 0 ; i--) {
+                result.append(input.toCharArray()[i]);
+            }
+            return result.toString();
         }
-        String result = "";
-        char[] chars = input.toCharArray();
-        for(int i=input.length()-1; i >= 0; i--){
-            result += chars[i];
-        }
-        return result;
+
+        return null;
     }
 }
