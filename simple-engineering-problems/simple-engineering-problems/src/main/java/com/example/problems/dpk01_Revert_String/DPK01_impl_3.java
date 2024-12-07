@@ -1,9 +1,9 @@
 package com.example.problems.dpk01_Revert_String;
 
-public class DPK01_impl_1 {
+public class DPK01_impl_3 {
 
     public String revert(String input){
-        if (null == input){
+        if (input == null){
             return null;
         }
         String result = "";
