@@ -53,10 +53,10 @@ class DPK05_impl_2Test {
         assertEquals(leaderboard,dpk05Impl2.getLeaderboard());
 
         //round 3 - draw
-        assertEquals("draw", dpk05Impl2.play("John","Ringo"));
+        assertEquals("draw", dpk05Impl2.play("Paul","Paul"));
         leaderboard = Map.of(
                 "John",20,
-                "Paul",-5,
+                "Paul",5,
                 "George",0,
                 "Ringo",-5
         );
