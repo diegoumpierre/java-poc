@@ -1,6 +1,5 @@
 package com.example.problems.dpk05_pointers;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class DPK05_impl_1 {
