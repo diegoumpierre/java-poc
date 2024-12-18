@@ -14,8 +14,12 @@ tipos de erro
 
 
 --Add more models and services
+
 --add a generate data
+
 --add a collector class
+
 --add a expose class
+
 --all need work by rest api
 
