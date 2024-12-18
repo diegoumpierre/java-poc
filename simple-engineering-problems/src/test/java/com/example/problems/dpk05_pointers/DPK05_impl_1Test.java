@@ -16,12 +16,18 @@ class DPK05_impl_1Test {
         assertEquals(90, dpk05Impl1.getPower("Paul"));
         assertEquals(80, dpk05Impl1.getPower("George"));
         assertEquals(70, dpk05Impl1.getPower("Ringo"));
-        assertEquals(-1, dpk05Impl1.getPower("Diego"));
+        assertEquals(-1, dpk05Impl1.getPower("Ringo2"));
+        assertEquals(70, dpk05Impl1.getPower("Ringo3"));
     }
 
     @Test
     void takeThepowerfullOneShouldBeSucess(){
         assertEquals("John", dpk05Impl1.getPowerFullOne("George","John"));
+    }
+
+    @Test
+    void takeThepowerfullOneDrawShouldBeSucess(){
+        assertEquals("draw", dpk05Impl1.getPowerFullOne("Ringo","Ringo3"));
     }
 
     @Test
@@ -33,7 +39,8 @@ class DPK05_impl_1Test {
                 "John",10,
                 "Paul", -5,
                 "George", 0,
-                "Ringo", 0
+                "Ringo", 0,
+                "Ringo3", 0
         );
         assertEquals(dpk05Impl1.getLeaderboard(), leaderboardExpected1);
 
@@ -43,8 +50,23 @@ class DPK05_impl_1Test {
                 "John",20,
                 "Paul", -5,
                 "George", 0,
-                "Ringo", -5
+                "Ringo", -5,
+                "Ringo3", 0
         );
         assertEquals(dpk05Impl1.getLeaderboard(), leaderboardExpected2);
+    }
+
+    @Test
+    void playDrawShouldBeSuccess(){
+        assertEquals("draw", dpk05Impl1.play("Ringo", "Ringo3"));
+        Map<String, Integer> leaderboardExpected3 = Map.of(
+                "John",0,
+                "Paul", 0,
+                "George", 0,
+                "Ringo", 5,
+                "Ringo3", 5
+        );
+        assertEquals(dpk05Impl1.getLeaderboard(), leaderboardExpected3);
+
     }
 }
