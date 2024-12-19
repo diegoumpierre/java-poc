@@ -42,7 +42,7 @@ public class DPK05_impl_3 {
         } else if (winner.equals(player2)) {
             leaderboard.put(player2,leaderboard.get(player2)+10);
             leaderboard.put(player1,leaderboard.get(player1)-5);
-        }else{
+        }else if (winner.equals("draw")) {
             leaderboard.put(player1,leaderboard.get(player1)+5);
             leaderboard.put(player2,leaderboard.get(player2)+5);
         }
