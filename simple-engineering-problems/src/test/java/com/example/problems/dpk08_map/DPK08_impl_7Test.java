@@ -7,12 +7,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DPK08_impl_1Test {
+class DPK08_impl_7Test {
 
     @Test
     void mapShouldSuccess() {
         List<Integer> expected = Arrays.asList(2, 4, 6, 8, 10);
-        assertEquals(expected, DPK08_impl_1.map(Arrays.asList(1, 2, 3, 4, 5), (x) -> x * 2));
+        assertEquals(expected, DPK08_impl_7.map(Arrays.asList(1, 2, 3, 4, 5), (x) -> x * 2));
     }
 
 }
