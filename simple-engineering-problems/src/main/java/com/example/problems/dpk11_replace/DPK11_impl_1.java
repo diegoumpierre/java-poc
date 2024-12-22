@@ -1,16 +1,31 @@
 package com.example.problems.dpk11_replace;
 
-import java.util.List;
-import java.util.function.BinaryOperator;
-
 public class DPK11_impl_1 {
 
-    public static String replace(String input, String token, String replaceBy) {
-        String result = new String();
+    public static String replace(String input, String token, String newToken) {
+        String result = "";
 
-        result = input.replaceAll(token,replaceBy);
+        char[] tokenToReplace = token.toCharArray();
+        char[] inputString = input.toCharArray();
 
+        for(int i=0;i<input.length();i++){
+            boolean toReplace = false;
+            for(int j=0;j<tokenToReplace.length;j++){
+                toReplace = true;
+                if ((i+j) < inputString.length && inputString[i+j] != tokenToReplace[j]){
+                    toReplace = false;
+                    break;
+                }
+            }
+            if (toReplace) {
+                result += newToken;
+                i += token.length()-1;
+            }else{
+                result += inputString[i];
+            }
 
+        }
         return result;
     }
+
 }
