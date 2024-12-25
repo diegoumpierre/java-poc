@@ -7,7 +7,8 @@ public class DPK13_impl_1 {
     private static final Integer THREE = 3;
     private static final Integer FIVE = 5;
 
-    public static String solve(Object n) {
+    public static String fizzBuzz() {
+        Object n=null;
         return switch (n){
             case Integer i: {
                 if (mod(i, THREE) && mod(i, FIVE)) yield "fizzbuzz";
