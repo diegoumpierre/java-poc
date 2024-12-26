@@ -3,27 +3,19 @@ package com.example.problems.dpk13_fizz_buzz;
 public class DPK13_impl_1 {
 
 
-    private static final Integer ZERO =0;
-    private static final Integer THREE = 3;
-    private static final Integer FIVE = 5;
-
-    public static String fizzBuzz() {
-        Object n=null;
-        return switch (n){
-            case Integer i: {
-                if (mod(i, THREE) && mod(i, FIVE)) yield "fizzbuzz";
-                if (mod(i, THREE)){
-                    yield "fizz";
-                }
-                if (mod(i, FIVE)){
-                    yield "buzz";
-                }
+    public static Object[] fizzBuzz(int numbersToGenerate) {
+        Object[] result = new Object[numbersToGenerate];
+        for (int i = 1; i <= numbersToGenerate; i++) {
+            if (i % 3 == 0 && i % 5 == 0) {
+                result[i - 1] = "FizzBuzz";
+            } else if (i % 3 == 0) {
+                result[i - 1] = "Fizz";
+            } else if (i % 5 == 0) {
+                result[i - 1] = "Buzz";
+            } else {
+                result[i - 1] = i;
             }
-            default: yield String.valueOf(n);
-        };
-    }
-
-    public static Boolean mod(int number, int mod){
-        return number % mod == ZERO;
+        }
+        return result;
     }
 }
