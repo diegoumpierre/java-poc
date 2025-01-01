@@ -6,6 +6,21 @@ import java.util.List;
 public class DPK15_impl_1 {
 
 
+    public String moreFriends(List<Person> personList) {
+
+        String winner = "";
+        int maxFriends = -1;
+
+        for(Person person :personList){
+            if (maxFriends < person.getFriends().size()){
+                maxFriends = person.getFriends().size();
+                winner = person.getName();
+            }
+        }
+
+
+        return winner;
+    }
 }
 
 class Person{
