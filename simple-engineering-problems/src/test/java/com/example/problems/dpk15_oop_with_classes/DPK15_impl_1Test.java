@@ -21,9 +21,9 @@ class DPK15_impl_1Test {
         person.addFriends("Ringo");
         List<String> expectedFriends = List.of("Paul","George", "Ringo");
 
+        assertEquals("John", person.getName());
         assertEquals(30, person.getAge());
         assertArrayEquals(expectedFriends.toArray(), person.getFriends().toArray());
-        assertEquals("John", person.getName());
     }
 
     @Test

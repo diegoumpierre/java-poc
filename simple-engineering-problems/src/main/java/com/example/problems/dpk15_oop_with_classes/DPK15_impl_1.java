@@ -2,6 +2,7 @@ package com.example.problems.dpk15_oop_with_classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DPK15_impl_1 {
 
@@ -11,8 +12,8 @@ public class DPK15_impl_1 {
         String winner = "";
         int maxFriends = -1;
 
-        for(Person person :personList){
-            if (maxFriends < person.getFriends().size()){
+        for (Person person : personList) {
+            if (maxFriends < person.getFriends().size()) {
                 maxFriends = person.getFriends().size();
                 winner = person.getName();
             }
@@ -23,26 +24,26 @@ public class DPK15_impl_1 {
     }
 }
 
-class Person{
+class Person {
 
     String name;
     int age;
-    List<String> friends = new ArrayList<>();
+    List<Friend> friends = new ArrayList<>();
 
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    public void addFriends(String friend){
-        friends.add(friend);
+    public void addFriends(String name) {
+        friends.add(new Friend(name));
     }
 
     public List<String> getFriends() {
-        return friends;
+        return friends.stream().map(Friend::getName).collect(Collectors.toList());
     }
 
-    public int getAge(){
+    public int getAge() {
         return age;
     }
 
@@ -51,6 +52,32 @@ class Person{
     }
 
     public void removeFriend(String name) {
-        friends.remove(name);
+        friends.remove(new Friend(name));
+    }
+}
+
+class Friend {
+
+    String name;
+
+    public Friend(String name){
+        this.name = name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this.getName() == obj.getName()){
+            return true;
+        }
+        return false;
     }
 }
