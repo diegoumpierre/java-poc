@@ -7,40 +7,40 @@ import java.util.stream.Collectors;
 public class DPK15_impl_1 {
 
 
-    public String moreFriends(List<Person> personList) {
+    public String moreFriends(List<Person1> person1List) {
 
         String winner = "";
         int maxFriends = Integer.MIN_VALUE;
 
-        for (Person person : personList) {
-            if (maxFriends < person.getFriends().size()) {
-                maxFriends = person.getFriends().size();
-                winner = person.getName();
+        for (Person1 person1 : person1List) {
+            if (maxFriends < person1.getFriends().size()) {
+                maxFriends = person1.getFriends().size();
+                winner = person1.getName();
             }
         }
         return winner;
     }
 
-    public String lessFriends(List<Person> personList) {
+    public String lessFriends(List<Person1> person1List) {
 
         String winner = "";
         int minFriends = Integer.MAX_VALUE;
 
-        for (Person person : personList) {
-            if (minFriends > person.getFriends().size()) {
-                minFriends = person.getFriends().size();
-                winner = person.getName();
+        for (Person1 person1 : person1List) {
+            if (minFriends > person1.getFriends().size()) {
+                minFriends = person1.getFriends().size();
+                winner = person1.getName();
             }
         }
         return winner;
     }
 
-    public String oldestFriends(List<Person> personList) {
+    public String oldestFriends(List<Person1> person1List) {
         String winner = "";
         int oldestFriend = Integer.MIN_VALUE;
 
-        for (Person person : personList) {
-            for(Friend friend : person.friends){
+        for (Person1 person1 : person1List) {
+            for(Friend friend : person1.friends){
                 if (oldestFriend < friend.getAge()) {
                     oldestFriend = friend.getAge();
                     winner = friend.getName();
@@ -51,13 +51,13 @@ public class DPK15_impl_1 {
     }
 }
 
-class Person {
+class Person1 {
 
     String name;
     int age;
     List<Friend> friends = new ArrayList<>();
 
-    public Person(String name, int age) {
+    public Person1(String name, int age) {
         this.name = name;
         this.age = age;
     }

@@ -12,124 +12,124 @@ class DPK15_impl_1Test {
 
     @Test
     void personAddFriendsShouldSuccess(){
-        Person person = new Person("John", 30);
-        person.addFriends("Paul");
-        person.addFriends("George");
-        person.addFriends("Ringo");
+        Person1 person1 = new Person1("John", 30);
+        person1.addFriends("Paul");
+        person1.addFriends("George");
+        person1.addFriends("Ringo");
         List<String> expectedFriends = List.of("Paul","George", "Ringo");
 
-        assertEquals("John", person.getName());
-        assertEquals(30, person.getAge());
-        assertArrayEquals(expectedFriends.toArray(), person.getFriends().toArray());
+        assertEquals("John", person1.getName());
+        assertEquals(30, person1.getAge());
+        assertArrayEquals(expectedFriends.toArray(), person1.getFriends().toArray());
     }
 
 
     @Test
     void dontAllowTheSameFriendTwiceShouldBeSuccess(){
-        Person person = new Person("John", 30);
-        person.addFriends("Paul");
-        person.addFriends("Paul");
+        Person1 person1 = new Person1("John", 30);
+        person1.addFriends("Paul");
+        person1.addFriends("Paul");
 
-        assertEquals(1,person.getFriends().size());
-        assertEquals("Paul",person.getFriends().get(0));
+        assertEquals(1, person1.getFriends().size());
+        assertEquals("Paul", person1.getFriends().get(0));
     }
 
     @Test
     void personRemoveFriendsShouldSuccess(){
-        Person person = new Person("John", 30);
-        person.addFriends("Paul");
-        person.addFriends("George");
-        person.addFriends("Ringo");
+        Person1 person1 = new Person1("John", 30);
+        person1.addFriends("Paul");
+        person1.addFriends("George");
+        person1.addFriends("Ringo");
         List<String> expectedFriends = List.of("Paul", "Ringo");
 
-        person.removeFriend("George");
-        assertArrayEquals(expectedFriends.toArray(), person.getFriends().toArray());
+        person1.removeFriend("George");
+        assertArrayEquals(expectedFriends.toArray(), person1.getFriends().toArray());
     }
 
     @Test
     void moreFriendsShouldBeSuccess() {
 
-        List<Person> personList = new ArrayList<>();
+        List<Person1> person1List = new ArrayList<>();
 
-        Person person = new Person("John", 30);
-        person.addFriends("Paul");
-        person.addFriends("George");
-        personList.add(person);
+        Person1 person1 = new Person1("John", 30);
+        person1.addFriends("Paul");
+        person1.addFriends("George");
+        person1List.add(person1);
 
-        person = new Person("Ringo", 89);
-        person.addFriends("Paul");
-        person.addFriends("George");
-        person.addFriends("Ringo");
-        person.addFriends("Ringo1");
-        person.addFriends("Ringo2");
-        person.addFriends("Ringo3");
-        personList.add(person);
+        person1 = new Person1("Ringo", 89);
+        person1.addFriends("Paul");
+        person1.addFriends("George");
+        person1.addFriends("Ringo");
+        person1.addFriends("Ringo1");
+        person1.addFriends("Ringo2");
+        person1.addFriends("Ringo3");
+        person1List.add(person1);
 
-        person = new Person("John1", 67);
-        person.addFriends("Paul");
-        personList.add(person);
+        person1 = new Person1("John1", 67);
+        person1.addFriends("Paul");
+        person1List.add(person1);
 
 
         DPK15_impl_1 dpk15Impl1 = new DPK15_impl_1();
-        assertEquals("Ringo", dpk15Impl1.moreFriends(personList));
+        assertEquals("Ringo", dpk15Impl1.moreFriends(person1List));
 
     }
 
     @Test
     void lessFriendsShouldBeSuccess() {
 
-        List<Person> personList = new ArrayList<>();
+        List<Person1> person1List = new ArrayList<>();
 
-        Person person = new Person("John", 30);
-        person.addFriends("Paul");
-        person.addFriends("George");
-        personList.add(person);
+        Person1 person1 = new Person1("John", 30);
+        person1.addFriends("Paul");
+        person1.addFriends("George");
+        person1List.add(person1);
 
-        person = new Person("Ringo", 89);
-        person.addFriends("Paul");
-        person.addFriends("George");
-        person.addFriends("Ringo");
-        person.addFriends("Ringo1");
-        person.addFriends("Ringo2");
-        person.addFriends("Ringo3");
-        personList.add(person);
+        person1 = new Person1("Ringo", 89);
+        person1.addFriends("Paul");
+        person1.addFriends("George");
+        person1.addFriends("Ringo");
+        person1.addFriends("Ringo1");
+        person1.addFriends("Ringo2");
+        person1.addFriends("Ringo3");
+        person1List.add(person1);
 
-        person = new Person("John1", 67);
-        person.addFriends("Paul");
-        personList.add(person);
+        person1 = new Person1("John1", 67);
+        person1.addFriends("Paul");
+        person1List.add(person1);
 
 
         DPK15_impl_1 dpk15Impl1 = new DPK15_impl_1();
-        assertEquals("John1", dpk15Impl1.lessFriends(personList));
+        assertEquals("John1", dpk15Impl1.lessFriends(person1List));
 
     }
 
     @Test
     void oldestFriendsShouldBeSuccess() {
 
-        List<Person> personList = new ArrayList<>();
+        List<Person1> person1List = new ArrayList<>();
 
-        Person person = new Person("John", 30);
-        person.addFriends("Paul",60);
-        person.addFriends("George",61);
-        personList.add(person);
+        Person1 person1 = new Person1("John", 30);
+        person1.addFriends("Paul",60);
+        person1.addFriends("George",61);
+        person1List.add(person1);
 
-        person = new Person("Ringo", 89);
-        person.addFriends("Paul",69);
-        person.addFriends("George", 70);
-        person.addFriends("Ringo",10);
-        person.addFriends("Ringo1",62);
-        person.addFriends("Ringo2",64);
-        person.addFriends("Ringo3",62);
-        personList.add(person);
+        person1 = new Person1("Ringo", 89);
+        person1.addFriends("Paul",69);
+        person1.addFriends("George", 70);
+        person1.addFriends("Ringo",10);
+        person1.addFriends("Ringo1",62);
+        person1.addFriends("Ringo2",64);
+        person1.addFriends("Ringo3",62);
+        person1List.add(person1);
 
-        person = new Person("John1", 67);
-        person.addFriends("Paul",20);
-        personList.add(person);
+        person1 = new Person1("John1", 67);
+        person1.addFriends("Paul",20);
+        person1List.add(person1);
 
 
         DPK15_impl_1 dpk15Impl1 = new DPK15_impl_1();
-        assertEquals("George", dpk15Impl1.oldestFriends(personList));
+        assertEquals("George", dpk15Impl1.oldestFriends(person1List));
     }
 
 }
