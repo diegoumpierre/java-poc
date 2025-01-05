@@ -40,10 +40,10 @@ public class DPK15_impl_1 {
         int oldestFriend = Integer.MIN_VALUE;
 
         for (Person1 person1 : person1List) {
-            for(Friend friend : person1.friends){
-                if (oldestFriend < friend.getAge()) {
-                    oldestFriend = friend.getAge();
-                    winner = friend.getName();
+            for(Friend1 friend1 : person1.friend1s){
+                if (oldestFriend < friend1.getAge()) {
+                    oldestFriend = friend1.getAge();
+                    winner = friend1.getName();
                 }
             }
         }
@@ -55,7 +55,7 @@ class Person1 {
 
     String name;
     int age;
-    List<Friend> friends = new ArrayList<>();
+    List<Friend1> friend1s = new ArrayList<>();
 
     public Person1(String name, int age) {
         this.name = name;
@@ -64,30 +64,30 @@ class Person1 {
 
     public void addFriends(String name) {
         boolean exists = false;
-        for (Friend friend : friends) {
-            if (friend.name.equals(name)) {
+        for (Friend1 friend1 : friend1s) {
+            if (friend1.name.equals(name)) {
                 exists = true;
             }
         }
         if (!exists) {
-            friends.add(new Friend(name));
+            friend1s.add(new Friend1(name));
         }
     }
 
     public void addFriends(String name, int age) {
         boolean exists = false;
-        for (Friend friend : friends) {
-            if (friend.name.equals(name)) {
+        for (Friend1 friend1 : friend1s) {
+            if (friend1.name.equals(name)) {
                 exists = true;
             }
         }
         if (!exists) {
-            friends.add(new Friend(name, age));
+            friend1s.add(new Friend1(name, age));
         }
     }
 
     public List<String> getFriends() {
-        return friends.stream().map(Friend::getName).collect(Collectors.toList());
+        return friend1s.stream().map(Friend1::getName).collect(Collectors.toList());
     }
 
     public int getAge() {
@@ -99,24 +99,24 @@ class Person1 {
     }
 
     public void removeFriend(String name) {
-        for (Friend friend : friends) {
-            if (friend.getName().equals(name)) {
-                friends.remove(friend);
+        for (Friend1 friend1 : friend1s) {
+            if (friend1.getName().equals(name)) {
+                friend1s.remove(friend1);
             }
         }
     }
 }
 
-class Friend {
+class Friend1 {
 
     String name;
     int age;
 
-    public Friend(String name) {
+    public Friend1(String name) {
         this.name = name;
     }
 
-    public Friend(String name, int age) {
+    public Friend1(String name, int age) {
         this.name = name;
         this.age = age;
     }

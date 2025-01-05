@@ -44,7 +44,6 @@ class DPK15_impl_2Test {
     void returnAgeShouldVeSuccess(){
         Person2 person2 = new Person2("John", 30);
         assertEquals(30, person2.getAge());
-
     }
 
 }
