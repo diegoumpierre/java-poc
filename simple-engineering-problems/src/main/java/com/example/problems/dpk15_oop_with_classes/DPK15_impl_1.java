@@ -128,6 +128,4 @@ class Friend1 {
     public int getAge() {
         return this.age;
     }
-
-
 }

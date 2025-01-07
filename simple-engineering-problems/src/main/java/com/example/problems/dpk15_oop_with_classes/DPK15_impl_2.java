@@ -24,8 +24,15 @@ class Person2 {
     }
 
     public void addFriend(String name) {
-        Friend2 friend2 = new Friend2(name,0);
-        friends.add(friend2);
+        boolean exists = false;
+        for (Friend2 friend2 : friends) {
+            if (friend2.getName().equals(name)) {
+                exists = true;
+            }
+        }
+        if (!exists) {
+            friends.add(new Friend2(name));
+        }
     }
 
     public String getName() {
@@ -44,6 +51,10 @@ class Friend2 {
     public Friend2(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    public Friend2(String name) {
+        this.name = name;
     }
 
     public String getName() {
