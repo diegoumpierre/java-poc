@@ -46,6 +46,15 @@ class DPK15_impl_2Test {
         assertEquals(30, person2.getAge());
     }
 
+    @Test
+    void dontAllowTheSameFriendTwiceShouldBeSuccess(){
+        Person2 person2 = new Person2("John", 30);
+        person2.addFriend("Paul");
+        person2.addFriend("Paul");
+
+        assertEquals(1, person2.getFriends().size());
+        assertEquals("Paul", person2.getFriends().get(0));
+    }
 
 
 }
