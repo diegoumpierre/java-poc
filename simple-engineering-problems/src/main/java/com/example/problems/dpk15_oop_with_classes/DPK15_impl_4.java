@@ -113,6 +113,10 @@ class Friend4 {
         this.age = age;
     }
 
+    public Friend4(String name) {
+        this.name = name;
+    }
+
     public int getAge() {
         return age;
     }
