@@ -1,5 +1,6 @@
 package com.poc;
 
+import com.poc.observability.service.ScheduleExecuterService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,8 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ObservabilityLatencyApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         SpringApplication.run(ObservabilityLatencyApplication.class, args);
+        ScheduleExecuterService.run();
     }
 
 }
