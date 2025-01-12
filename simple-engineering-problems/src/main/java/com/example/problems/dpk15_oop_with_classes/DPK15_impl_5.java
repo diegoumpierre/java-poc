@@ -64,10 +64,6 @@ class Person5 {
         this.age = age;
     }
 
-    public Person5(String name) {
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }
@@ -85,7 +81,7 @@ class Person5 {
     }
 
     public void addFriend(String name, int age) {
-        Optional<Friend5> friend5 = friend5List.stream().findFirst().filter(friend -> friend.getName().equals(name));
+        Optional<Friend5> friend5 = friend5List.stream().filter(friend -> friend.getName().equals(name)).findFirst();
         if (!friend5.isPresent()) {
             friend5List.add(new Friend5(name, age));
         }
