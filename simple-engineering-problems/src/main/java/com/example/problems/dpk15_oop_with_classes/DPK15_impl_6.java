@@ -80,7 +80,7 @@ class Person6 {
     }
 
     public void addFriend(String name, int age) {
-        Optional<Friend6> friend6 = friend6List.stream().findFirst().filter(friend -> friend.getName().equals(name));
+        Optional<Friend6> friend6 = friend6List.stream().filter(friend -> friend.getName().equals(name)).findFirst();
         if (!friend6.isPresent()) {
             friend6List.add(new Friend6(name, age));
         }
