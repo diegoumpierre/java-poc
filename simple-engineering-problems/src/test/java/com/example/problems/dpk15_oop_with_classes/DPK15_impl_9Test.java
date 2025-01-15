@@ -63,9 +63,9 @@ class DPK15_impl_9Test {
         person9.addFriend("George");
         person9.addFriend("Ringo");
 
-        List<Friend6> expectedFriends = new ArrayList<>();
-        expectedFriends.add(new Friend6("Paul"));
-        expectedFriends.add(new Friend6("Ringo"));
+        List<Friend9> expectedFriends = new ArrayList<>();
+        expectedFriends.add(new Friend9("Paul"));
+        expectedFriends.add(new Friend9("Ringo"));
 
         person9.removeFriend("George");
         assertEquals(2, person9.getFriends().size());

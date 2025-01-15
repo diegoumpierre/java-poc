@@ -102,6 +102,9 @@ class Friend8 {
         this.name = name;
         this.age = age;
     }
+    public Friend8(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return this.name;
