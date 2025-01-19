@@ -65,10 +65,10 @@ class Mosquito1 {
                 break;
 
         }
-//            if (!String.valueOf(grid[x][y]).isEmpty()) {
-//                excludeItems.add(grid[x][y]);
-//            }
-//            grid[x][y] = valueAtActualPosition;
+            if (!String.valueOf(grid[x][y]).isEmpty()) {
+                //excludeItems.add(grid[x][y]);
+            }
+            grid[x][y] = valueAtActualPosition;
 
 
     }
@@ -93,31 +93,31 @@ class Mosquito1 {
 //    }
 //}
 //
-//class Game1 {
-//    private int mosquitos;
-//    private int exterminators;
-//
-//    private int[][] matrix = new int[100][100];
-//
-//
-//    public Game1() {
-//        this.mosquitos = 10;
-//        this.exterminators = 1;
-//    }
-//
-//    //quando inicia o jogo tenho que colocar os mosquitos na matrix
-//
-//
-//
-//    public void mosquitoMove() {
-//        //random position
-//    }
-//
-//    public int getExterminators() {
-//        return exterminators;
-//    }
-//
-//    public int getMosquitos() {
-//        return mosquitos;
-//    }
+class Game1 {
+    private int mosquitos;
+    private int exterminators;
+
+    private int[][] matrix = new int[100][100];
+
+
+    public Game1() {
+        this.mosquitos = 10;
+        this.exterminators = 1;
+    }
+
+    //quando inicia o jogo tenho que colocar os mosquitos na matrix
+
+
+
+    public void mosquitoMove() {
+        //random position
+    }
+
+    public int getExterminators() {
+        return exterminators;
+    }
+
+    public int getMosquitos() {
+        return mosquitos;
+    }
 }
