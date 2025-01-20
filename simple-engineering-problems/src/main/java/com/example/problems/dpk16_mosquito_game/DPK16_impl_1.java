@@ -1,45 +1,69 @@
 package com.example.problems.dpk16_mosquito_game;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class DPK16_impl_1 {
 }
+//
+//class Exterminator1 {
+//
+//}
 
-class Exterminator1 {
+enum MosquitoMove1Enum {
+    UP("UP"),
+    DOWN("DOWN"),
+    LEFT("LEFT"),
+    RIGHT("RIGHT"),
+    DIAGONAL_UP_RIGHT("UP", "RIGHT"),
+    DIAGONAL_UP_LEFT("UP", "LEFT"),
+    DIAGONAL_DOWN_RIGHT("DOWN", "RIGHT"),
+    DIAGONAL_DOWN_LEFT("DOWN", "LEFT");
 
-}
+    private List<String> movements;
 
-class Mosquito1 {
+    MosquitoMove1Enum(String... movements) {
+        this.movements = Arrays.asList(movements);
+    }
 
-    public void mosquitoMove(){
-        String[] directions = {"up", "down", "left", "right", "diagonals_up_righ","diagonals_up_left",
-                "diagonals_up_righ","diagonals_down_left", "diagonals_down_righ"};
-
+    public List<String> getMovements() {
+        return movements;
     }
 }
 
+class Mosquito1 {
+    private int[] position;
 
-    private int[] position = {0,0};
+    private Random random;
 
-    String[] directions = {"up", "down", "left", "right", "diagonals"};
+    public Mosquito1(Random random, int[] position) {
+        this.random = random;
+        this.position = position;
+    }
 
-    public void move(int[][] grid) {
+    private List<String> getNextMove() {
+        int randomIndex = random.nextInt(MosquitoMove1Enum.values().length);
+        return MosquitoMove1Enum.values()[randomIndex].getMovements();
+    }
+
+    public void mosquitoMove(int[][] gridPosition) {
+        getNextMove();
+
+    }
+
+    private void move(int[][] grid, String movement) {
         int x = position[0];
         int y = position[1];
 
-        switch (getNextMove()) {
-            case "up":
+        switch (MosquitoMove1Enum.valueOf(movement)) {
+            case UP:
                 if (x + 1 > 99) {
                     x = 0;
                 } else {
                     x++;
                 }
                 break;
-
-            case "down":
+            case DOWN:
                 if (x - 1 < 0) {
                     x = 99;
                 } else {
@@ -47,7 +71,7 @@ class Mosquito1 {
                 }
                 break;
 
-            case "left":
+            case LEFT:
                 if (y - 1 < 0) {
                     y = 99;
                 } else {
@@ -55,17 +79,7 @@ class Mosquito1 {
                 }
                 break;
 
-            case "right":
-                if (y + 1 > 99) {
-                    y = 0;
-                } else {
-                    y++;
-                }
-                break;
-            case "diagonals":
-                //need think more in the diagonal
-
-
+            case RIGHT:
                 if (y + 1 > 99) {
                     y = 0;
                 } else {
@@ -73,67 +87,36 @@ class Mosquito1 {
                 }
                 break;
 
+//    grid[x][y] = valueAtActualPosition;
         }
-            if (!String.valueOf(grid[x][y]).isEmpty()) {
-                //excludeItems.add(grid[x][y]);
-            }
-            grid[x][y] = valueAtActualPosition;
-
-
-    }
-
-    private String getNextMove() {
-        Random random = new Random();
-        int randomIndex = random.nextInt(directions.length);
-        return directions[randomIndex];
     }
 
 
-private String getNextMoveMosquito(String[] possibilitys) {
-    Random random = new Random();
-    int randomIndex = random.nextInt(possibilitys.length);
-    return possibilitys[randomIndex];
-}
-
-//}
+/// /
+//class Game1 {
+//    private int mosquitos;
+//    private int exterminators;
 //
+//    private int[][] matrix = new int[100][100];
+//
+//
+//    public Game1() {
+//        this.mosquitos = 10;
+//        this.exterminators = 1;
 //    }
 //
+//    //quando inicia o jogo tenho que colocar os mosquitos na matrix
 //
-//    private int getRandomNumber(int axis){
-//        int randomNumber = (int) (Math.random() * 101);
-//        if (randomNumber == axis){
-//            getRandomNumber(axis);
-//        }
-//        return randomNumber;
+//
+//    public void mosquitoMove() {
+//        //random position
+//    }
+//
+//    public int getExterminators() {
+//        return exterminators;
+//    }
+//
+//    public int getMosquitos() {
+//        return mosquitos;
 //    }
 //}
-//
-class Game1 {
-    private int mosquitos;
-    private int exterminators;
-
-    private int[][] matrix = new int[100][100];
-
-
-    public Game1() {
-        this.mosquitos = 10;
-        this.exterminators = 1;
-    }
-
-    //quando inicia o jogo tenho que colocar os mosquitos na matrix
-
-
-
-    public void mosquitoMove() {
-        //random position
-    }
-
-    public int getExterminators() {
-        return exterminators;
-    }
-
-    public int getMosquitos() {
-        return mosquitos;
-    }
-}
