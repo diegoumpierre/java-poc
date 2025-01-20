@@ -13,6 +13,15 @@ class Exterminator1 {
 }
 
 class Mosquito1 {
+
+    public void mosquitoMove(){
+        String[] directions = {"up", "down", "left", "right", "diagonals_up_righ","diagonals_up_left",
+                "diagonals_up_righ","diagonals_down_left", "diagonals_down_righ"};
+
+    }
+}
+
+
     private int[] position = {0,0};
 
     String[] directions = {"up", "down", "left", "right", "diagonals"};
@@ -65,10 +74,10 @@ class Mosquito1 {
                 break;
 
         }
-//            if (!String.valueOf(grid[x][y]).isEmpty()) {
-//                excludeItems.add(grid[x][y]);
-//            }
-//            grid[x][y] = valueAtActualPosition;
+            if (!String.valueOf(grid[x][y]).isEmpty()) {
+                //excludeItems.add(grid[x][y]);
+            }
+            grid[x][y] = valueAtActualPosition;
 
 
     }
@@ -78,6 +87,13 @@ class Mosquito1 {
         int randomIndex = random.nextInt(directions.length);
         return directions[randomIndex];
     }
+
+
+private String getNextMoveMosquito(String[] possibilitys) {
+    Random random = new Random();
+    int randomIndex = random.nextInt(possibilitys.length);
+    return possibilitys[randomIndex];
+}
 
 //}
 //
@@ -93,31 +109,31 @@ class Mosquito1 {
 //    }
 //}
 //
-//class Game1 {
-//    private int mosquitos;
-//    private int exterminators;
-//
-//    private int[][] matrix = new int[100][100];
-//
-//
-//    public Game1() {
-//        this.mosquitos = 10;
-//        this.exterminators = 1;
-//    }
-//
-//    //quando inicia o jogo tenho que colocar os mosquitos na matrix
-//
-//
-//
-//    public void mosquitoMove() {
-//        //random position
-//    }
-//
-//    public int getExterminators() {
-//        return exterminators;
-//    }
-//
-//    public int getMosquitos() {
-//        return mosquitos;
-//    }
+class Game1 {
+    private int mosquitos;
+    private int exterminators;
+
+    private int[][] matrix = new int[100][100];
+
+
+    public Game1() {
+        this.mosquitos = 10;
+        this.exterminators = 1;
+    }
+
+    //quando inicia o jogo tenho que colocar os mosquitos na matrix
+
+
+
+    public void mosquitoMove() {
+        //random position
+    }
+
+    public int getExterminators() {
+        return exterminators;
+    }
+
+    public int getMosquitos() {
+        return mosquitos;
+    }
 }
