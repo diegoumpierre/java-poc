@@ -13,6 +13,15 @@ class Exterminator1 {
 }
 
 class Mosquito1 {
+
+    public void mosquitoMove(){
+        String[] directions = {"up", "down", "left", "right", "diagonals_up_righ","diagonals_up_left",
+                "diagonals_up_righ","diagonals_down_left", "diagonals_down_righ"};
+
+    }
+}
+
+
     private int[] position = {0,0};
 
     String[] directions = {"up", "down", "left", "right", "diagonals"};
@@ -78,6 +87,13 @@ class Mosquito1 {
         int randomIndex = random.nextInt(directions.length);
         return directions[randomIndex];
     }
+
+
+private String getNextMoveMosquito(String[] possibilitys) {
+    Random random = new Random();
+    int randomIndex = random.nextInt(possibilitys.length);
+    return possibilitys[randomIndex];
+}
 
 //}
 //
