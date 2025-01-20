@@ -2,30 +2,36 @@ package com.example.problems.dpk16_mosquito_game;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DPK16_impl_1Test {
 
 
+    //I need test the mosquito move
     @Test
-    void initialGameShouldBeSuccess(){//The game should start with 10 mosquitos, 1 exterminator.
-//        Game1 game1 = new Game1();
-//        assertEquals(10, game1.getMosquitos());
-//        assertEquals(1, game1.getExterminators());
+    void mosquitoMoveEnumShouldBeSuccess(){
+        assertArrayEquals(List.of("UP").toArray(), MosquitoMove1Enum.UP.getMovements().toArray());
+        assertArrayEquals(List.of("DOWN").toArray(), MosquitoMove1Enum.DOWN.getMovements().toArray());
+        assertArrayEquals(List.of("LEFT").toArray(), MosquitoMove1Enum.LEFT.getMovements().toArray());
+        assertArrayEquals(List.of("RIGHT").toArray(), MosquitoMove1Enum.RIGHT.getMovements().toArray());
+        assertArrayEquals(List.of("UP","RIGHT").toArray(), MosquitoMove1Enum.DIAGONAL_UP_RIGHT.getMovements().toArray());
+        assertArrayEquals(List.of("UP","LEFT").toArray(), MosquitoMove1Enum.DIAGONAL_UP_LEFT.getMovements().toArray());
+        assertArrayEquals(List.of("DOWN","RIGHT").toArray(), MosquitoMove1Enum.DIAGONAL_DOWN_RIGHT.getMovements().toArray());
+        assertArrayEquals(List.of("DOWN","LEFT").toArray(), MosquitoMove1Enum.DIAGONAL_DOWN_LEFT.getMovements().toArray());
     }
 
     @Test
-    void mosquitoMoveToRandomPosition(){
-//        Mosquito1 mosquito1 = new Mosquito1();
-//        mosquito1.move();
+    void ramdomMoveShouldBeSuccess(){
+
+        Mosquito1 mosquito1 = new Mosquito1();
+        mosquito1.mosquitoMove();
+
     }
 
-    @Test
-    void tests(){
-        int[][] matrix = new int[100][100];
 
-        matrix[100][100] = 10;
-    }
+
 
 }
 
@@ -40,7 +46,9 @@ class DPK16_impl_1Test {
  * The game should have a method that can return the number of mosquitos alive.
  * The mosquito can walk in any direction (up, down, left, right, diagonals).
  * The exterminator can walk in one direction, it should swap the metrixs.
- * The exterminator can walk from the bottown left corner to the top right corner them from the botton to the top them return on the same route.
+ *
+ *  The exterminator can walk from the bottown left corner to the top right corner
+ * them from the botton to the top them return on the same route.
  *
  *
  */
