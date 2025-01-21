@@ -7,30 +7,31 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DPK16_impl_1Test {
-
-
-    //I need test the mosquito move
     @Test
-    void mosquitoMoveEnumShouldBeSuccess(){
+    void mosquitoMoveEnumShouldBeSuccess() {
         assertArrayEquals(List.of("UP").toArray(), MosquitoMove1Enum.UP.getMovements().toArray());
         assertArrayEquals(List.of("DOWN").toArray(), MosquitoMove1Enum.DOWN.getMovements().toArray());
         assertArrayEquals(List.of("LEFT").toArray(), MosquitoMove1Enum.LEFT.getMovements().toArray());
         assertArrayEquals(List.of("RIGHT").toArray(), MosquitoMove1Enum.RIGHT.getMovements().toArray());
-        assertArrayEquals(List.of("UP","RIGHT").toArray(), MosquitoMove1Enum.DIAGONAL_UP_RIGHT.getMovements().toArray());
-        assertArrayEquals(List.of("UP","LEFT").toArray(), MosquitoMove1Enum.DIAGONAL_UP_LEFT.getMovements().toArray());
-        assertArrayEquals(List.of("DOWN","RIGHT").toArray(), MosquitoMove1Enum.DIAGONAL_DOWN_RIGHT.getMovements().toArray());
-        assertArrayEquals(List.of("DOWN","LEFT").toArray(), MosquitoMove1Enum.DIAGONAL_DOWN_LEFT.getMovements().toArray());
+        assertArrayEquals(List.of("UP", "RIGHT").toArray(), MosquitoMove1Enum.DIAGONAL_UP_RIGHT.getMovements().toArray());
+        assertArrayEquals(List.of("UP", "LEFT").toArray(), MosquitoMove1Enum.DIAGONAL_UP_LEFT.getMovements().toArray());
+        assertArrayEquals(List.of("DOWN", "RIGHT").toArray(), MosquitoMove1Enum.DIAGONAL_DOWN_RIGHT.getMovements().toArray());
+        assertArrayEquals(List.of("DOWN", "LEFT").toArray(), MosquitoMove1Enum.DIAGONAL_DOWN_LEFT.getMovements().toArray());
     }
+
 
     @Test
-    void ramdomMoveShouldBeSuccess(){
+    void testGrid(){
+        Object[][] grid = new Object[100][100];
 
+        //add a mosquito to grid
         Mosquito1 mosquito1 = new Mosquito1();
-        mosquito1.mosquitoMove();
+        grid[mosquito1.getPositionX()][mosquito1.getPositionY()] = mosquito1;
+
+        Mosquito1 mosquito2 = new Mosquito1();
+        grid[mosquito2.getPositionX()][mosquito2.getPositionY()] = mosquito2;
 
     }
-
-
 
 
 }

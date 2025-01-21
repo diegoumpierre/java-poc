@@ -5,10 +5,6 @@ import java.util.*;
 
 public class DPK16_impl_1 {
 }
-//
-//class Exterminator1 {
-//
-//}
 
 enum MosquitoMove1Enum {
     UP("UP"),
@@ -33,13 +29,25 @@ enum MosquitoMove1Enum {
 
 class Mosquito1 {
     private int[] position;
-
     private Random random;
+
+    public int getPositionX() {
+        return position[0];
+    }
+    public int getPositionY() {
+        return position[1];
+    }
 
     public Mosquito1(Random random, int[] position) {
         this.random = random;
         this.position = position;
     }
+
+    public Mosquito1() {
+        this.random = new Random();
+        this.position = new int[]{0, 0};
+    }
+
 
     private List<String> getNextMove() {
         int randomIndex = random.nextInt(MosquitoMove1Enum.values().length);
@@ -86,37 +94,16 @@ class Mosquito1 {
                     y++;
                 }
                 break;
-
-//    grid[x][y] = valueAtActualPosition;
         }
     }
 
 
-/// /
-//class Game1 {
-//    private int mosquitos;
-//    private int exterminators;
-//
-//    private int[][] matrix = new int[100][100];
-//
-//
-//    public Game1() {
-//        this.mosquitos = 10;
-//        this.exterminators = 1;
-//    }
-//
-//    //quando inicia o jogo tenho que colocar os mosquitos na matrix
-//
-//
-//    public void mosquitoMove() {
-//        //random position
-//    }
-//
-//    public int getExterminators() {
-//        return exterminators;
-//    }
-//
-//    public int getMosquitos() {
-//        return mosquitos;
-//    }
-//}
+}
+class Game1 {
+    private int[][] grid = new int[100][100];
+
+    public Game1(){
+
+    }
+
+}
