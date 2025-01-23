@@ -9,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class DPK16_impl_1Test {
     @Test
     void mosquitoMoveEnumShouldBeSuccess() {
-        assertArrayEquals(List.of("UP").toArray(), MosquitoMove1Enum.UP.getMovements().toArray());
-        assertArrayEquals(List.of("DOWN").toArray(), MosquitoMove1Enum.DOWN.getMovements().toArray());
-        assertArrayEquals(List.of("LEFT").toArray(), MosquitoMove1Enum.LEFT.getMovements().toArray());
-        assertArrayEquals(List.of("RIGHT").toArray(), MosquitoMove1Enum.RIGHT.getMovements().toArray());
-        assertArrayEquals(List.of("UP", "RIGHT").toArray(), MosquitoMove1Enum.DIAGONAL_UP_RIGHT.getMovements().toArray());
-        assertArrayEquals(List.of("UP", "LEFT").toArray(), MosquitoMove1Enum.DIAGONAL_UP_LEFT.getMovements().toArray());
-        assertArrayEquals(List.of("DOWN", "RIGHT").toArray(), MosquitoMove1Enum.DIAGONAL_DOWN_RIGHT.getMovements().toArray());
-        assertArrayEquals(List.of("DOWN", "LEFT").toArray(), MosquitoMove1Enum.DIAGONAL_DOWN_LEFT.getMovements().toArray());
+        assertArrayEquals(List.of("UP").toArray(), Move1Strategy.UP.getMovements().toArray());
+        assertArrayEquals(List.of("DOWN").toArray(), Move1Strategy.DOWN.getMovements().toArray());
+        assertArrayEquals(List.of("LEFT").toArray(), Move1Strategy.LEFT.getMovements().toArray());
+        assertArrayEquals(List.of("RIGHT").toArray(), Move1Strategy.RIGHT.getMovements().toArray());
+        assertArrayEquals(List.of("UP", "RIGHT").toArray(), Move1Strategy.DIAGONAL_UP_RIGHT.getMovements().toArray());
+        assertArrayEquals(List.of("UP", "LEFT").toArray(), Move1Strategy.DIAGONAL_UP_LEFT.getMovements().toArray());
+        assertArrayEquals(List.of("DOWN", "RIGHT").toArray(), Move1Strategy.DIAGONAL_DOWN_RIGHT.getMovements().toArray());
+        assertArrayEquals(List.of("DOWN", "LEFT").toArray(), Move1Strategy.DIAGONAL_DOWN_LEFT.getMovements().toArray());
     }
 
 
