@@ -1,42 +1,124 @@
 package com.example.problems.dpk16_mosquito_game;
 
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class DPK16_impl_1 {
 }
 
-enum MosquitoMove1Enum {
-    UP("UP"),
-    DOWN("DOWN"),
-    LEFT("LEFT"),
-    RIGHT("RIGHT"),
-    DIAGONAL_UP_RIGHT("UP", "RIGHT"),
-    DIAGONAL_UP_LEFT("UP", "LEFT"),
-    DIAGONAL_DOWN_RIGHT("DOWN", "RIGHT"),
-    DIAGONAL_DOWN_LEFT("DOWN", "LEFT");
+interface MovementApplication1 {
+    int[] execute(int[] position);
+}
 
-    private List<String> movements;
+enum Move1Strategy {
+    UP(new Up1()),
+    DOWN(new Down1()),
+    LEFT(new Left1()),
+    RIGHT(new Right1()),
+    DIAGONAL_UP_RIGHT(new DiagonalUpRight1()),
+    DIAGONAL_UP_LEFT(new DiagonalUpLeft1()),
+    DIAGONAL_DOWN_RIGHT(new DiagonalDownRight1()),
+    DIAGONAL_DOWN_LEFT(new DiagonalDownLeft1());
 
-    MosquitoMove1Enum(String... movements) {
-        this.movements = Arrays.asList(movements);
+    private final MovementApplication1 application;
+
+    Move1Strategy(MovementApplication1 application) {
+        this.application = application;
     }
 
-    public List<String> getMovements() {
-        return movements;
+    public MovementApplication1 getApplication() {
+        return application;
+    }
+
+    private static class Up1 implements MovementApplication1 {
+        @Override
+        public int[] execute(int[] position) {
+            if (position[0] + 1 > 99) {
+                position[0] = 0;
+            } else {
+                position[0]++;
+            }
+            return position;
+        }
+    }
+
+    private static class Down1 implements MovementApplication1 {
+        @Override
+        public int[] execute(int[] position) {
+            if (position[0] - 1 < 0) {
+                position[0] = 99;
+            } else {
+                position[0]--;
+            }
+            return position;
+        }
+    }
+
+    private static class Right1 implements MovementApplication1 {
+        @Override
+        public int[] execute(int[] position) {
+            if (position[1] + 1 > 99) {
+                position[1] = 0;
+            } else {
+                position[1]++;
+            }
+            return position;
+        }
+    }
+
+    private static class Left1 implements MovementApplication1 {
+        @Override
+        public int[] execute(int[] position) {
+            if (position[1] - 1 < 0) {
+                position[1] = 99;
+            } else {
+                position[1]--;
+            }
+            return position;
+        }
+    }
+
+    private static class DiagonalUpRight1 implements MovementApplication1 {
+        @Override
+        public int[] execute(int[] position) {
+            Up1 up1 = new Up1();
+            Right1 right1 = new Right1();
+            return right1.execute(up1.execute(position));
+        }
+    }
+
+    private static class DiagonalUpLeft1 implements MovementApplication1 {
+        @Override
+        public int[] execute(int[] position) {
+            Up1 up1 = new Up1();
+            Left1 left1 = new Left1();
+            return left1.execute(up1.execute(position));
+        }
+    }
+
+    private static class DiagonalDownRight1 implements MovementApplication1 {
+        @Override
+        public int[] execute(int[] position) {
+            Down1 down1 = new Down1();
+            Right1 right1 = new Right1();
+            return right1.execute(down1.execute(position));
+        }
+    }
+
+    private static class DiagonalDownLeft1 implements MovementApplication1 {
+        @Override
+        public int[] execute(int[] position) {
+            Down1 down1 = new Down1();
+            Left1 left1 = new Left1();
+            return left1.execute(down1.execute(position));
+        }
     }
 }
 
 class Mosquito1 {
     private int[] position;
     private Random random;
-
-    public int getPositionX() {
-        return position[0];
-    }
-    public int getPositionY() {
-        return position[1];
-    }
 
     public Mosquito1(Random random, int[] position) {
         this.random = random;
@@ -49,9 +131,9 @@ class Mosquito1 {
     }
 
 
-    private List<String> getNextMove() {
-        int randomIndex = random.nextInt(MosquitoMove1Enum.values().length);
-        return MosquitoMove1Enum.values()[randomIndex].getMovements();
+    private Move1Strategy getNextMove() {
+        int randomIndex = random.nextInt(Move1Strategy.values().length);
+        return Move1Strategy.values()[randomIndex];
     }
 
     public void mosquitoMove(int[][] gridPosition) {
@@ -59,50 +141,15 @@ class Mosquito1 {
 
     }
 
-    private void move(int[][] grid, String movement) {
-        int x = position[0];
-        int y = position[1];
-
-        switch (MosquitoMove1Enum.valueOf(movement)) {
-            case UP:
-                if (x + 1 > 99) {
-                    x = 0;
-                } else {
-                    x++;
-                }
-                break;
-            case DOWN:
-                if (x - 1 < 0) {
-                    x = 99;
-                } else {
-                    x--;
-                }
-                break;
-
-            case LEFT:
-                if (y - 1 < 0) {
-                    y = 99;
-                } else {
-                    y--;
-                }
-                break;
-
-            case RIGHT:
-                if (y + 1 > 99) {
-                    y = 0;
-                } else {
-                    y++;
-                }
-                break;
-        }
-    }
+}
 
 
 }
+
 class Game1 {
     private int[][] grid = new int[100][100];
 
-    public Game1(){
+    public Game1() {
 
     }
 
