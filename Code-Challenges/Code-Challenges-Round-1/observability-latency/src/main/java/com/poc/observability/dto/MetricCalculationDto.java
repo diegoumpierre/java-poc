@@ -1,4 +1,5 @@
 package com.poc.observability.dto;
+
 import lombok.Getter;
 
 import java.util.Set;
@@ -15,39 +16,39 @@ public class MetricCalculationDto {
     private long averageResponseTime;
 
 
-    public static MetricCalculationDto buildMetric(){
+    public static MetricCalculationDto buildMetric() {
         MetricCalculationDto metricCalculationDto = new MetricCalculationDto();
 
         Set<String> metricKeys = MetricQueueDto.metricMap.keySet();
 
-        for(String key :metricKeys){
+        for (String key : metricKeys) {
             MetricDto metric = MetricQueueDto.metricMap.get(key);
 
             //total requests
             metricCalculationDto.totalRequests++;
 
             //totalResponseTime
-            metricCalculationDto.totalResponseTime = metricCalculationDto.totalResponseTime+metric.getResponseTime();
+            metricCalculationDto.totalResponseTime = metricCalculationDto.totalResponseTime + metric.getResponseTime();
 
             //success or fail
-            if(metric.isSuccess()){
+            if (metric.isSuccess()) {
                 metricCalculationDto.countSuccess++;
-            }else {
+            } else {
                 metricCalculationDto.contFail++;
             }
 
             //bestResponseTime - the short one
-            if (metricCalculationDto.bestResponseTime > metric.getResponseTime()){
+            if (metricCalculationDto.bestResponseTime > metric.getResponseTime()) {
                 metricCalculationDto.bestResponseTime = metric.getResponseTime();
             }
 
             //worstResponseTime - the long one
-            if (metricCalculationDto.worstResponseTime < metric.getResponseTime()){
+            if (metricCalculationDto.worstResponseTime < metric.getResponseTime()) {
                 metricCalculationDto.worstResponseTime = metric.getResponseTime();
             }
         }
 
-        metricCalculationDto.averageResponseTime = metricCalculationDto.totalResponseTime/metricCalculationDto.totalRequests;
+        metricCalculationDto.averageResponseTime = metricCalculationDto.totalResponseTime / metricCalculationDto.totalRequests;
         return metricCalculationDto;
     }
 

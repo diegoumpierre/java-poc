@@ -13,4 +13,8 @@ public class MetricDto {
     private long responseTimeEnd;
     private String method;
     private String path;
+
+
+
+
 }
