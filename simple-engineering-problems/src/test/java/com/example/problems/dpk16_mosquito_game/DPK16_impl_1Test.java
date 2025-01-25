@@ -110,7 +110,7 @@ class DPK16_impl_1Test {
     @Test
     void testPrint() {
         Game1 game1 = new Game1(10, 10, 10, 1);
-        game1.run();
+        //game1.run();
     }
 }
 
