@@ -117,6 +117,7 @@ public class DPK16_impl_1 {
     }
 
     class Mosquito {
+        private int round = 0;
         private int[] position;
         private Random random;
         private int moves;
@@ -216,13 +217,16 @@ public class DPK16_impl_1 {
             return mosquitoKilled;
         }
 
-        private Boolean isGridBusy(int[] position) {
-            int x = position[0];
-            int y = position[1];
-            if (x == row) return null;
-            if (y == column) return null;
 
-            if (null != grid[x][y]) {
+        private boolean isInvalidPosition(int[] position) {
+            if (position[0] >= row || position[0] >= column) {
+                return true;
+            }
+            return false;
+        }
+
+        private boolean isGridBusy(int[] position) {
+            if (null != grid[position[0]][position[1]]) {
                 return true;
             }
             return false;
@@ -232,7 +236,7 @@ public class DPK16_impl_1 {
             //The game should start with 1 exterminator
             for (int i = 0; i < exterminator; i++) {
                 Exterminator exterminator = new Exterminator(new int[]{0, 0});
-                while (null == isGridBusy(exterminator.getPosition()) || isGridBusy(exterminator.getPosition())) {
+                while (isInvalidPosition(exterminator.getPosition()) || isGridBusy(exterminator.getPosition())) {
                     exterminator.move();
                 }
                 grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]] = exterminator;
@@ -241,7 +245,7 @@ public class DPK16_impl_1 {
             //The game should start with 10 mosquito
             for (int i = 1; i <= mosquito; i++) {
                 Mosquito mosquito = new Mosquito(new Random(), new int[]{i, 0});
-                while (null == isGridBusy(mosquito.getPosition()) || isGridBusy(mosquito.getPosition())) {
+                while (isInvalidPosition(mosquito.getPosition()) || isGridBusy(mosquito.getPosition())) {
                     mosquito.move();
                 }
                 grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
@@ -249,41 +253,83 @@ public class DPK16_impl_1 {
             }
         }
 
+        private Mosquito getMosquitoFromGrid(int[] position) {
+            Object o = grid[position[0]][position[1]];
+            if (o instanceof Mosquito) {
+                return (Mosquito) o;
+            }
+            return null;
+        }
 
+        private Exterminator getExterminatorFromGrid(int[] position) {
+            Object o = grid[position[0]][position[1]];
+            if (o instanceof Exterminator) {
+                return (Exterminator) o;
+            }
+            return null;
+        }
 
         private void printMatrix() {
+            String itemToPrint;
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
-                    Object object = grid[i][j];
-                    if (null == object) {
-                        object = new String("#");
-                    } else if (object instanceof Mosquito) {
-                        object = new String("M");
-                    } else {
-                        object = new String("E");
+                    itemToPrint = "#";
+                    if (null != getMosquitoFromGrid(new int[]{i, j})) {
+                        itemToPrint = "M";
                     }
-                    System.out.print(object + "\t");  // Tab for spacing
+                    if (null != getExterminatorFromGrid(new int[]{i, j})) {
+                        itemToPrint = "E";
+                    }
+                    System.out.print(itemToPrint + "\t");  // Tab for spacing
                 }
-                System.out.println();  // New line after each row
+                System.out.println();
             }
             System.out.println("Mosquito alive = " + getMosquitoAlive() + " | Mosquito killed = " + mosquitoKilled);
         }
 
-        private void tick() {
+        private void tick(int round) {
             //reading the grid
+            boolean mosquitoDie;
+            Mosquito mosquito;
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
-                    Object object = grid[i][j];
-                    if (null != object) {
-                        if (object instanceof Mosquito) {
-                            ((Mosquito) object).move();
-                        } else {
-                            object = new String("E");
-                        }
+                    if (!isGridBusy(new int[]{i, j})) {
+                        continue;
                     }
+                    //moving the mosquito
+                    mosquitoDie = false;
+                    mosquito = getMosquitoFromGrid(new int[]{i, j});
+                    if (null != mosquito) {
+                        if (mosquito.round == round) continue;
+                        int[] currentPosition = mosquito.getPosition();
+                        mosquito.move();
+                        while (isGridBusy(mosquito.getPosition())) {
+                            if (null != getExterminatorFromGrid(mosquito.getPosition())) {
+                                //exist an exterminator in the next position, so mosquito die
+                                mosquitoAlive--;
+                                mosquitoKilled++;
+                                grid[currentPosition[0]][currentPosition[1]] = null;
+                                mosquitoDie = true;
+                                break;
+                            } else {
+                                mosquito.move();
+                            }
+                        }
+                        if (!mosquitoDie) {
+                            mosquito.round=round;
+                            grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
+                            grid[currentPosition[0]][currentPosition[1]] = null;
+                        }
+
+
+                    }
+
+
                 }
             }
         }
+
+
 
 
         public void run() throws InterruptedException {
