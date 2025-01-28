@@ -243,14 +243,8 @@ public class DPK16_impl_1 {
             }
 
             //The game should start with 10 mosquito
-            for (int i = 1; i <= mosquito; i++) {
-                Mosquito mosquito = new Mosquito(new Random(), new int[]{i, 0});
-                while (isInvalidPosition(mosquito.getPosition()) || isGridBusy(mosquito.getPosition())) {
-                    mosquito.move();
-                }
-                grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
-                mosquitoAlive++;
-            }
+            createMosquito(mosquito);
+
         }
 
         private Mosquito getMosquitoFromGrid(int[] position) {
@@ -287,6 +281,18 @@ public class DPK16_impl_1 {
             System.out.println("Mosquito alive = " + getMosquitoAlive() + " | Mosquito killed = " + mosquitoKilled);
         }
 
+
+        private void createMosquito(int numMosquitosToCreate){
+            for (int i = 1; i <= numMosquitosToCreate; i++) {
+                Mosquito mosquito = new Mosquito(new Random(), new int[]{i, 0});
+                while (isInvalidPosition(mosquito.getPosition()) || isGridBusy(mosquito.getPosition())) {
+                    mosquito.move();
+                }
+                grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
+                mosquitoAlive++;
+            }
+        }
+
         private void tick(int round) {
             //reading the grid
             boolean mosquitoDie;
@@ -312,6 +318,9 @@ public class DPK16_impl_1 {
                                 mosquitoDie = true;
                                 break;
                             } else {
+                                if (mosquito.moves >= 5){
+                                    //need check all the position near
+                                }
                                 mosquito.move();
                             }
                         }
