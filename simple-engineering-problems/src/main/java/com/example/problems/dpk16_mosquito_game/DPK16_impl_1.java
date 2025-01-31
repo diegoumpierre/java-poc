@@ -1,5 +1,6 @@
 package com.example.problems.dpk16_mosquito_game;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import static java.lang.Thread.sleep;
@@ -282,7 +283,7 @@ public class DPK16_impl_1 {
         }
 
 
-        private void createMosquito(int numMosquitosToCreate){
+        private void createMosquito(int numMosquitosToCreate) {
             for (int i = 1; i <= numMosquitosToCreate; i++) {
                 Mosquito mosquito = new Mosquito(new Random(), new int[]{i, 0});
                 while (isInvalidPosition(mosquito.getPosition()) || isGridBusy(mosquito.getPosition())) {
@@ -318,14 +319,17 @@ public class DPK16_impl_1 {
                                 mosquitoDie = true;
                                 break;
                             } else {
-                                if (mosquito.moves >= 5){
+                                if (mosquito.moves >= 5) {
+                                    //check if exists a mosquito near
+
+
                                     //need check all the position near
                                 }
                                 mosquito.move();
                             }
                         }
                         if (!mosquitoDie) {
-                            mosquito.round=round;
+                            mosquito.round = round;
                             grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
                             grid[currentPosition[0]][currentPosition[1]] = null;
                         }
@@ -338,8 +342,19 @@ public class DPK16_impl_1 {
             }
         }
 
+        private Mosquito reproduceMosquito(Mosquito mosquito) {
 
+            Arrays.stream(MoveStrategy.values()).forEach(moveStrategy -> {
 
+                if (null != getMosquitoFromGrid(
+                        moveStrategy.getApplication().execute(mosquito.getPosition()))) {
+                    createMosquito(1);
+                    mosquito.moves = 0;
+                    mosquitoAlive++;
+                }
+            });
+            return mosquito;
+        }
 
         public void run() throws InterruptedException {
             startGame();
