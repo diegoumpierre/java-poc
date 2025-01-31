@@ -319,13 +319,13 @@ public class DPK16_impl_1 {
                                 mosquitoDie = true;
                                 break;
                             } else {
-                                if (mosquito.moves >= 5) {
-                                    //check if exists a mosquito near
-
-
+                                if (mosquito.moves >= 5 && existsMosquitoNear(mosquito.getPosition())) {
+                                    createMosquito(1);
+                                    mosquitoAlive++;
                                     //need check all the position near
+                                } else {
+                                    mosquito.move();
                                 }
-                                mosquito.move();
                             }
                         }
                         if (!mosquitoDie) {
@@ -333,33 +333,26 @@ public class DPK16_impl_1 {
                             grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
                             grid[currentPosition[0]][currentPosition[1]] = null;
                         }
-
-
                     }
-
-
                 }
             }
         }
 
-        private Mosquito reproduceMosquito(Mosquito mosquito) {
-
-            Arrays.stream(MoveStrategy.values()).forEach(moveStrategy -> {
-
-                if (null != getMosquitoFromGrid(
-                        moveStrategy.getApplication().execute(mosquito.getPosition()))) {
-                    createMosquito(1);
-                    mosquito.moves = 0;
-                    mosquitoAlive++;
+        private boolean existsMosquitoNear(int[] initialPosition) {
+            for (MoveStrategy moveStrategy : MoveStrategy.values()) {
+                int[] newPosition = moveStrategy.getApplication().execute(initialPosition);
+                if (null != getMosquitoFromGrid(newPosition)) {
+                    return true;
                 }
-            });
-            return mosquito;
+            }
+
+            return false;
         }
 
         public void run() throws InterruptedException {
             startGame();
             printMatrix();
-
+            Random random = new Random();
             //percorrer a grid
             //percorrer a list mosquito e do exterminator
             //fazer distribuido
@@ -367,7 +360,7 @@ public class DPK16_impl_1 {
 
             while (true) {
                 sleep(1000);
-                //method tick (centralized)
+                tick(random.nextInt());
             }
         }
 
