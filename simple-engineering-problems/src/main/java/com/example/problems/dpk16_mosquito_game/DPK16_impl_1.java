@@ -7,6 +7,15 @@ import static java.lang.Thread.sleep;
 
 public class DPK16_impl_1 {
 
+    private Game game;
+
+    public DPK16_impl_1(int row, int column, int mosquito, int exterminator) {
+        this.game = new Game(row, column, mosquito, exterminator);
+    }
+
+    public Game getGame() {
+        return this.game;
+    }
 
     interface MovementApplication {
         int[] execute(int[] position);
@@ -282,7 +291,6 @@ public class DPK16_impl_1 {
             System.out.println("Mosquito alive = " + getMosquitoAlive() + " | Mosquito killed = " + mosquitoKilled);
         }
 
-
         private void createMosquito(int numMosquitosToCreate) {
             for (int i = 1; i <= numMosquitosToCreate; i++) {
                 Mosquito mosquito = new Mosquito(new Random(), new int[]{i, 0});
@@ -361,6 +369,7 @@ public class DPK16_impl_1 {
             while (true) {
                 sleep(1000);
                 tick(random.nextInt());
+                printMatrix();
             }
         }
 
