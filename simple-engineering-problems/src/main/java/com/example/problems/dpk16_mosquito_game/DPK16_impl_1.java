@@ -1,24 +1,13 @@
 package com.example.problems.dpk16_mosquito_game;
 
-import java.util.Arrays;
-import java.util.Random;
-
-import static java.lang.Thread.sleep;
+import com.example.problems.dpk16_mosquito_game.impl1.Game;
 
 public class DPK16_impl_1 {
 
     private Game game;
 
-    public DPK16_impl_1(int row, int column, int mosquito, int exterminator) {
-        this.game = new Game(row, column, mosquito, exterminator);
+    public void runSystem() throws InterruptedException {
+        game.run();
     }
 
-    public Game getGame() {
-        return this.game;
-    }
-
-
-
-
-    }
 }
