@@ -1,7 +1,5 @@
 package com.example.problems.dpk16_mosquito_game.impl1;
 
-import com.example.problems.dpk16_mosquito_game.DPK16_impl_1;
-
 import java.util.Random;
 
 public class Mosquito {
@@ -30,13 +28,13 @@ public class Mosquito {
         return moves;
     }
 
-    private DPK16_impl_1.MoveStrategy getNextMove() {
-        int randomIndex = random.nextInt(DPK16_impl_1.MoveStrategy.values().length);
-        return DPK16_impl_1.MoveStrategy.values()[randomIndex];
+    private MoveStrategy getNextMove() {
+        int randomIndex = random.nextInt(MoveStrategy.values().length);
+        return MoveStrategy.values()[randomIndex];
     }
 
     public void move() {
-        DPK16_impl_1.MoveStrategy moveStrategy = getNextMove();
+        MoveStrategy moveStrategy = getNextMove();
         position = moveStrategy.getApplication().execute(position);
         moves++;
     }

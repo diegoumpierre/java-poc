@@ -1,6 +1,5 @@
 package com.example.problems.dpk16_mosquito_game.impl1;
 
-import com.example.problems.dpk16_mosquito_game.DPK16_impl_1;
 
 public enum MoveStrategy {
 
@@ -13,17 +12,17 @@ public enum MoveStrategy {
     DIAGONAL_DOWN_RIGHT(new DiagonalDownRight()),
     DIAGONAL_DOWN_LEFT(new DiagonalDownLeft());
 
-    private final DPK16_impl_1.MovementApplication application;
+    private final MovementApplication application;
 
-    MoveStrategy(DPK16_impl_1.MovementApplication application) {
+    MoveStrategy(MovementApplication application) {
         this.application = application;
     }
 
-    public DPK16_impl_1.MovementApplication getApplication() {
+    public MovementApplication getApplication() {
         return application;
     }
 
-    private static class Up implements DPK16_impl_1.MovementApplication {
+    private static class Up implements MovementApplication {
         @Override
         public int[] execute(int[] position) {
             if (position[0] + 1 > Game.row - 1) {
@@ -35,7 +34,7 @@ public enum MoveStrategy {
         }
     }
 
-    private static class Down implements DPK16_impl_1.MovementApplication {
+    private static class Down implements MovementApplication {
         @Override
         public int[] execute(int[] position) {
             if (position[0] - 1 < 0) {
@@ -47,7 +46,7 @@ public enum MoveStrategy {
         }
     }
 
-    private static class Right implements DPK16_impl_1.MovementApplication {
+    private static class Right implements MovementApplication {
         @Override
         public int[] execute(int[] position) {
             if (position[1] + 1 > Game.column - 1) {
@@ -59,7 +58,7 @@ public enum MoveStrategy {
         }
     }
 
-    private static class Left implements DPK16_impl_1.MovementApplication {
+    private static class Left implements MovementApplication {
         @Override
         public int[] execute(int[] position) {
             if (position[1] - 1 < 0) {
@@ -71,7 +70,7 @@ public enum MoveStrategy {
         }
     }
 
-    private static class DiagonalUpRight implements DPK16_impl_1.MovementApplication {
+    private static class DiagonalUpRight implements MovementApplication {
         @Override
         public int[] execute(int[] position) {
             Up up1 = new Up();
@@ -80,7 +79,7 @@ public enum MoveStrategy {
         }
     }
 
-    private static class DiagonalUpLeft implements DPK16_impl_1.MovementApplication {
+    private static class DiagonalUpLeft implements MovementApplication {
         @Override
         public int[] execute(int[] position) {
             Up up1 = new Up();
@@ -89,7 +88,7 @@ public enum MoveStrategy {
         }
     }
 
-    private static class DiagonalDownRight implements DPK16_impl_1.MovementApplication {
+    private static class DiagonalDownRight implements MovementApplication {
         @Override
         public int[] execute(int[] position) {
             Down down1 = new Down();
@@ -98,7 +97,7 @@ public enum MoveStrategy {
         }
     }
 
-    private static class DiagonalDownLeft implements DPK16_impl_1.MovementApplication {
+    private static class DiagonalDownLeft implements MovementApplication {
         @Override
         public int[] execute(int[] position) {
             Down down1 = new Down();
