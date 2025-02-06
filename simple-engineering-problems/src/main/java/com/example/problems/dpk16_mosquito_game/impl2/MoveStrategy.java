@@ -1,4 +1,4 @@
-package com.example.problems.dpk16_mosquito_game.impl1;
+package com.example.problems.dpk16_mosquito_game.impl2;
 
 
 enum MoveStrategy {
