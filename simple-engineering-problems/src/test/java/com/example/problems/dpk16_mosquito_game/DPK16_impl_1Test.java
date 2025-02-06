@@ -1,6 +1,6 @@
 package com.example.problems.dpk16_mosquito_game;
 
-import org.junit.jupiter.api.BeforeEach;
+import com.example.problems.dpk16_mosquito_game.impl1.Game;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,8 +17,7 @@ class DPK16_impl_1Test {
         int column = 5;
         int mosquito = 10;
         int exterminator = 1;
-        this.dpk16Impl1 = new DPK16_impl_1(row, column, mosquito, exterminator);
-        DPK16_impl_1.Game game = dpk16Impl1.getGame();
+        Game game = new Game(row, column, mosquito, exterminator);
 
         //method under test
         game.run();
