@@ -3,10 +3,10 @@ package com.example.problems.dpk16_mosquito_game.impl1;
 import java.util.Random;
 
 public class Mosquito {
-    private int round = 0;
+    public int round = 0;
     private int[] position;
     private Random random;
-    private int moves;
+    public int moves;
 
     public Mosquito(Random random, int[] position) {
         this.random = random;
