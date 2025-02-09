@@ -15,13 +15,13 @@ class Exterminator {
 
     public void move() {
         //top right
-        if (position[0] == 99 && position[1] == 99) {
+        if (position[0] == Game.row && position[1] == Game.column) {
             position = MoveStrategy.UP.getApplication().execute(position);
             direction = MoveStrategy.DIAGONAL_UP_LEFT;
             return;
         }
         //top left
-        if (position[0] == 99 && position[1] == 0) {
+        if (position[0] == Game.row && position[1] == Game.column) {
             position = MoveStrategy.UP.getApplication().execute(position);
             direction = MoveStrategy.DIAGONAL_UP_RIGHT;
             return;
