@@ -43,8 +43,8 @@ class ExterminatorTest {
     @Test
     void moveExterminatorTopLeftEndTopRightShouldSuccess() {
         //give
-        int row=100;
-        int column=100;
+        int row=99;
+        int column=99;
         int mosquito=0;
         int exterminator=0;
         Game game = new Game(row, column, mosquito, exterminator);
