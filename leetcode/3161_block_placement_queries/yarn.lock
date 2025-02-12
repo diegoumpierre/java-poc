@@ -570,7 +570,7 @@
 
 "@tsconfig/node20@^20.1.4":
   version "20.1.4"
-  resolved "https://artifactory.tlcinternal.com/artifactory/api/npm/npm-virtual/@tsconfig/node20/-/node20-20.1.4.tgz"
+  resolved "https://artifactory.tlcinternal.com/artifactory/api/npm/npm-virtual/@tsconfig/node20/-/node20-20.1.4.tgz#3457d42eddf12d3bde3976186ab0cd22b85df928"
   integrity sha512-sqgsT69YFeLWf5NtJ4Xq/xAF8p4ZQHlmGW74Nu2tD4+g5fAsposc4ZfaaPixVu4y01BEiDCWLRDCvDM5JOsRxg==
 
 "@types/babel__core@^7.1.14":
@@ -645,9 +645,16 @@
     expect "^29.0.0"
     pretty-format "^29.0.0"
 
-"@types/node@*", "@types/node@^22.13.1":
+"@types/node@*":
   version "22.13.1"
   resolved "https://artifactory.tlcinternal.com/artifactory/api/npm/npm-virtual/@types/node/-/node-22.13.1.tgz"
+  integrity sha512-jK8uzQlrvXqEU91UxiK5J7pKHyzgnI1Qnl0QDHIgVGuolJhRb9EEl28Cj9b3rGR8B2lhFCtvIm5os8lFnO/1Ew==
+  dependencies:
+    undici-types "~6.20.0"
+
+"@types/node@^22.13.1":
+  version "22.13.1"
+  resolved "https://artifactory.tlcinternal.com/artifactory/api/npm/npm-virtual/@types/node/-/node-22.13.1.tgz#a2a3fefbdeb7ba6b89f40371842162fac0934f33"
   integrity sha512-jK8uzQlrvXqEU91UxiK5J7pKHyzgnI1Qnl0QDHIgVGuolJhRb9EEl28Cj9b3rGR8B2lhFCtvIm5os8lFnO/1Ew==
   dependencies:
     undici-types "~6.20.0"
@@ -2117,7 +2124,7 @@ ts-jest@^29.2.5:
 
 ts-node@^10.9.2:
   version "10.9.2"
-  resolved "https://artifactory.tlcinternal.com/artifactory/api/npm/npm-virtual/ts-node/-/ts-node-10.9.2.tgz"
+  resolved "https://artifactory.tlcinternal.com/artifactory/api/npm/npm-virtual/ts-node/-/ts-node-10.9.2.tgz#70f021c9e185bccdca820e26dc413805c101c71f"
   integrity sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==
   dependencies:
     "@cspotcode/source-map-support" "^0.8.0"
@@ -2146,7 +2153,7 @@ type-fest@^0.21.3:
 
 typescript@^5.7.3:
   version "5.7.3"
-  resolved "https://artifactory.tlcinternal.com/artifactory/api/npm/npm-virtual/typescript/-/typescript-5.7.3.tgz"
+  resolved "https://artifactory.tlcinternal.com/artifactory/api/npm/npm-virtual/typescript/-/typescript-5.7.3.tgz#919b44a7dbb8583a9b856d162be24a54bf80073e"
   integrity sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==
 
 undici-types@~6.20.0:
