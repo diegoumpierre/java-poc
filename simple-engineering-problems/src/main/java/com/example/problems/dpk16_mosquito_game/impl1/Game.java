@@ -8,23 +8,23 @@ class Game {
     private boolean endGame = false;
     private int mosquitoAlive = 0;
     private int mosquitoKilled = 0;
-    public static int row, column, mosquito, exterminator;
+    private int row, column, mosquito, exterminator;
     private Object[][] grid;
 
     public Game(int row, int column, int mosquito, int exterminator) {
-        Game.row = row;
-        Game.column = column;
-        Game.mosquito = mosquito;
-        Game.exterminator = exterminator;
+        this.row = row;
+        this.column = column;
+        this.mosquito = mosquito;
+        this.exterminator = exterminator;
         grid = new Object[row][column];
     }
 
     public Game() {
-        Game.row = 100;
-        Game.column = 100;
-        Game.mosquito = 10;
-        Game.exterminator = 1;
-        grid = new Object[Game.row][Game.column];
+        this.row = 100;
+        this.column = 100;
+        this.mosquito = 10;
+        this.exterminator = 1;
+        grid = new Object[this.row][this.column];
     }
 
     public int getMosquitoAlive() {
@@ -53,7 +53,7 @@ class Game {
     public void startGame() {
         //The game should start with 1 exterminator
         for (int i = 0; i < exterminator; i++) {
-            Exterminator exterminator = new Exterminator(new int[]{0, 0});
+            Exterminator exterminator = new Exterminator(new int[]{0, 0}, this);
             while (isInvalidPosition(exterminator.getPosition()) || isGridBusy(exterminator.getPosition())) {
                 exterminator.move();
             }
@@ -156,7 +156,7 @@ class Game {
 
     private boolean existsMosquitoNear(int[] initialPosition) {
         for (MoveStrategy moveStrategy : MoveStrategy.values()) {
-            int[] newPosition = moveStrategy.getApplication().execute(initialPosition);
+            int[] newPosition = moveStrategy.getApplication().execute(initialPosition, null);
             if (null != getMosquitoFromGrid(newPosition)) {
                 return true;
             }
@@ -179,5 +179,13 @@ class Game {
             tick(random.nextInt());
             printMatrix();
         }
+    }
+
+    public int getRow() {
+        return this.row;
+    }
+
+    public int getColumn() {
+        return this.column;
     }
 }
