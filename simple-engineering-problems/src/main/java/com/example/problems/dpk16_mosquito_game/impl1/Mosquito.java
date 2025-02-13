@@ -35,7 +35,7 @@ class Mosquito {
 
     public void move() {
         MoveStrategy moveStrategy = getNextMove();
-        position = moveStrategy.getApplication().execute(position);
+        position = moveStrategy.getApplication().execute(position, null);
         moves++;
     }
 }

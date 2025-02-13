@@ -5,8 +5,11 @@ class Exterminator {
     private int[] position;
     private MoveStrategy direction = MoveStrategy.DIAGONAL_UP_RIGHT;
 
-    public Exterminator(int[] position) {
+    private Game game;
+
+    public Exterminator(int[] position, Game game) {
         this.position = position;
+        this.game = game;
     }
 
     public int[] getPosition() {
@@ -15,19 +18,19 @@ class Exterminator {
 
     public void move() {
         //top right
-        if (position[0] == Game.row && position[1] == Game.column) {
-            position = MoveStrategy.UP.getApplication().execute(position);
+        if (position[0] == game.getRow() && position[1] == game.getColumn()) {
+            position = MoveStrategy.UP.getApplication().execute(position, game);
             direction = MoveStrategy.DIAGONAL_UP_LEFT;
             return;
         }
         //top left
-        if (position[0] == Game.row && position[1] == Game.column) {
-            position = MoveStrategy.UP.getApplication().execute(position);
+        if (position[0] == game.getRow() && position[1] == game.getColumn()) {
+            position = MoveStrategy.UP.getApplication().execute(position, game);
             direction = MoveStrategy.DIAGONAL_UP_RIGHT;
             return;
         }
 
-        position = direction.getApplication().execute(position);
+        position = direction.getApplication().execute(position, game);
     }
 
 

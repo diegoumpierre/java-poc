@@ -9,13 +9,9 @@ class ExterminatorTest {
     @Test
     void moveExterminatorTopRightShouldSuccess() {
         //give
-        int row=100;
-        int column=100;
-        int mosquito=0;
-        int exterminator=0;
-        Game game = new Game(row, column, mosquito, exterminator);
+        Game game = new Game(100, 100, 0, 0);
 
-        Exterminator exterminator1 = new Exterminator(new int[]{0, 0});
+        Exterminator exterminator1 = new Exterminator(new int[]{0, 0}, game);
         //method under test
         exterminator1.move();
         //then
@@ -24,12 +20,8 @@ class ExterminatorTest {
     @Test
     void moveExterminatorTopRightEndTopLeftShouldSuccess() {
         //give
-        int row=100;
-        int column=100;
-        int mosquito=0;
-        int exterminator=0;
-        Game game = new Game(row, column, mosquito, exterminator);
-        Exterminator exterminator1 = new Exterminator(new int[]{99, 99});
+        Game game = new Game(100, 100, 0, 0);
+        Exterminator exterminator1 = new Exterminator(new int[]{99, 99}, game);
 
         //method under test
         exterminator1.move();
@@ -43,12 +35,8 @@ class ExterminatorTest {
     @Test
     void moveExterminatorTopLeftEndTopRightShouldSuccess() {
         //give
-        int row=99;
-        int column=99;
-        int mosquito=0;
-        int exterminator=0;
-        Game game = new Game(row, column, mosquito, exterminator);
-        Exterminator exterminator1 = new Exterminator(new int[]{99, 0});
+        Game game = new Game(100, 100, 0, 0);
+        Exterminator exterminator1 = new Exterminator(new int[]{99, 0}, game);
         //method under test
         exterminator1.move();
         //then
