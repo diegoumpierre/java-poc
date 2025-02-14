@@ -1,4 +1,4 @@
-package com.poc.taxsystem.service;
+package com.poc.taxsystem.strategy;
 
 public enum TaxYearStateStrategy {
 
