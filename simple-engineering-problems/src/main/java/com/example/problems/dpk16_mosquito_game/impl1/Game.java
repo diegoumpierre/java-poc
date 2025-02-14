@@ -19,13 +19,13 @@ class Game {
         grid = new Object[row][column];
     }
 
-    public Game() {
-        this.row = 100;
-        this.column = 100;
-        this.mosquito = 10;
-        this.exterminator = 1;
-        grid = new Object[this.row][this.column];
-    }
+//    public Game() {
+//        this.row = 100;
+//        this.column = 100;
+//        this.mosquito = 10;
+//        this.exterminator = 1;
+//        grid = new Object[this.row][this.column];
+//    }
 
     public int getMosquitoAlive() {
         return mosquitoAlive;
@@ -101,7 +101,7 @@ class Game {
 
     private void createMosquito(int numMosquitosToCreate) {
         for (int i = 1; i <= numMosquitosToCreate; i++) {
-            Mosquito mosquito = new Mosquito(new Random(), new int[]{i, 0});
+            Mosquito mosquito = new Mosquito(new Random(), new int[]{i, 0}, null);
             while (isInvalidPosition(mosquito.getPosition()) || isGridBusy(mosquito.getPosition())) {
                 mosquito.move();
             }

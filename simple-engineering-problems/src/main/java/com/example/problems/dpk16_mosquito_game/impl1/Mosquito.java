@@ -8,17 +8,21 @@ class Mosquito {
     private Random random;
     public int moves;
 
-    public Mosquito(Random random, int[] position) {
+    private Game game;
+
+
+    public Mosquito(Random random, int[] position, Game game) {
         this.random = random;
         this.position = position;
         this.moves = 0;
+        this.game = game;
     }
 
-    public Mosquito() {
-        this.random = new Random();
-        this.position = new int[]{0, 0};
-        this.moves = 0;
-    }
+//    public Mosquito() {
+//        this.random = new Random();
+//        this.position = new int[]{0, 0};
+//        this.moves = 0;
+//    }
 
     public int[] getPosition() {
         return position;
@@ -35,7 +39,7 @@ class Mosquito {
 
     public void move() {
         MoveStrategy moveStrategy = getNextMove();
-        position = moveStrategy.getApplication().execute(position, null);
+        position = moveStrategy.getApplication().execute(position, game);
         moves++;
     }
 }

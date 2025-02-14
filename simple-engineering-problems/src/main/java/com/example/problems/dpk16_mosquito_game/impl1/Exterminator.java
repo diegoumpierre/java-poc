@@ -4,7 +4,6 @@ package com.example.problems.dpk16_mosquito_game.impl1;
 class Exterminator {
     private int[] position;
     private MoveStrategy direction = MoveStrategy.DIAGONAL_UP_RIGHT;
-
     private Game game;
 
     public Exterminator(int[] position, Game game) {
