@@ -13,19 +13,17 @@ class MosquitoTest {
     @Test
     void moveMosquitoShouldBeSuccess() {
         //give
-        int row=100;
-        int column=100;
-        int mosquito=0;
-        int exterminator=0;
-        Game game = new Game(row, column, mosquito, exterminator);
-
+        Game game = new Game(10, 10, 1, 0);
         Random random = Mockito.mock(Random.class);
         when(random.nextInt(MoveStrategy.values().length)).thenReturn(1);
-        Mosquito mosquito1 = new Mosquito(random, new int[]{0, 0});
+        Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, game);
+
         //method under test
-        mosquito1.move();
+        mosquito.move();
+
         //then
-        assertArrayEquals(new int[]{99, 0}, mosquito1.getPosition());
+        assertArrayEquals(new int[]{game.getRow(), 0}, mosquito.getPosition());
+        assertEquals(1, mosquito.getMoves());
     }
 
 }
