@@ -14,7 +14,7 @@ public class TaxSystemService {
         double taxRate = 0;
         for (TaxSpecification taxSpecification : taxSpecifications) {
             if (taxSpecification.isSatisfiedBy(state, year)) {
-                taxRate += 0.5;
+                taxRate += taxSpecification.getTax();
             }
         }
         return price * taxRate;
