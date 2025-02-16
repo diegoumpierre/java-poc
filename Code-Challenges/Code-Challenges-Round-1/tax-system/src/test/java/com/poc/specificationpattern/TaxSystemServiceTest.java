@@ -15,10 +15,10 @@ class TaxSystemServiceTest {
     @Test
     void calculateTaxShouldBeSuccess() {
 
-        TaxSpecification stateTaxSpecification = new StateTaxSpecification("RS");
-        TaxSpecification yearTaxSpecification = new YearTaxSpecification(2024);
+        TaxSpecification stateTaxSpecification = new StateTaxSpecification("RS",2023);
+//        TaxSpecification yearTaxSpecification = new YearTaxSpecification(2024);
 
-        List<TaxSpecification> specifications = Arrays.asList(stateTaxSpecification, yearTaxSpecification);
+        List<TaxSpecification> specifications = Arrays.asList(stateTaxSpecification);
 
         TaxSystemService taxSystemService = new TaxSystemService(specifications);
 
@@ -30,7 +30,7 @@ class TaxSystemServiceTest {
     void calculateTaxWrongStateShouldBeFail() {
 
         TaxSpecification stateTaxSpecification = new StateTaxSpecification("RS");
-        TaxSpecification yearTaxSpecification = new YearTaxSpecification(2024);
+//        TaxSpecification yearTaxSpecification = new YearTaxSpecification(2024);
 
         List<TaxSpecification> specifications = Arrays.asList(stateTaxSpecification, yearTaxSpecification);
 
