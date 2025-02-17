@@ -1,11 +1,13 @@
-package com.poc.specificationpattern;
+package com.poc.specificationpattern.state;
 
-public class Rs2024TaxSpecification implements TaxSpecification{
+import com.poc.specificationpattern.TaxSpecification;
+
+public class Sc2023TaxSpecification implements TaxSpecification {
 
     private String state;
     private int year;
 
-    public Rs2024TaxSpecification(String state, int year){
+    public Sc2023TaxSpecification(String state, int year){
         this.state = state;
         this.year = year;
     }
@@ -18,6 +20,6 @@ public class Rs2024TaxSpecification implements TaxSpecification{
 
     @Override
     public double getTax() {
-        return 1.2;
+        return 4.3;
     }
 }
