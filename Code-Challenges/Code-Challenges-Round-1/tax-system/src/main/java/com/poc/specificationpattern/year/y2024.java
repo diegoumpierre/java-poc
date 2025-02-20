@@ -4,18 +4,32 @@ import com.poc.specificationpattern.TaxSpecification;
 
 public class y2024 implements TaxSpecification {
 
-    private String state;
     private int year;
+    private double tax;
 
-    public y2024(String state, int year){
-        this.state = state;
+    public y2024(int year){
         this.year = year;
     }
 
     @Override
     public boolean isSatisfiedBy(String state, int year) {
+        boolean satisfied = false;
 
-        return (state.equals(state) && this.year == year);
+        if (this.year == year){
+            switch (state){
+                case "RS":
+                    tax = 1.0;
+                    satisfied=true;
+                    break;
+                case "SC":
+                    tax = 3.0;
+                    satisfied=true;
+                    break;
+            }
+        }
+
+        return satisfied;
+
     }
 
     @Override
