@@ -3,10 +3,10 @@ package com.example.problems.dpk16_mosquito_game.impl1;
 import java.util.Random;
 
 class Mosquito {
-
+    public int round;
     private int[] position;
     private Random random;
-    public int moves;
+    public int moves = 0;
 
     private Game game;
 
@@ -14,7 +14,6 @@ class Mosquito {
     public Mosquito(Random random, int[] position, Game game) {
         this.random = random;
         this.position = position;
-        this.moves = 0;
         this.game = game;
     }
 
@@ -36,7 +35,6 @@ class Mosquito {
         MoveStrategy moveStrategy = getNextMove();
         position = moveStrategy.getApplication().execute(position, game);
     }
-
 
 
     public boolean hasMosquitoNearby() {

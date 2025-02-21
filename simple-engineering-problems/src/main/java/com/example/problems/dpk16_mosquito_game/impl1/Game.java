@@ -62,13 +62,13 @@ class Game {
         String itemToPrint;
         for (int i = 0; i < getRow(); i++) {
             for (int j = 0; j < getColumn(); j++) {
-                itemToPrint = "#";
+                itemToPrint = "-";
                 Object object = grid[i][j];
                 if (null != object && object instanceof Mosquito) {
                     itemToPrint = "M";
                 }
                 if (null != object && object instanceof Exterminator) {
-                    itemToPrint = "E";
+                    itemToPrint = "X";
                 }
                 System.out.print(itemToPrint + "\t");  // Tab for spacing
             }
@@ -79,10 +79,11 @@ class Game {
 
     public void run() {
         try{
+            int round = 0;
             while (mosquitoAlive > 0) {
-                printMatrix();
-                tick();
-                sleep(1000);
+                tick(round);
+                sleep(10000);
+                round++;
             }
             printMatrix();
         } catch (Exception e) {
@@ -91,7 +92,7 @@ class Game {
 
     }
 
-    private Mosquito moveInTheGrid(Mosquito mosquito) {
+    public Mosquito moveInTheGrid(Mosquito mosquito) {
         mosquito.move();
         Object possibleExterminator = grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]];
         if (null != possibleExterminator && possibleExterminator instanceof Exterminator) {
@@ -99,43 +100,60 @@ class Game {
         }
         while (possibleExterminator != null) {
             moveInTheGrid(mosquito);
+            break;
         }
         return mosquito;
     }
 
 
-    private void tick() {
+    private void tick(int round) {
+        printMatrix();
+
         for (int i = 0; i < getRow(); i++) {
             for (int j = 0; j < getColumn(); j++) {
                 Object object = grid[i][j];
                 if (null != object && object instanceof Mosquito) {
                     Mosquito mosquito = (Mosquito) object;
-                    mosquito = moveInTheGrid(mosquito);
-                    if (mosquito == null) {
-                        mosquitoAlive--;
-                        mosquitoKilled++;
-                    } else {
-                        mosquito.moves++;
-                        grid[i][j] = mosquito;
-                    }
-                    if (mosquito.moves == 5) {
-                        if (mosquito.hasMosquitoNearby()) {
-                            createMosquito(1);
-                            mosquito.moves = 0;
+                    if (mosquito.round != round) {
+                        mosquito.round = round;
+                        mosquito = moveInTheGrid(mosquito);
+                        if (mosquito == null) {
+                            mosquitoAlive--;
+                            mosquitoKilled++;
+                        } else {
+                            mosquito.moves++;
+                            grid[i][j] = null;
+                            grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
+
+                            if (mosquito.moves == 5) {
+                                if (mosquito.hasMosquitoNearby()) {
+                                    createMosquito(1);
+                                    mosquito.moves = 0;
+                                }
+                            }
                         }
                     }
+                    printMatrix();
+
                 }
                 if (null != object && object instanceof Exterminator) {
                     Exterminator exterminator = (Exterminator) object;
-                    exterminator.move();
-                    Object possibleMosquito = grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]];
-                    if (null != possibleMosquito && possibleMosquito instanceof Mosquito) {
-                        mosquitoAlive--;
-                        mosquitoKilled++;
+                    if (exterminator.round != round) {
+                        exterminator.round = round;
+
+                        exterminator.move();
+                        Object possibleMosquito = grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]];
+                        if (null != possibleMosquito && possibleMosquito instanceof Mosquito) {
+                            mosquitoAlive--;
+                            mosquitoKilled++;
+                        }
+                        grid[i][j] = null;
+                        grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]] = exterminator;
                     }
-                    grid[i][j] = exterminator;
+                    printMatrix();
                 }
             }
         }
+
     }
 }

@@ -2,6 +2,7 @@ package com.example.problems.dpk16_mosquito_game.impl1;
 
 
 class Exterminator {
+    public int round;
     private int[] position;
     private MoveStrategy direction = MoveStrategy.RIGHT;
     private Game game;
