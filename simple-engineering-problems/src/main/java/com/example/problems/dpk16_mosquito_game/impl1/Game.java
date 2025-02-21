@@ -81,7 +81,7 @@ class Game {
         return null;
     }
 
-    private void printMatrix() {
+    public void printMatrix() {
         String itemToPrint;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {

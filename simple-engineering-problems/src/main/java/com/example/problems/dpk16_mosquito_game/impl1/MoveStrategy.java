@@ -25,6 +25,19 @@ enum MoveStrategy {
     private static class Up implements MovementApplication {
         @Override
         public int[] execute(int[] position, Game game) {
+            if (position[0] - 1 < 0) {
+                position[0] = game.getRow() - 1;
+            } else {
+                position[0]--;
+            }
+            return position;
+
+        }
+    }
+
+    private static class Down implements MovementApplication {
+        @Override
+        public int[] execute(int[] position, Game game) {
             if (position[0] + 1 > game.getRow() - 1) {
                 position[0] = 0;
             } else {
@@ -34,13 +47,13 @@ enum MoveStrategy {
         }
     }
 
-    private static class Down implements MovementApplication {
+    private static class Left implements MovementApplication {
         @Override
         public int[] execute(int[] position, Game game) {
-            if (position[0] - 1 < 0) {
-                position[0] = game.getRow();
+            if (position[1] - 1 < 0) {
+                position[1] = game.getColumn() - 1;
             } else {
-                position[0]--;
+                position[1]--;
             }
             return position;
         }
@@ -58,17 +71,6 @@ enum MoveStrategy {
         }
     }
 
-    private static class Left implements MovementApplication {
-        @Override
-        public int[] execute(int[] position, Game game) {
-            if (position[1] - 1 < 0) {
-                position[1] = game.getColumn();
-            } else {
-                position[1]--;
-            }
-            return position;
-        }
-    }
 
     private static class DiagonalUpRight implements MovementApplication {
         @Override

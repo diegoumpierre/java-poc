@@ -5,60 +5,68 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExterminatorTest {
-    @Test
-    void moveTopLeftEndShouldSuccess() {
-        //give
-        Game game = new Game(10, 10, 0, 0);
-        Exterminator exterminator = new Exterminator(new int[]{game.getRow(), 0}, game);
 
+
+    @Test
+    void moveToRightStartFromBottomLeft() {
+        //given
+        Game game = new Game(5, 5, 0, 1);
+        int[] startPosition = {4, 0};
+        Exterminator exterminator = new Exterminator(startPosition, game);
         //method under test
         exterminator.move();
-        assertArrayEquals(new int[]{0, 0}, exterminator.getPosition());
-        assertEquals(MoveStrategy.DIAGONAL_UP_RIGHT, exterminator.getDirection());
-
-        exterminator.move();
-        assertArrayEquals(new int[]{1, 1}, exterminator.getPosition());
+        //them
+        assertArrayEquals(new int[]{4, 1}, exterminator.getPosition());
     }
 
     @Test
-    void moveTopRightEndShouldSuccess() {
-        //give
-        Game game = new Game(10, 10, 0, 0);
-        Exterminator exterminator = new Exterminator(new int[]{game.getRow(), game.getColumn()}, game);
-
+    void moveFromBottomRight() {
+        //given
+        Game game = new Game(5, 5, 0, 1);
+        int[] startPosition = {4, 4};
+        Exterminator exterminator = new Exterminator(startPosition, game);
         //method under test
         exterminator.move();
-        assertArrayEquals(new int[]{0, game.getColumn()}, exterminator.getPosition());
-        assertEquals(MoveStrategy.DIAGONAL_UP_LEFT, exterminator.getDirection());
-
+        //them
+        assertArrayEquals(new int[]{3, 4}, exterminator.getPosition());
+        //method under test
         exterminator.move();
-        assertArrayEquals(new int[]{1, game.getColumn() - 1}, exterminator.getPosition());
-
+        //them
+        assertArrayEquals(new int[]{3, 3}, exterminator.getPosition());
     }
 
     @Test
-    void moveDownRightEndShouldSuccess() {
-        //give
-        Game game = new Game(10, 10, 0, 0);
-        Exterminator exterminator = new Exterminator(new int[]{0, game.getColumn()}, game);
-
+    void moveFromLeftUpChangeDirection() {
+        //given
+        Game game = new Game(5, 5, 0, 1);
+        int[] startPosition = {4, 4};
+        Exterminator exterminator = new Exterminator(startPosition, game);
         //method under test
         exterminator.move();
-        assertArrayEquals(new int[]{1, 0}, exterminator.getPosition());
-        assertEquals(MoveStrategy.DIAGONAL_UP_RIGHT, exterminator.getDirection());
+        exterminator.move();
+        exterminator.move();
+        exterminator.move();
+        exterminator.move();
+        assertArrayEquals(new int[]{3, 0}, exterminator.getPosition());
+        //method under test
+        exterminator.move();
+        assertArrayEquals(new int[]{2, 0}, exterminator.getPosition());
+        exterminator.move();
+        assertArrayEquals(new int[]{2, 1}, exterminator.getPosition());
     }
 
     @Test
-    void moveDownRightEndShouldSuccess2() {
-        //give
-        Game game = new Game(10, 10, 0, 0);
-        Exterminator exterminator = new Exterminator(new int[]{game.getRow(), game.getColumn() - 1}, game);
-
+    void moveFromRightTop() {
+        //given
+        Game game = new Game(5, 5, 0, 1);
+        int[] startPosition = {0, 3};
+        Exterminator exterminator = new Exterminator(startPosition, game);
         //method under test
         exterminator.move();
-        assertArrayEquals(new int[]{0, 0}, exterminator.getPosition());
-        assertEquals(MoveStrategy.DIAGONAL_UP_RIGHT, exterminator.getDirection());
+        assertArrayEquals(new int[]{0, 4}, exterminator.getPosition());
+        //method under test
+        exterminator.move();
+        assertArrayEquals(new int[]{4, 0}, exterminator.getPosition());
     }
-
 
 }
