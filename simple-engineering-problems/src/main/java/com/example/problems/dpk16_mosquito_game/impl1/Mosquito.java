@@ -18,11 +18,6 @@ class Mosquito {
         this.game = game;
     }
 
-    public Mosquito() {
-        this.random = new Random();
-        this.position = new int[]{0, 0};
-        this.moves = 0;
-    }
 
     public int[] getPosition() {
         return position;
