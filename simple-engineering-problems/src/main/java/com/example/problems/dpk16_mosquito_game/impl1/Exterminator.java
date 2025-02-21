@@ -15,10 +15,6 @@ class Exterminator {
         return position;
     }
 
-//    public MoveStrategy getDirection() {
-//        return direction;
-//    }
-
     public void move() {
         //top-right -- restart to initial position
         if (direction == MoveStrategy.RIGHT && position[1] + 1 > game.getColumn() - 1 && position[0] == 0) {
@@ -44,4 +40,8 @@ class Exterminator {
         //execute the direction set
         position = direction.getApplication().execute(position, game);
     }
+
+
+
+
 }

@@ -10,7 +10,7 @@ class ExterminatorTest {
     @Test
     void moveToRightStartFromBottomLeft() {
         //given
-        Game game = new Game(5, 5, 0, 1);
+        Game game = new Game(5, 5, 0);
         int[] startPosition = {4, 0};
         Exterminator exterminator = new Exterminator(startPosition, game);
         //method under test
@@ -22,7 +22,7 @@ class ExterminatorTest {
     @Test
     void moveFromBottomRight() {
         //given
-        Game game = new Game(5, 5, 0, 1);
+        Game game = new Game(5, 5, 0);
         int[] startPosition = {4, 4};
         Exterminator exterminator = new Exterminator(startPosition, game);
         //method under test
@@ -38,7 +38,7 @@ class ExterminatorTest {
     @Test
     void moveFromLeftUpChangeDirection() {
         //given
-        Game game = new Game(5, 5, 0, 1);
+        Game game = new Game(5, 5, 0);
         int[] startPosition = {4, 4};
         Exterminator exterminator = new Exterminator(startPosition, game);
         //method under test
@@ -58,7 +58,7 @@ class ExterminatorTest {
     @Test
     void moveFromRightTop() {
         //given
-        Game game = new Game(5, 5, 0, 1);
+        Game game = new Game(5, 5, 0);
         int[] startPosition = {0, 3};
         Exterminator exterminator = new Exterminator(startPosition, game);
         //method under test
