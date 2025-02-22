@@ -3,6 +3,8 @@ package com.example.problems.dpk16_mosquito_game.impl1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.UnexpectedException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MoveStrategyTest {
@@ -11,7 +13,7 @@ class MoveStrategyTest {
 
     @BeforeEach
     void setUp() {
-        this.game = new Game(5, 5, 0, 0);
+        this.game = new Game(5, 5, 0);
     }
 
     @Test

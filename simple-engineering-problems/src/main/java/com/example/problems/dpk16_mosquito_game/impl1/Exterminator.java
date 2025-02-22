@@ -2,6 +2,7 @@ package com.example.problems.dpk16_mosquito_game.impl1;
 
 
 class Exterminator {
+    public int round;
     private int[] position;
     private MoveStrategy direction = MoveStrategy.RIGHT;
     private Game game;
@@ -14,10 +15,6 @@ class Exterminator {
     public int[] getPosition() {
         return position;
     }
-
-//    public MoveStrategy getDirection() {
-//        return direction;
-//    }
 
     public void move() {
         //top-right -- restart to initial position
@@ -44,4 +41,8 @@ class Exterminator {
         //execute the direction set
         position = direction.getApplication().execute(position, game);
     }
+
+
+
+
 }

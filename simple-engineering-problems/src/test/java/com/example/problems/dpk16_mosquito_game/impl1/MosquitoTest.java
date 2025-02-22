@@ -13,7 +13,7 @@ class MosquitoTest {
     @Test
     void moveMosquitoShouldBeSuccess() {
         //give
-        Game game = new Game(10, 10, 1, 0);
+        Game game = new Game(10, 10, 1);
         Random random = Mockito.mock(Random.class);
         when(random.nextInt(MoveStrategy.values().length)).thenReturn(1);
         Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, game);
@@ -22,8 +22,30 @@ class MosquitoTest {
         mosquito.move();
 
         //then
-        assertArrayEquals(new int[]{game.getRow(), 0}, mosquito.getPosition());
-        assertEquals(1, mosquito.getMoves());
+        assertArrayEquals(new int[]{1, 0}, mosquito.getPosition());
+        assertEquals(0, mosquito.getMoves());
+    }
+
+
+    @Test
+    void mosquitoNearShouldBeSuccess() {
+        //give
+        Game game = new Game(5, 5, 10);
+        Mosquito mosquito = new Mosquito(new Random(), new int[]{0, 0}, game);
+
+        //method under test
+        assertTrue(mosquito.hasMosquitoNearby());
+    }
+
+    @Test
+    void mosquitoNearShouldBeFail() {
+        //give
+        Game game = new Game(5, 5, 0);
+        Mosquito mosquito = new Mosquito(new Random(), new int[]{0, 0}, game);
+
+        //method under test
+        assertFalse(mosquito.hasMosquitoNearby());
+
     }
 
 }
