@@ -16,7 +16,7 @@ class MosquitoTest {
         Game game = new Game(10, 10, 1);
         Random random = Mockito.mock(Random.class);
         when(random.nextInt(MoveStrategy.values().length)).thenReturn(1);
-        Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, game);
+        Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, game,1);
 
         //method under test
         mosquito.move();
@@ -31,7 +31,7 @@ class MosquitoTest {
     void mosquitoNearShouldBeSuccess() {
         //give
         Game game = new Game(5, 5, 10);
-        Mosquito mosquito = new Mosquito(new Random(), new int[]{0, 0}, game);
+        Mosquito mosquito = new Mosquito(new Random(), new int[]{0, 0}, game,1);
 
         //method under test
         assertTrue(mosquito.hasMosquitoNearby());
@@ -41,7 +41,7 @@ class MosquitoTest {
     void mosquitoNearShouldBeFail() {
         //give
         Game game = new Game(5, 5, 0);
-        Mosquito mosquito = new Mosquito(new Random(), new int[]{0, 0}, game);
+        Mosquito mosquito = new Mosquito(new Random(), new int[]{0, 0}, game,1);
 
         //method under test
         assertFalse(mosquito.hasMosquitoNearby());

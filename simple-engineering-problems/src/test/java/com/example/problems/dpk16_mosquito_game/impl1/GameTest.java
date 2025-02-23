@@ -49,7 +49,7 @@ class GameTest {
         Game game = new Game(5, 5, 2);
         Random random = Mockito.mock(Random.class);
         when(random.nextInt(MoveStrategy.values().length)).thenReturn(3);
-        Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, game);
+        Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, game, 1);
         assertEquals(mosquito, game.moveInTheGrid(mosquito));
     }
 

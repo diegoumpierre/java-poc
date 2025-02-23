@@ -52,7 +52,7 @@ class Game {
     private void createMosquito(int mosquitoToCreate) {
         for (int i = 0; i < mosquitoToCreate; i++) {
             int[] initialPosition = getGridNextFreeSpace();
-            Mosquito mosquito = new Mosquito(new Random(), initialPosition, this);
+            Mosquito mosquito = new Mosquito(new Random(), initialPosition, this, i-1000);
             grid[initialPosition[0]][initialPosition[1]] = mosquito;
             mosquitoAlive++;
         }
