@@ -38,7 +38,13 @@ class GameTest {
     @Test
     void gameShouldBeSuccess() {
         //given
-        Game game = new Game(5, 5, 10);
+        Game game = new Game(2, 2, 2);
+        game.run();
+    }
+    @Test
+    void gameShouldBeSuccess2() {
+        //given
+        Game game = new Game(2, 2, 1);
         game.run();
     }
 
@@ -46,7 +52,7 @@ class GameTest {
     @Test
     void moveInTheGridTest() {
         //given
-        Game game = new Game(5, 5, 2);
+        Game game = new Game(2, 2, 1);
         Random random = Mockito.mock(Random.class);
         when(random.nextInt(MoveStrategy.values().length)).thenReturn(3);
         Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, game, 1);
