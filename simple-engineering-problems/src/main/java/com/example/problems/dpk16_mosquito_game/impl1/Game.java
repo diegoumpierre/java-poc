@@ -79,10 +79,10 @@ class Game {
 
     public void run() {
         try{
-            int round = 0;
+            int round = 1;
             while (mosquitoAlive > 0) {
                 tick(round);
-                sleep(10000);
+                sleep(1000);
                 round++;
             }
             printMatrix();
