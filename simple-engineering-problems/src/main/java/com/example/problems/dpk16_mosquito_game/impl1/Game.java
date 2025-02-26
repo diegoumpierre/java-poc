@@ -11,7 +11,7 @@ class Game {
 
     public Game(int row, int column, int mosquito) {
         grid = new Object[row][column];
-        createMosquito(mosquito);
+        createMosquito(mosquito, 0);
         this.mosquitoKilled = 0;
         Exterminator exterminator = new Exterminator(new int[]{getRow() - 1, 0}, this);
         grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]] = exterminator;
@@ -49,10 +49,10 @@ class Game {
     }
 
 
-    private void createMosquito(int mosquitoToCreate) {
+    private void createMosquito(int mosquitoToCreate, int round) {
         for (int i = 0; i < mosquitoToCreate; i++) {
             int[] initialPosition = getGridNextFreeSpace();
-            Mosquito mosquito = new Mosquito(new Random(), initialPosition, this, i-1000);
+            Mosquito mosquito = new Mosquito(new Random(), initialPosition, this, round);
             grid[initialPosition[0]][initialPosition[1]] = mosquito;
             mosquitoAlive++;
         }
@@ -79,7 +79,7 @@ class Game {
 
     public void run() {
         try{
-            int round = 1;
+            int round = 0;
             while (mosquitoAlive > 0) {
                 tick(round);
                 sleep(1000);
@@ -127,7 +127,7 @@ class Game {
 
                             if (mosquito.moves == 5) {
                                 if (mosquito.hasMosquitoNearby()) {
-                                    createMosquito(1);
+                                    createMosquito(1, round);
                                     mosquito.moves = 0;
                                 }
                             }
