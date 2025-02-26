@@ -44,7 +44,7 @@ class GameTest {
     @Test
     void gameShouldBeSuccess2() {
         //given
-        Game game = new Game(2, 2, 1);
+        Game game = new Game(5, 5, 5);
         game.run();
     }
 
