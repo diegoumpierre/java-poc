@@ -127,7 +127,7 @@ class Game {
 
                             if (mosquito.moves == 5) {
                                 if (mosquito.hasMosquitoNearby()) {
-                                    createMosquito(1, round);
+                                    //createMosquito(1, round);
                                     mosquito.moves = 0;
                                 }
                             }
