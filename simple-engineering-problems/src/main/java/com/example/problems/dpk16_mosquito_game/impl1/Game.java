@@ -97,12 +97,6 @@ class Game {
         Object itIsOccuped = grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]];
         if (null == itIsOccuped) {
             mosquito.moves++;
-            if (mosquito.moves == 5) {
-                if (mosquito.hasMosquitoNearby()) {
-                    createMosquito(1, mosquito.round);
-                    mosquito.moves = 0;
-                }
-            }
             grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
             return mosquito;
         }
@@ -138,14 +132,24 @@ class Game {
                     Mosquito mosquito = (Mosquito) object;
                     if (mosquito.round != round) {
                         mosquito.round = round;
-
                          moveInTheGrid(mosquito);
                         grid[i][j] = null;
                     }
                     printMatrix();
+                    if (mosquito.moves == 5) {
+                        if (mosquito.hasMosquitoNearby()) {
+                            createMosquito(1, mosquito.round+1);
+                            mosquito.moves = 0;
+                            grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
+                        }
+                    }
+
+                    printMatrix();
 
                 }
-                if (null != object && object instanceof Exterminator && false) {
+
+
+                if (null != object && object instanceof Exterminator) {
                     Exterminator exterminator = (Exterminator) object;
                     if (exterminator.round != round) {
                         exterminator.round = round;
