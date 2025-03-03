@@ -149,7 +149,7 @@ class Game {
                 }
 
 
-                if (null != object && object instanceof Exterminator) {
+                if (null != object && object instanceof Exterminator && false) {
                     Exterminator exterminator = (Exterminator) object;
                     if (exterminator.round != round) {
                         exterminator.round = round;
