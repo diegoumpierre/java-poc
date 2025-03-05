@@ -138,7 +138,7 @@ class Game {
                     printMatrix();
                     if (mosquito.moves == 5) {
                         if (mosquito.hasMosquitoNearby()) {
-                            createMosquito(1, mosquito.round+1);
+                          //  createMosquito(1, mosquito.round+1);
                             mosquito.moves = 0;
                             grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
                         }
