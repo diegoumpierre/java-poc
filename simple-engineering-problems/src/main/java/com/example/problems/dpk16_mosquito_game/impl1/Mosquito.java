@@ -11,7 +11,12 @@ class Mosquito {
     private Game game;
 
 
-
+    public Mosquito(Random random, int[] position, Game game, int round) {
+        this.random = random;
+        this.position = position;
+        this.game = game;
+        this.round = round;
+    }
 
 
     public int[] getPosition() {
