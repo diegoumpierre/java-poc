@@ -10,9 +10,8 @@ class ExterminatorTest {
     @Test
     void moveToRightStartFromBottomLeft() {
         //given
-        Game game = new Game(5, 5, 0);
         int[] startPosition = {4, 0};
-        Exterminator exterminator = new Exterminator(startPosition, game);
+        Exterminator exterminator = new Exterminator(startPosition, 5, 5);
         //method under test
         exterminator.move();
         //them
@@ -22,9 +21,8 @@ class ExterminatorTest {
     @Test
     void moveFromBottomRight() {
         //given
-        Game game = new Game(5, 5, 0);
         int[] startPosition = {4, 4};
-        Exterminator exterminator = new Exterminator(startPosition, game);
+        Exterminator exterminator = new Exterminator(startPosition, 5, 5);
         //method under test
         exterminator.move();
         //them
@@ -38,9 +36,8 @@ class ExterminatorTest {
     @Test
     void moveFromLeftUpChangeDirection() {
         //given
-        Game game = new Game(5, 5, 0);
         int[] startPosition = {4, 4};
-        Exterminator exterminator = new Exterminator(startPosition, game);
+        Exterminator exterminator = new Exterminator(startPosition, 5, 5);
         //method under test
         exterminator.move();
         exterminator.move();
@@ -58,9 +55,8 @@ class ExterminatorTest {
     @Test
     void moveFromRightTop() {
         //given
-        Game game = new Game(5, 5, 0);
         int[] startPosition = {0, 3};
-        Exterminator exterminator = new Exterminator(startPosition, game);
+        Exterminator exterminator = new Exterminator(startPosition, 5, 5);
         //method under test
         exterminator.move();
         assertArrayEquals(new int[]{0, 4}, exterminator.getPosition());

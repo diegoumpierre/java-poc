@@ -7,15 +7,14 @@ class Mosquito {
     private int[] position;
     private Random random;
     public int moves = 0;
+    private int gameRow, gameColumn;
 
-    private Game game;
-
-
-    public Mosquito(Random random, int[] position, Game game, int round) {
+    public Mosquito(Random random, int[] position, int gameRow, int gameColumn, int round) {
         this.random = random;
         this.position = position;
-        this.game = game;
         this.round = round;
+        this.gameRow = gameRow;
+        this.gameColumn = gameColumn;
     }
 
 
@@ -34,18 +33,18 @@ class Mosquito {
 
     public void move() {
         MoveStrategy moveStrategy = getNextMove();
-        position = moveStrategy.getApplication().execute(position, game);
+        position = moveStrategy.getApplication().execute(position, gameRow, gameColumn);
     }
 
 
-    public boolean hasMosquitoNearby() {
-        for (MoveStrategy strategy : MoveStrategy.values()) {
-            int[] positionToCheck = strategy.getApplication().execute(new int[]{position[0], position[1]}, game);
-            Object possibleMosquito = game.getGrid()[positionToCheck[0]][positionToCheck[1]];
-            if (null != possibleMosquito && possibleMosquito instanceof Mosquito) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean hasMosquitoNearby() {
+//        for (MoveStrategy strategy : MoveStrategy.values()) {
+//            int[] positionToCheck = strategy.getApplication().execute(new int[]{position[0], position[1]}, gameRow, gameColumn);
+//            Object possibleMosquito = game.getGrid()[positionToCheck[0]][positionToCheck[1]];
+//            if (null != possibleMosquito && possibleMosquito instanceof Mosquito) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }
