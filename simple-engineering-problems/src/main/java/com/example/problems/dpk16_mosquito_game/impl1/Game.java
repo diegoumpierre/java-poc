@@ -13,7 +13,7 @@ class Game {
         grid = new Object[row][column];
         createMosquito(mosquito, 0);
         this.mosquitoKilled = 0;
-        Exterminator exterminator = new Exterminator(new int[]{getRow() - 1, 0}, this);
+        Exterminator exterminator = new Exterminator(new int[]{getRow() - 1, 0}, getRow(), getColumn());
         grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]] = exterminator;
     }
 
@@ -52,13 +52,13 @@ class Game {
     private void createMosquito(int mosquitoToCreate, int round) {
         for (int i = 0; i < mosquitoToCreate; i++) {
             int[] initialPosition = getGridNextFreeSpace();
-            Mosquito mosquito = new Mosquito(new Random(), initialPosition, this, round);
+            Mosquito mosquito = new Mosquito(new Random(), initialPosition, getRow(), getColumn(), round);
             grid[initialPosition[0]][initialPosition[1]] = mosquito;
             mosquitoAlive++;
         }
     }
 
-    public void printMatrix() {
+    public void printMatrix(int round) {
         String itemToPrint;
         for (int i = 0; i < getRow(); i++) {
             for (int j = 0; j < getColumn(); j++) {
@@ -74,7 +74,7 @@ class Game {
             }
             System.out.println();
         }
-        System.out.println("Mosquito alive = " + getMosquitoAlive() + " | Mosquito killed = " + mosquitoKilled);
+        System.out.println("ROND= "+round+" # Mosquito alive = " + getMosquitoAlive() + " | Mosquito killed = " + mosquitoKilled);
     }
 
     public void run() {
@@ -85,7 +85,7 @@ class Game {
                 sleep(1000);
                 round++;
             }
-            printMatrix();
+            printMatrix(round);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -123,7 +123,7 @@ class Game {
 
 
     private void tick(int round) {
-        printMatrix();
+        printMatrix(round);
 
         for (int i = 0; i < getRow(); i++) {
             for (int j = 0; j < getColumn(); j++) {
@@ -135,16 +135,14 @@ class Game {
                          moveInTheGrid(mosquito);
                         grid[i][j] = null;
                     }
-                    printMatrix();
-                    if (mosquito.moves == 5) {
-                        if (mosquito.hasMosquitoNearby()) {
-                          //  createMosquito(1, mosquito.round+1);
-                            mosquito.moves = 0;
-                            grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
-                        }
-                    }
 
-                    printMatrix();
+//                    if (mosquito.moves == 5) {
+//                        if (mosquito.hasMosquitoNearby()) {
+//                          //  createMosquito(1, mosquito.round+1);
+//                            mosquito.moves = 0;
+//                            grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
+//                        }
+//                    }
 
                 }
 
@@ -162,7 +160,7 @@ class Game {
                         grid[i][j] = null;
                         grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]] = exterminator;
                     }
-                    printMatrix();
+
                 }
             }
         }

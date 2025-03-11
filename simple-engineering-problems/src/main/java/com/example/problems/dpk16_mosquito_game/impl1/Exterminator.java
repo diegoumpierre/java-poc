@@ -5,11 +5,12 @@ class Exterminator {
     public int round;
     private int[] position;
     private MoveStrategy direction = MoveStrategy.RIGHT;
-    private Game game;
+    private int gameRow, gameColumn;
 
-    public Exterminator(int[] position, Game game) {
+    public Exterminator(int[] position, int gameRow, int gameColumn) {
         this.position = position;
-        this.game = game;
+        this.gameRow = gameRow;
+        this.gameColumn = gameColumn;
     }
 
     public int[] getPosition() {
@@ -18,31 +19,29 @@ class Exterminator {
 
     public void move() {
         //top-right -- restart to initial position
-        if (direction == MoveStrategy.RIGHT && position[1] + 1 > game.getColumn() - 1 && position[0] == 0) {
-            position = MoveStrategy.RIGHT.getApplication().execute(position,game);
-            position = MoveStrategy.UP.getApplication().execute(position,game);
+        if (direction == MoveStrategy.RIGHT && position[1] + 1 > gameColumn - 1 && position[0] == 0) {
+            position = MoveStrategy.RIGHT.getApplication().execute(position, gameRow, gameColumn);
+            position = MoveStrategy.UP.getApplication().execute(position, gameRow, gameColumn);
             return;
         }
 
         //right corner -- go up and change direction
-        if (direction == MoveStrategy.RIGHT && position[1] + 1 > game.getColumn() - 1) {
+        if (direction == MoveStrategy.RIGHT && position[1] + 1 > gameColumn - 1) {
             direction = MoveStrategy.LEFT;
-            position = MoveStrategy.UP.getApplication().execute(position, game);
+            position = MoveStrategy.UP.getApplication().execute(position, gameRow, gameColumn);
             return;
         }
 
         //left corner -- go up and change direction
         if (direction == MoveStrategy.LEFT && position[1] - 1 < 0) {
             direction = MoveStrategy.RIGHT;
-            position = MoveStrategy.UP.getApplication().execute(position, game);
+            position = MoveStrategy.UP.getApplication().execute(position, gameRow, gameColumn);
             return;
         }
 
         //execute the direction set
-        position = direction.getApplication().execute(position, game);
+        position = direction.getApplication().execute(position, gameRow, gameColumn);
     }
-
-
 
 
 }
