@@ -33,18 +33,7 @@ class Mosquito {
 
     public void move() {
         MoveStrategy moveStrategy = getNextMove();
-        position = moveStrategy.getApplication().execute(position, gameRow, gameColumn);
+        this.position = moveStrategy.getApplication().execute(position, gameRow, gameColumn);
     }
 
-
-//    public boolean hasMosquitoNearby() {
-//        for (MoveStrategy strategy : MoveStrategy.values()) {
-//            int[] positionToCheck = strategy.getApplication().execute(new int[]{position[0], position[1]}, gameRow, gameColumn);
-//            Object possibleMosquito = game.getGrid()[positionToCheck[0]][positionToCheck[1]];
-//            if (null != possibleMosquito && possibleMosquito instanceof Mosquito) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 }
