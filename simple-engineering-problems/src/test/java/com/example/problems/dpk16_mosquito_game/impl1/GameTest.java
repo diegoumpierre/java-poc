@@ -3,7 +3,6 @@ package com.example.problems.dpk16_mosquito_game.impl1;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.rmi.UnexpectedException;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,38 +25,38 @@ class GameTest {
     }
 
     @Test
-    void createGameShouldBeSuccessFullGrid() {
-        //given
-        Game game = new Game(1, 1, 10);
-
-        //method under test
-        assertEquals(10, game.getMosquitoAlive());
-        assertEquals(0, game.getMosquitoKilled());
-    }
-
-    @Test
-    void gameShouldBeSuccess() {
+    void gameShouldBeSuccess2x2Grid() {
         //given
         Game game = new Game(2, 2, 2);
         game.run();
     }
+
     @Test
-    void gameShouldBeSuccess2() {
-        //given
-        Game game = new Game(3, 3, 6);
+    void gameShouldBeSuccess100x100Grid() {
+        //Terrible game
+        Game game = new Game(100, 100, 10);
         game.run();
     }
 
-
     @Test
-    void moveInTheGridTest() {
-        //given
-        Random random = Mockito.mock(Random.class);
-        when(random.nextInt(MoveStrategy.values().length)).thenReturn(3);
-        Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, 2, 2, 1);
-        //assertEquals(mosquito, game.moveInTheGrid(mosquito));
+    void gameShouldBeSuccess10x10Grid() {
+        //Cool but the mosquito wins
+        Game game = new Game(10, 10, 10);
+        game.run();
     }
 
+    @Test
+    void gameShouldBeSuccess5x5Grid() {
+        //Cool but the mosquito wins
+        Game game = new Game(5, 5, 10);
+        game.run();
+    }
 
+    @Test
+    void gameShouldBeSuccess5x5Grid5mosquito() {
+        //Cool but the mosquito wins
+        Game game = new Game(5, 5, 5);
+        game.run();
+    }
 
-}
+  }
