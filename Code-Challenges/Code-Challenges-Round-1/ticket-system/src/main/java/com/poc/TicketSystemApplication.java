@@ -11,3 +11,13 @@ public class TicketSystemApplication {
         SpringApplication.run(TicketSystemApplication.class, args);
     }
 }
+
+
+/*
+
+    Principal problem here is the think in concurrency
+
+
+
+ */
+
