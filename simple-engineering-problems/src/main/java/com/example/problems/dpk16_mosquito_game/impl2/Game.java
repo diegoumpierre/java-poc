@@ -1,7 +1,4 @@
 package com.example.problems.dpk16_mosquito_game.impl2;
-y;
-
-import java.util.Random;
 
 import java.util.Random;
 
@@ -67,35 +64,30 @@ public class Game {
                 if (object instanceof Mosquito mosquito) {
 
 
-                        //mosquito come from another round, so we need move them
-                        mosquito = moveInTheGrid(mosquito);
-                    if (mosquito.round != round) {
-                        //mosquito come from another round, so we need move them
-                        mosquito = moveInTheGrid(mosquito, round);
+                    //mosquito come from another round, so we need move them
+                    mosquito = moveInTheGrid(mosquito);
 
-                        grid[i][j] = null;
+                    grid[i][j] = null;
 
-                        if (mosquito != null) {
-                            mosquito.moves++;
-                            grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
-                        }
+                    if (mosquito != null) {
+                        mosquito.moves++;
+                        grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
                     }
+
                 }
 
 
                 if (object instanceof Exterminator exterminator) {
-                    if (exterminator.round != round) {
-                        exterminator.round = round;
-                        exterminator.move();
 
-                        Object possibleMosquito = grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]];
-                        if (possibleMosquito instanceof Mosquito) {
-                            mosquitoAlive--;
-                            mosquitoKilled++;
-                        }
-                        grid[i][j] = null;
-                        grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]] = exterminator;
+                    exterminator.move();
+
+                    Object possibleMosquito = grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]];
+                    if (possibleMosquito instanceof Mosquito) {
+                        mosquitoAlive--;
+                        mosquitoKilled++;
                     }
+                    grid[i][j] = null;
+                    grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]] = exterminator;
                 }
             }
         }
@@ -109,7 +101,6 @@ public class Game {
                     if (mosquito.getMoves() == 5 && hasMosquitoNearby(mosquito)) {
                         int[] nextFreeSpace = getGridNextFreeSpace();
                         Mosquito mosquitoChild = new Mosquito(new Random(), nextFreeSpace, getRow(), getColumn());
-                        Mosquito mosquitoChild = new Mosquito(new Random(), nextFreeSpace, getRow(), getColumn(), round);
                         grid[mosquitoChild.getPosition()[0]][mosquitoChild.getPosition()[1]] = mosquitoChild;
                         mosquito.moves = 0;
                         mosquitoAlive++;
@@ -146,8 +137,6 @@ public class Game {
 
                 Mosquito mosquito = new Mosquito(new Random(), nextFreeSpace, getRow(), getColumn());
 
-                Mosquito mosquito = new Mosquito(new Random(), nextFreeSpace, getRow(), getColumn(), round);
-
                 grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
             }
 
@@ -157,8 +146,6 @@ public class Game {
                 int[] nextFreeSpace = getGridNextFreeSpace();
 
                 Mosquito mosquito = new Mosquito(new Random(), nextFreeSpace, getRow(), getColumn());
-
-                Mosquito mosquito = new Mosquito(new Random(), nextFreeSpace, getRow(), getColumn(), round);
 
                 grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
             }
@@ -190,7 +177,6 @@ public class Game {
 
         if (itemFromTheNewPosition instanceof Mosquito) {
             return moveInTheGrid(mosquito);
-            return moveInTheGrid(mosquito, round);
         }
 
         return mosquito;
