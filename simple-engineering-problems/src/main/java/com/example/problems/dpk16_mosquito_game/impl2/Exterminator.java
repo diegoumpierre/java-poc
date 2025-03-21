@@ -1,7 +1,7 @@
 package com.example.problems.dpk16_mosquito_game.impl2;
 
 public class Exterminator {
-
+    private int round;
     public int[] position;
     private MoveStrategy moveStrategy = MoveStrategy.RIGHT;
     private final int gameRow;
@@ -11,6 +11,15 @@ public class Exterminator {
         this.position = position;
         this.gameRow = gameRow;
         this.gameColumn = gameColumn;
+    }
+
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
+    public int getRound() {
+        return round;
     }
 
     public int[] getPosition() {

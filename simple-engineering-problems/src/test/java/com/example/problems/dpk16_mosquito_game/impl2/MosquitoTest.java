@@ -17,7 +17,7 @@ class MosquitoTest {
         //give
         Random random = Mockito.mock(Random.class);
         when(random.nextInt(MoveStrategy.values().length)).thenReturn(1);
-        Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, 10, 10);
+        Mosquito mosquito = new Mosquito(random, new int[]{0, 0}, 10, 10,1);
 
         //method under test
         mosquito.move();

@@ -26,11 +26,11 @@ class ExterminatorTest {
         //method under test
         exterminator.move();
         //them
-        assertArrayEquals(new int[]{3, 4}, exterminator.getPosition());
+        assertArrayEquals(new int[]{4, 0}, exterminator.getPosition());
         //method under test
         exterminator.move();
         //them
-        assertArrayEquals(new int[]{3, 3}, exterminator.getPosition());
+        assertArrayEquals(new int[]{4, 1}, exterminator.getPosition());
     }
 
     @Test
@@ -44,12 +44,12 @@ class ExterminatorTest {
         exterminator.move();
         exterminator.move();
         exterminator.move();
-        assertArrayEquals(new int[]{3, 0}, exterminator.getPosition());
+        assertArrayEquals(new int[]{4, 4}, exterminator.getPosition());
         //method under test
         exterminator.move();
-        assertArrayEquals(new int[]{2, 0}, exterminator.getPosition());
+        assertArrayEquals(new int[]{4, 0}, exterminator.getPosition());
         exterminator.move();
-        assertArrayEquals(new int[]{2, 1}, exterminator.getPosition());
+        assertArrayEquals(new int[]{4, 1}, exterminator.getPosition());
     }
 
     @Test
