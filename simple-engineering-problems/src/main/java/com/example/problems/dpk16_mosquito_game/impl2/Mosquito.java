@@ -4,17 +4,26 @@ import java.util.Random;
 
 public class Mosquito {
 
-
+    private int round;
     private Random random;
     private int[] position;
     public int moves = 0;
     private int gameRow, gameColumn;
 
-    public Mosquito(Random random, int[] position, int gameRow, int gameColumn) {
+    public Mosquito(Random random, int[] position, int gameRow, int gameColumn, int round) {
         this.random = random;
         this.position = position;
         this.gameRow = gameRow;
         this.gameColumn = gameColumn;
+        this.round = round;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
     }
 
     public int[] getPosition(){

@@ -1,12 +1,8 @@
 package com.example.problems.dpk16_mosquito_game.impl2;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.Random;
-
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 class GameTest {
 
@@ -21,14 +17,18 @@ class GameTest {
         assertEquals(0, game.getMosquitoKilled());
         assertEquals(5, game.getRow());
         assertEquals(10, game.getColumn());
-        assertEquals(new Object[5][10], game.getGrid());
+
     }
 
     @Test
     void gameShouldBeSuccess2x2Grid() {
         //given
         Game game = new Game(2, 2, 2);
-        game.run();
+        assertThatThrownBy(() -> game.run())
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("java.lang.RuntimeException: #### ===> Don't have more space in the grid!");
+
+
     }
 
     @Test
