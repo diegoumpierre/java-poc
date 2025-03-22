@@ -13,5 +13,4 @@ public class Event {
     private BigDecimal ticketPrice;
     private List<Zone> zones;
 
-    // Getters e Setters
 }

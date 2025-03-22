@@ -6,5 +6,4 @@ public class Seat {
     private boolean isAvailable;
     private Zone zone;
 
-    // Getters e Setters
 }
