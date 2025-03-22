@@ -11,6 +11,6 @@ public class Payment {
     private LocalDateTime paymentDate;
     private PaymentStatus status;
 
-    // Getters e Setters
+
 }
 

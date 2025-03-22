@@ -96,21 +96,21 @@ class Game {
                         grid[exterminator.getPosition()[0]][exterminator.getPosition()[1]] = exterminator;
                     }
                 }
-            }
-        }
 
-        //after do all the moves with the mosquito's and the exterminator - now reproduce the mosquito
-        for (int i = 0; i < getRow(); i++) {
-            for (int j = 0; j < getColumn(); j++) {
-                Object object = grid[i][j];
+                //after do all the moves with the mosquito's and the exterminator - now reproduce the mosquito
+                for (int k = 0; k < getRow();k++) {
+                    for (int l= 0; l < getColumn(); l++) {
+                        Object object1 = grid[k][l];
 
-                if (object instanceof Mosquito mosquito) {
-                    if (mosquito.getMoves() == 5 && hasMosquitoNearby(mosquito)) {
-                        int[] nextFreeSpace = getGridNextFreeSpace();
-                        Mosquito mosquitoChild = new Mosquito(new Random(), nextFreeSpace, getRow(), getColumn(), round);
-                        grid[mosquitoChild.getPosition()[0]][mosquitoChild.getPosition()[1]] = mosquitoChild;
-                        mosquito.moves = 0;
-                        mosquitoAlive++;
+                        if (object1 instanceof Mosquito mosquito) {
+                            if (mosquito.getMoves() == 5 && hasMosquitoNearby(mosquito)) {
+                                int[] nextFreeSpace = getGridNextFreeSpace();
+                                Mosquito mosquitoChild = new Mosquito(new Random(), nextFreeSpace, getRow(), getColumn(), round);
+                                grid[mosquitoChild.getPosition()[0]][mosquitoChild.getPosition()[1]] = mosquitoChild;
+                                mosquito.moves = 0;
+                                mosquitoAlive++;
+                            }
+                        }
                     }
                 }
             }

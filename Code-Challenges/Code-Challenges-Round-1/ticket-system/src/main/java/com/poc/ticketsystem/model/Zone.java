@@ -8,6 +8,5 @@ public class Zone {
     private int capacity;
     private List<Seat> seats;
 
-    // Getters e Setters
 }
 
