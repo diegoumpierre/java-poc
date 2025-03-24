@@ -137,16 +137,6 @@ public class Game {
 
                     grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
                 }
-
-
-                //creating the mosquito's
-                for (int i = 0; i < mosquitoAlive; i++) {
-                    int[] nextFreeSpace = getGridNextFreeSpace();
-
-                    Mosquito mosquito = new Mosquito(new Random(), nextFreeSpace, getRow(), getColumn(), round);
-
-                    grid[mosquito.getPosition()[0]][mosquito.getPosition()[1]] = mosquito;
-                }
                 printMatrix(round);
 
                 while (mosquitoAlive > 0) {
