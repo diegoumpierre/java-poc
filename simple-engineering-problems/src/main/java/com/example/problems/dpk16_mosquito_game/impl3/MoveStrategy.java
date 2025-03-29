@@ -1,6 +1,7 @@
 package com.example.problems.dpk16_mosquito_game.impl3;
 
-public enum MoveStrategy {
+
+enum MoveStrategy {
 
     UP(new Up()),
     DOWN(new Down()),
@@ -10,8 +11,6 @@ public enum MoveStrategy {
     DIAGONAL_UP_LEFT(new DiagonalUpLeft()),
     DIAGONAL_DOWN_RIGHT(new DiagonalDownRight()),
     DIAGONAL_DOWN_LEFT(new DiagonalDownLeft());
-
-
 
     private final MovementApplication application;
 
@@ -76,36 +75,36 @@ public enum MoveStrategy {
     private static class DiagonalUpRight implements MovementApplication {
         @Override
         public int[] execute(int[] position, int gameRow, int gameColumn) {
-            Up up = new Up();
-            Right right = new Right();
-            return right.execute(up.execute(position, gameRow, gameColumn), gameRow, gameColumn);
+            Up up1 = new Up();
+            Right right1 = new Right();
+            return right1.execute(up1.execute(position, gameRow, gameColumn), gameRow, gameColumn);
         }
     }
 
     private static class DiagonalUpLeft implements MovementApplication {
         @Override
         public int[] execute(int[] position, int gameRow, int gameColumn) {
-            Up up = new Up();
-            Left left = new Left();
-            return left.execute(up.execute(position, gameRow, gameColumn), gameRow, gameColumn);
+            Up up1 = new Up();
+            Left left1 = new Left();
+            return left1.execute(up1.execute(position, gameRow, gameColumn), gameRow, gameColumn);
         }
     }
 
     private static class DiagonalDownRight implements MovementApplication {
         @Override
         public int[] execute(int[] position, int gameRow, int gameColumn) {
-            Down down = new Down();
-            Right right = new Right();
-            return right.execute(down.execute(position, gameRow, gameColumn), gameRow, gameColumn);
+            Down down1 = new Down();
+            Right right1 = new Right();
+            return right1.execute(down1.execute(position, gameRow, gameColumn), gameRow, gameColumn);
         }
     }
 
     private static class DiagonalDownLeft implements MovementApplication {
         @Override
         public int[] execute(int[] position, int gameRow, int gameColumn) {
-            Down down = new Down();
-            Left left = new Left();
-            return left.execute(down.execute(position, gameRow, gameColumn), gameRow, gameColumn);
+            Down down1 = new Down();
+            Left left1 = new Left();
+            return left1.execute(down1.execute(position, gameRow, gameColumn), gameRow, gameColumn);
         }
     }
 
