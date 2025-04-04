@@ -1,5 +1,7 @@
 package com.poc.ticketsystem.model;
 
+import com.poc.ticketsystem.model.enums.PaymentStatus;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
