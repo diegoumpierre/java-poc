@@ -1,4 +1,4 @@
-package com.poc.ticketsystem.model.enums;
+package com.poc.ticketsystem.model;
 
 public enum TicketStatus {
     AVAILABLE,
