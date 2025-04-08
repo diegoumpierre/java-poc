@@ -1,7 +1,5 @@
 package com.poc.ticketsystem.model;
 
-import com.poc.ticketsystem.model.enums.TicketStatus;
-
 import java.math.BigDecimal;
 
 public class Ticket {
