@@ -62,13 +62,10 @@ class EventServiceTest {
         event.setId(1);
         event.setName("Nem Event Rock");
         event.setZones(zoneList);
+        event.setVenue(venue);
 
-
-
-
-
-
-
+        //now I have the event
+        assertEquals(100, event.getVenue().getCapacity());
 
 
 
