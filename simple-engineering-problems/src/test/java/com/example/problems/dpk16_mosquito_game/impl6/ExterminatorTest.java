@@ -1,8 +1,5 @@
 package com.example.problems.dpk16_mosquito_game.impl6;
 
-
-
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
