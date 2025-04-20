@@ -1,6 +1,5 @@
 package com.example.problems.dpk16_mosquito_game.impl6;
 
-
 import java.util.Random;
 
 public class Mosquito {
