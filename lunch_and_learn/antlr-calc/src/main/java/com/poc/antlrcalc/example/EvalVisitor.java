@@ -1,22 +1,25 @@
 package com.poc.antlrcalc.example;
 
+import com.poc.antlrcalc.gen.ExprBaseVisitor;
+import com.poc.antlrcalc.gen.ExprParser;
+
 public class EvalVisitor extends ExprBaseVisitor<Integer> {
-    @Override
+
     public Integer visitMulDiv(ExprParser.MulDivContext ctx) {
         int left = visit(ctx.expr(0));
         int right = visit(ctx.expr(1));
-        if (ctx.op.getType() == ExprParser.MUL) {
+        if (ctx.op.getType() == ExprParser.T__3) {
             return left * right;
         } else {
             return left / right;
         }
     }
 
-    @Override
+
     public Integer visitAddSub(ExprParser.AddSubContext ctx) {
         int left = visit(ctx.expr(0));
         int right = visit(ctx.expr(1));
-        if (ctx.op.getType() == ExprParser.ADD) {
+        if (ctx.op.getType() == ExprParser.INT) {
             return left + right;
         } else {
             return left - right;
