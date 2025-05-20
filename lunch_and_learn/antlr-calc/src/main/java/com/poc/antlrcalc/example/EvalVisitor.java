@@ -1,8 +1,5 @@
 package com.poc.antlrcalc.example;
 
-import com.poc.antlrcalc.gen.ExprBaseVisitor;
-import com.poc.antlrcalc.gen.ExprParser;
-
 public class EvalVisitor extends ExprBaseVisitor<Integer> {
 
     public Integer visitMulDiv(ExprParser.MulDivContext ctx) {
