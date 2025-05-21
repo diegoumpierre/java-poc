@@ -1,5 +1,4 @@
 package java.gen;// Generated from /Users/dumpierre/Documents/study/git_diego_umpierre/poc/lunch_and_learn/antlr4/sintaxe-analys/src/LabeledExpr.g4 by ANTLR 4.13.2
-import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
  * This interface defines a complete listener for a parse tree produced by
