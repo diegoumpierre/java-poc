@@ -17,7 +17,7 @@ public interface LabeledExprListener extends ParseTreeListener {
 	void exitProg(LabeledExprParser.ProgContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code printExpr}
-	 * labeled alternative in {@link LabeledExprParser#stat}.
+	 * labeled alternative inz {@link LabeledExprParser#stat}.
 	 * @param ctx the parse tree
 	 */
 	void enterPrintExpr(LabeledExprParser.PrintExprContext ctx);
