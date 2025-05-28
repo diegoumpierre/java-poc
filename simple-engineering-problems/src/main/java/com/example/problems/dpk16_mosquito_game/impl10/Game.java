@@ -3,6 +3,8 @@ package com.example.problems.dpk16_mosquito_game.impl10;
 
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
+
 public class Game {
 
     private int mosquitoAlive = 0;
@@ -35,7 +37,8 @@ public class Game {
         return grid;
     }
 
-    protected void printMatrix(int round) {
+    protected void printMatrix(int round) throws InterruptedException {
+        sleep(1000);
         String itemToPrint;
         for (int i = 0; i < getRow(); i++) {
             for (int j = 0; j < getColumn(); j++) {
