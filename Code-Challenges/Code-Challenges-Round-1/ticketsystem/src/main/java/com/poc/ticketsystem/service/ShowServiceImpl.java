@@ -20,10 +20,6 @@ public class ShowServiceImpl implements ShowService{
         //select the seat
 
 
-
-
-
-
         return false;
     }
 }
