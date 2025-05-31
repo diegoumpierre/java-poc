@@ -22,4 +22,14 @@ public class ShowServiceImpl implements ShowService{
 
         return false;
     }
+
+    @Override
+    public boolean reserveASeat() {
+        return false;
+    }
+
+    @Override
+    public Show findById(String id) {
+        return null;
+    }
 }

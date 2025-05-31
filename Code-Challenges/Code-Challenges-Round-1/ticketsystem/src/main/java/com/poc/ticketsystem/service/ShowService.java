@@ -13,5 +13,8 @@ public interface ShowService {
     boolean buyTicket(User user, ShowSelected showSelected);
 
 
+    boolean reserveASeat();
+
+    Show findById(String id);
 
 }
