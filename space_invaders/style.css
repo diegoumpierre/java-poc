@@ -1,0 +1,61 @@
+body {
+  background: black;
+  color: white;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+#game {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  background: #111;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 2px solid white;
+}
+
+#player {
+  position: absolute;
+  bottom: 10px;
+  left: 280px;
+  width: 40px;
+  height: 20px;
+  background: lime;
+}
+
+.enemy {
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  background: red;
+}
+
+.bullet {
+  position: absolute;
+  width: 5px;
+  height: 10px;
+  background: yellow;
+}
+
+.enemy-bullet {
+  position: absolute;
+  width: 4px;
+  height: 10px;
+  background-color: red;
+}
+
+.shield-block {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+}
+
+.hidden {
+  display: none;
+}
+
+#info {
+  margin-top: 20px;
+}
