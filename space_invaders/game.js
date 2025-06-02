@@ -6,14 +6,16 @@ const livesDisplay = document.getElementById("lives");
 const gameOverText = document.getElementById("gameOverText");
 
 let score = 0;
-let lives = 3;
+let lifes = 3;
 let gameOver = false;
 let bullet = null;
 let enemies = [];
-let enemyDirection = 1;
+let enemyDirection = 1; // 1 = right, -1 = left
 let enemySpeed = 30;
 let enemyMoveInterval;
-let enemyBullets = [];
+let ufo = null;
+let ufoActive = false;
+
 
 document.addEventListener("keydown", (e) => {
   const left = parseInt(player.style.left);
@@ -31,12 +33,12 @@ document.addEventListener("keydown", (e) => {
 function shootBullet() {
   bullet = document.createElement("div");
   bullet.classList.add("bullet");
-  bullet.style.left = `${parseInt(player.style.left) + 17}px`;
+  bullet.style.left = `${parseInt(player.style.left) + 30}px`;
   bullet.style.bottom = "30px";
   bulletsContainer.appendChild(bullet);
 }
 
-function spawnEnemies() {
+function gridEnemies() {
   const enemiesContainer = document.getElementById("enemies");
   enemiesContainer.innerHTML = "";
   enemies = [];
@@ -53,30 +55,13 @@ function spawnEnemies() {
   }
 }
 
-function spawnShields() {
-  const shieldsContainer = document.getElementById("shields");
-  shieldsContainer.innerHTML = "";
-  const baseLefts = [100, 250, 400];
-
-  baseLefts.forEach((baseLeft) => {
-    for (let row = 0; row < 4; row++) {
-      for (let col = 0; col < 6; col++) {
-        const block = document.createElement("div");
-        block.classList.add("shield-block");
-        block.style.left = `${baseLeft + col * 10}px`;
-        block.style.bottom = `${100 + row * 10}px`;
-        shieldsContainer.appendChild(block);
-      }
-    }
-  });
-}
 
 function moveEnemies() {
   let moveDown = false;
 
   for (let enemy of enemies) {
     let left = parseInt(enemy.style.left);
-    if ((left <= 0 && enemyDirection === -1) || (left >= 550 && enemyDirection === 1)) {
+    if ((left <= 0 && enemyDirection === -1) || (left >= 565 && enemyDirection === 1)) {
       moveDown = true;
       break;
     }
@@ -91,7 +76,7 @@ function moveEnemies() {
       enemy.style.left = `${left + enemyDirection * 10}px`;
     }
 
-    if (top >= 340) {
+    if (top >= 540) {
       endGame();
     }
   }
@@ -105,7 +90,7 @@ function updateBullet() {
   let bottom = parseInt(bullet.style.bottom);
   bullet.style.bottom = `${bottom + 10}px`;
 
-  if (bottom > 400) {
+  if (bottom > 540) {
     bullet.remove();
     bullet = null;
     return;
@@ -135,91 +120,57 @@ function updateBullet() {
     }
   }
 
-  const blocks = document.querySelectorAll(".shield-block");
-  blocks.forEach((block) => {
-    const bLeft = parseInt(bullet.style.left);
-    const bBottom = parseInt(bullet.style.bottom);
-    const sLeft = parseInt(block.style.left);
-    const sBottom = parseInt(block.style.bottom);
-
+  if (ufo && ufoActive) {
+    let ufoLeft = parseInt(ufo.style.left);
     if (
-      bLeft >= sLeft &&
-      bLeft <= sLeft + 10 &&
-      bBottom >= sBottom &&
-      bBottom <= sBottom + 10
+      parseInt(bullet.style.bottom) > 350 &&
+      parseInt(bullet.style.left) >= ufoLeft &&
+      parseInt(bullet.style.left) <= ufoLeft + 40
     ) {
-      block.remove();
+      ufo.remove();
+      ufo = null;
+      ufoActive = false;
       bullet.remove();
       bullet = null;
+      score += 100;
+      scoreDisplay.textContent = score;
     }
-  });
+  }
 }
 
 function updateEnemySpeed() {
   clearInterval(enemyMoveInterval);
-  enemySpeed = Math.max(10, 30 - enemies.length);
+  enemySpeed = Math.max(10, 30 - enemies.length); // Faster as fewer remain
   enemyMoveInterval = setInterval(moveEnemies, 500 - (40 - enemySpeed) * 10);
 }
 
-function enemyShoot() {
-  if (enemies.length === 0) return;
+function spawnUFO() {
+  if (ufoActive || gameOver) return;
 
-  const shooter = enemies[Math.floor(Math.random() * enemies.length)];
-  const bullet = document.createElement("div");
-  bullet.classList.add("enemy-bullet");
-  bullet.style.left = `${parseInt(shooter.style.left) + 13}px`;
-  bullet.style.top = `${parseInt(shooter.style.top) + 20}px`;
-  document.getElementById("game").appendChild(bullet);
-  enemyBullets.push(bullet);
+  ufo = document.createElement("div");
+  ufo.classList.add("enemy");
+  ufo.style.top = "0px";
+  ufo.style.left = "-50px";
+  ufo.style.width = "40px";
+  ufo.style.height = "20px";
+  ufo.style.backgroundColor = "magenta";
+  document.getElementById("game").appendChild(ufo);
+  ufoActive = true;
+
+  let pos = -50;
+  const interval = setInterval(() => {
+    if (!ufo) return clearInterval(interval);
+    pos += 5;
+    ufo.style.left = `${pos}px`;
+    if (pos > 600) {
+      ufo.remove();
+      ufo = null;
+      ufoActive = false;
+      clearInterval(interval);
+    }
+  }, 50);
 }
 
-function updateEnemyBullets() {
-  for (let i = 0; i < enemyBullets.length; i++) {
-    const bullet = enemyBullets[i];
-    let top = parseInt(bullet.style.top);
-    bullet.style.top = `${top + 5}px`;
-
-    if (top > 400) {
-      bullet.remove();
-      enemyBullets.splice(i, 1);
-      i--;
-      continue;
-    }
-
-    const bLeft = parseInt(bullet.style.left);
-    const pLeft = parseInt(player.style.left);
-    if (
-      top >= 370 &&
-      bLeft >= pLeft &&
-      bLeft <= pLeft + 40
-    ) {
-      bullet.remove();
-      enemyBullets.splice(i, 1);
-      loseLife();
-      i--;
-      continue;
-    }
-
-    const shields = document.querySelectorAll(".shield-block");
-    for (let j = 0; j < shields.length; j++) {
-      const shield = shields[j];
-      const sLeft = parseInt(shield.style.left);
-      const sBottom = parseInt(shield.style.bottom);
-      if (
-        bLeft >= sLeft &&
-        bLeft <= sLeft + 10 &&
-        top >= sBottom &&
-        top <= sBottom + 10
-      ) {
-        shield.remove();
-        bullet.remove();
-        enemyBullets.splice(i, 1);
-        i--;
-        break;
-      }
-    }
-  }
-}
 
 function loseLife() {
   lives--;
@@ -235,22 +186,36 @@ function endGame() {
   gameOverText.classList.remove("hidden");
   enemies.forEach(e => e.remove());
   if (bullet) bullet.remove();
-  enemyBullets.forEach(b => b.remove());
+  if (ufo) ufo.remove();
 }
 
+function youWin() {
+  gameOver = true;
+  clearInterval(enemyMoveInterval);
+  winText.classList.remove("hidden");
+  enemies.forEach(e => e.remove());
+  if (bullet) bullet.remove();
+  if (ufo) ufo.remove();
+}
+
+
 function gameLoop() {
+
+  if (enemies.length === 0) {
+    youWin();
+  }
+
   if (!gameOver) {
     updateBullet();
-    updateEnemyBullets();
     requestAnimationFrame(gameLoop);
   }
 }
 
+// Start game
 player.style.left = "280px";
-spawnEnemies();
-spawnShields();
+gridEnemies();
 updateEnemySpeed();
 gameLoop();
-setInterval(() => {
-  if (!gameOver) enemyShoot();
-}, 1000);
+
+// UFO every 15 seconds
+setInterval(spawnUFO, 15000);
