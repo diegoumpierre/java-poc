@@ -2,7 +2,7 @@ const game = document.getElementById("game");
 const player = document.getElementById("player");
 const bulletsContainer = document.getElementById("bullets");
 const scoreDisplay = document.getElementById("score");
-const livesDisplay = document.getElementById("lives");
+const lifesDisplay = document.getElementById("lifes");
 const gameOverText = document.getElementById("gameOverText");
 
 let score = 0;
@@ -90,7 +90,7 @@ function updateBullet() {
   let bottom = parseInt(bullet.style.bottom);
   bullet.style.bottom = `${bottom + 10}px`;
 
-  if (bottom > 540) {
+  if (bottom > 600) {
     bullet.remove();
     bullet = null;
     return;
@@ -140,7 +140,7 @@ function updateBullet() {
 
 function updateEnemySpeed() {
   clearInterval(enemyMoveInterval);
-  enemySpeed = Math.max(10, 30 - enemies.length); // Faster as fewer remain
+  enemySpeed = Math.max(10, 30 - enemies.length); 
   enemyMoveInterval = setInterval(moveEnemies, 500 - (40 - enemySpeed) * 10);
 }
 
@@ -173,9 +173,9 @@ function spawnUFO() {
 
 
 function loseLife() {
-  lives--;
-  livesDisplay.textContent = lives;
-  if (lives <= 0) {
+  lifes--;
+  lifesDisplay.textContent = lifes;
+  if (lifes <= 0) {
     endGame();
   }
 }
