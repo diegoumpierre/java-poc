@@ -10,7 +10,7 @@ let lifes = 3;
 let gameOver = false;
 let bullet = null;
 let enemies = [];
-let enemyDirection = 1; // 1 = right, -1 = left
+let enemyDirection = 1; 
 let enemySpeed = 30;
 let enemyMoveInterval;
 let ufo = null;
@@ -90,7 +90,7 @@ function updateBullet() {
   let bottom = parseInt(bullet.style.bottom);
   bullet.style.bottom = `${bottom + 10}px`;
 
-  if (bottom > 600) {
+  if (bottom > 540) {
     bullet.remove();
     bullet = null;
     return;
