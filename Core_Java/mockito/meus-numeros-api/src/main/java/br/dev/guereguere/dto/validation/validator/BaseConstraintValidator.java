@@ -2,7 +2,6 @@ package br.dev.guereguere.dto.validation.validator;
 
 import br.dev.guereguere.dto.validation.constraints.ExpensiveValidationGroup;
 import br.dev.guereguere.dto.validation.constraints.BasicValidationGroup;
-import br.dev.guereguere.tools.ResourceBundleUtil;
 import br.dev.guereguere.exception.MessageFieldException;
 import org.springframework.stereotype.Component;
 
