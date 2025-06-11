@@ -1,0 +1,83 @@
+SERVER_PORT: 8255
+JPA_SHOW_SQL: true
+JPA_HIBERNATE_DDL_AUTO: update
+
+SPRING_DATABASE_HOST: mysql.101softwares.com
+SPRING_DATABASE_PORT: 3306
+SPRING_DATABASE_NAME: 101softwares
+SPRING_DATASOURCE_USERNAME: 101softwares
+SPRING_DATASOURCE_PASSWORD: 2qEfM4g4XzzD
+SPRING_DATASOURCE_URL: jdbc:mysql://${SPRING_DATABASE_HOST}:${SPRING_DATABASE_PORT}/${SPRING_DATABASE_NAME}?useSSL=false
+
+EUREKA_CLIENT: http://localhost:8761/eureka/
+ZUUL_CLIENT: http://localhost:8111/
+
+jwt:
+  secret: SequenciaDeCaracteresParaAssinarToken
+  expiration: 300000
+
+server:
+  port: ${SERVER_PORT}
+
+encryption-key: chave_seguranca_aplicacao
+
+spring:
+  application:
+    name: meus-numeros-api
+  jpa:
+    show-sql: ${JPA_SHOW_SQL}
+    hibernate:
+      ddl-auto: ${JPA_HIBERNATE_DDL_AUTO}
+      database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc.batch_size: 20
+        cache.use_query_cache: false
+        cache.use_second_level_cache: false
+        cache.use_structured_entries: false
+        cache.use_minimal_puts: false
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+eureka:
+  instance:
+    hostname: localhost
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+    lease-expiration-duration-in-seconds: 5
+  client:
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_CLIENT}
+
+serv001modelo:
+  scheduled:
+    cron-5m: 0 0/5 * * * *
+    cron-1h: 0 0 0/1 * * *
+  feign:
+    client:
+      url:
+        SERV001-MODELO: ${ZUUL_CLIENT}/SERV001-MODELO
+
+serv004-authorization:
+  feign:
+    client:
+      url:
+        SERV004-AUTHORIZATION: ${ZUUL_CLIENT}/SERV004-AUTHORIZATION
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+#clean package -P01_local spring-boot:run
