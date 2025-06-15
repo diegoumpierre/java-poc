@@ -1,4 +1,4 @@
-package br.dev.guereguere.filter;
+package br.dev;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -8,7 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-class MockitoAssertTest {
+public class MockTest {
 
     @Test
     void mockListSize() {
@@ -17,4 +17,5 @@ class MockitoAssertTest {
 
         assertThat(mockedList.size()).isEqualTo(5);
     }
+
 }
