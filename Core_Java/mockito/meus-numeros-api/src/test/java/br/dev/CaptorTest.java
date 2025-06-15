@@ -3,6 +3,8 @@ package br.dev;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
@@ -12,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CaptorTest {
 
-    @MockTest
+    @Mock
     private List<String> list;
 
-    @CaptorTest
+    @Captor
     ArgumentCaptor<String> captor;
 
     @BeforeEach
