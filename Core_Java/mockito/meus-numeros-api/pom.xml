@@ -89,8 +89,11 @@
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <useModulePath>false</useModulePath> <!-- Necessário para evitar conflitos com JPMS -->
+                    <argLine>-XX:+EnableDynamicAgentLoading</argLine>
                 </configuration>
             </plugin>
+
+
 
         </plugins>
     </build>
