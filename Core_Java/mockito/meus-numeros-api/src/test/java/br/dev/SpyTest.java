@@ -6,7 +6,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Spy {
+public class SpyTest {
 
     @Test
     void mockListSpy(){
