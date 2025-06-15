@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ class MockitoAssertTest {
 
         assertThat(mockedList.size()).isEqualTo(5);
     }
+    //mock end
 
     //spy
     @Test
@@ -51,10 +53,25 @@ class MockitoAssertTest {
         spyList.add("second item");
 
         Mockito.verify(spyList).add("one item");
+    }
+    //spy end
 
+    //@Spy
+    @Spy
+    List<String> list2 = new ArrayList<>();
+
+    @BeforeEach
+    void setUp2() {
+        MockitoAnnotations.openMocks(this);
     }
 
-    //mock
+    @Test
+    void testSpyList() {
+        list2.add("spy");
+        Mockito.verify(list2).add("spy");
+        assertEquals(1, list2.size());
+    }
+    //@Spy end
 
 
 
