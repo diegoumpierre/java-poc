@@ -1,15 +1,36 @@
 package br.dev.guereguere.filter;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 class MockitoAssertTest {
+
+    //@Mock
+    @Mock
+    List<String> list;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void testMockList() {
+        Mockito.when(list.get(0)).thenReturn("mocked");
+        assertEquals("mocked", list.get(0));
+    }
+    //@Mock end
+
 
     //mock
     @Test
@@ -32,6 +53,8 @@ class MockitoAssertTest {
         Mockito.verify(spyList).add("one item");
 
     }
+
+    //mock
 
 
 
