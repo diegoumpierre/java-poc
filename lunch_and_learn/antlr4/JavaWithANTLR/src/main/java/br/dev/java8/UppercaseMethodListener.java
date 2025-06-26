@@ -1,7 +1,7 @@
-package br.dev;
+package br.dev.java8;
 
-import antlrgen.Java8BaseListener;
-import antlrgen.Java8Parser;
+import br.dev.java8.antlrgen.Java8BaseListener;
+import br.dev.java8.antlrgen.Java8Parser;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;
@@ -10,8 +10,6 @@ import java.util.List;
 public class UppercaseMethodListener extends Java8BaseListener {
 
     private List<String> errors = new ArrayList<>();
-
-    // ... getter for errors
 
     @Override
     public void enterMethodDeclarator(Java8Parser.MethodDeclaratorContext ctx) {

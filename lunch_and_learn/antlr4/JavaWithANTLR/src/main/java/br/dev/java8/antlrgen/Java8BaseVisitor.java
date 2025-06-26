@@ -1,5 +1,4 @@
-package antlrgen;
-
+package br.dev.java8.antlrgen;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
