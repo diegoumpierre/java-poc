@@ -1,4 +1,5 @@
 package br.dev.calcPersonalized.antlrgen;
+
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -36,6 +37,13 @@ public interface CalcPersonalizedVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMulExpr(CalcPersonalizedParser.MulExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Umpierre}
+	 * labeled alternative in {@link CalcPersonalizedParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUmpierre(CalcPersonalizedParser.UmpierreContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code VarExpr}
 	 * labeled alternative in {@link CalcPersonalizedParser#expr}.

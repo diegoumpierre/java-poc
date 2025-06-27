@@ -6,7 +6,7 @@ import br.dev.calcPersonalized.antlrgen.CalcPersonalizedParser;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EvalVisitor extends CalcPersonalizedBaseVisitor<Integer> {
+public class MyPersonalVisitor extends CalcPersonalizedBaseVisitor<Integer> {
     Map<String, Integer> memory = new HashMap<>();
 
     @Override
@@ -47,4 +47,15 @@ public class EvalVisitor extends CalcPersonalizedBaseVisitor<Integer> {
     public Integer visitParenExpr(CalcPersonalizedParser.ParenExprContext ctx) {
         return visit(ctx.expr());
     }
+
+    @Override
+    public Integer visitUmpierre(CalcPersonalizedParser.UmpierreContext ctx) {
+        int currentValue = visit(ctx.getChild(0)); //9
+        currentValue = currentValue * 1000; //9000
+        int otherValue = visit(ctx.getChild(2));
+        currentValue += otherValue;
+
+        return currentValue;
+    }
+
 }
