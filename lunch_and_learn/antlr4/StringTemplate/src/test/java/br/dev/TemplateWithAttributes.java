@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AexampleApiClassTest {
+class TemplateWithAttributes {
 
     @Test
     void something() {
         assertDoesNotThrow(() -> {
-            AexampleApiClass aexampleApiClass = new AexampleApiClass();
-            aexampleApiClass.something();
+            TemplateWithAttributes templateWithAttributes = new TemplateWithAttributes();
+            templateWithAttributes.something();
         });
 
     }
