@@ -64,6 +64,18 @@ public class CalcPersonalizedBaseListener implements CalcPersonalizedListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterUmpierre(CalcPersonalizedParser.UmpierreContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUmpierre(CalcPersonalizedParser.UmpierreContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterVarExpr(CalcPersonalizedParser.VarExprContext ctx) { }
 	/**
 	 * {@inheritDoc}

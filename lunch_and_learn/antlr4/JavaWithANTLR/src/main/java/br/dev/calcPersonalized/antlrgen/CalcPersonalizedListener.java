@@ -1,4 +1,5 @@
 package br.dev.calcPersonalized.antlrgen;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -52,6 +53,18 @@ public interface CalcPersonalizedListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMulExpr(CalcPersonalizedParser.MulExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Umpierre}
+	 * labeled alternative in {@link CalcPersonalizedParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterUmpierre(CalcPersonalizedParser.UmpierreContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Umpierre}
+	 * labeled alternative in {@link CalcPersonalizedParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitUmpierre(CalcPersonalizedParser.UmpierreContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code VarExpr}
 	 * labeled alternative in {@link CalcPersonalizedParser#expr}.
