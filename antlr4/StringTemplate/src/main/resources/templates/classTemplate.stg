@@ -1,0 +1,19 @@
+group classTemplate;
+
+classFile(packageName, className, attributes) ::= <<
+package <packageName>;
+
+public class <className> {
+<attributes:{a |    private <a.type> <a.name>;}; separator="\n">
+
+    public <className>() {
+        // Default constructor
+    }
+
+<attributes:{
+    a |    public <a.type> get<a.name; format="capitalize">() { return <a.name>; }; separator="\n">
+
+<attributes:{
+    a |    public void set<a.name; format="capitalize">(<a.type> <a.name>) { this.<a.name> = <a.name>; }; separator="\n">
+}
+>>
