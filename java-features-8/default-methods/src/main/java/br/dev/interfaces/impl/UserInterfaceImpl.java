@@ -1,6 +1,7 @@
-package br.dev.interfaces;
+package br.dev.interfaces.impl;
 
 import br.dev.domain.User;
+import br.dev.interfaces.UserInterface;
 
 public class UserInterfaceImpl implements UserInterface {
 
