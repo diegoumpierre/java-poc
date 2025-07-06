@@ -1,10 +1,11 @@
-package br.dev.interfaces;
+package br.dev.interfaces.impl;
 
 import br.dev.domain.Post;
 import br.dev.domain.User;
+import br.dev.interfaces.PostInterface;
+import br.dev.interfaces.UserInterface;
 
 public class PostInterfaceImpl implements PostInterface, UserInterface {
-
 
     @Override
     public User createUser(String name, String email, String passwordHash) {
