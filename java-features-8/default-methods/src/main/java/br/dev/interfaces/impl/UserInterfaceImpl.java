@@ -9,7 +9,4 @@ public class UserInterfaceImpl implements UserInterface {
     public User createUser(String name, String email, String passwordHash) {
         return new User(name, email, passwordHash);
     }
-
-
-
 }
