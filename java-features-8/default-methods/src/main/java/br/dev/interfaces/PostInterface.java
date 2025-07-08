@@ -5,6 +5,11 @@ import br.dev.domain.User;
 
 public interface PostInterface {
 
+    //this way for which implementing the interface,
+    // I can use the method getAuthor() to get the author of the post
+    // and for each implementation, will be a different way to get the author
+    User getAuthor();
+
     default Post getPostById(Long id) {
         System.out.println("Fetching post with ID " + id);
         return null;
@@ -16,6 +21,17 @@ public interface PostInterface {
         post.setTitle(title);
         post.setContent(content);
         post.setAuthor(new User());
+        return post;
+    }
+
+    default Post updatePost(Long id, String title, String content) {
+        System.out.println("Updating post with ID " + id);
+        Post post = new Post();
+        post.setAuthor(getAuthor());
+        if (post != null) {
+            post.setTitle(title);
+            post.setContent(content);
+        }
         return post;
     }
 
