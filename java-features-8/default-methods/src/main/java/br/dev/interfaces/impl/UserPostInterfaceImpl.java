@@ -16,4 +16,11 @@ public class UserPostInterfaceImpl implements PostInterface, UserInterface {
     public Post addPost(Long userId, String title, String content) {
         return PostInterface.super.addPost(userId, title, content);
     }
+
+    @Override
+    public User getAuthor() {
+        User user = new User();
+        user.setEmail("other@umpierre.com.br");
+        return user;
+    }
 }
