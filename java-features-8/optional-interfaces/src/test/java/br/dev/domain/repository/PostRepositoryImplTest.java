@@ -13,11 +13,7 @@ class PostRepositoryImplTest {
     @Test
     public void testFindById() {
         PostRepository postRepository = new PostRepositoryImpl();
-
-
         Optional<Post> postOpt = postRepository.findById(1);
-
-
         postOpt.ifPresent(post -> System.out.println(post.getTitle()));
 
         // Test with a valid ID
