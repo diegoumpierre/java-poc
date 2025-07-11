@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.br.dev</groupId>
-    <artifactId>optional-interfaces</artifactId>
+    <artifactId>functional-interfaces</artifactId>
     <version>1.0.0</version>
     <build>
         <plugins>
