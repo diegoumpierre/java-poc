@@ -1,1 +1,0 @@
-https://leetcode.com/problems/block-placement-queries/description/
