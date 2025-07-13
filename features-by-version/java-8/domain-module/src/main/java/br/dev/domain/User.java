@@ -1,22 +1,18 @@
-package java.br.dev.domain;
+package br.dev.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
     private String name;
     private String email;
-    private String passwordHash;
 
     private List<Post> posts;
 
-    public User() {
-
-    }
-
-    public User(String name, String email, String passwordHash) {
+    public User(String name, String email) {
         this.name = name;
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.posts = new ArrayList<>();
     }
 
     public String getName() {
@@ -33,14 +29,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
     }
 
     public List<Post> getPosts() {

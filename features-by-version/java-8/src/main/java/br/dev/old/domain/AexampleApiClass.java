@@ -1,4 +1,4 @@
-package java.br.dev.old.domain;
+package br.dev.old.domain;
 
 public class AexampleApiClass {
 

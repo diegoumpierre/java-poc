@@ -1,7 +1,7 @@
-package java.br.dev.old.domain;
+package br.dev.old.domain;
 
-import java.br.dev.domain.Post;
-import java.br.dev.domain.User;
+import br.dev.domain.Post;
+import br.dev.domain.User;
 
 public interface PostInterface {
 
@@ -17,22 +17,24 @@ public interface PostInterface {
 
     default Post addPost(Long userId, String title, String content) {
         System.out.println("Adding post for user ID " + userId + " CLASS: " + this.getClass().getSimpleName());
-        Post post = new Post();
-        post.setTitle(title);
-        post.setContent(content);
-        post.setAuthor(new User());
-        return post;
+//        Post post = new Post();
+//        post.setTitle(title);
+//        post.setContent(content);
+//        post.setAuthor(new User());
+//        return post;
+        return null;
     }
 
     default Post updatePost(Long id, String title, String content) {
-        System.out.println("Updating post with ID " + id);
-        Post post = new Post();
-        post.setAuthor(getAuthor());
-        if (post != null) {
-            post.setTitle(title);
-            post.setContent(content);
-        }
-        return post;
+//        System.out.println("Updating post with ID " + id);
+//        Post post = new Post();
+//        post.setAuthor(getAuthor());
+//        if (post != null) {
+//            post.setTitle(title);
+//            post.setContent(content);
+//        }
+//        return post;
+        return null;
     }
 
 }

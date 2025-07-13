@@ -1,8 +1,8 @@
-package java.br.dev.old.domain;
+package br.dev.old.domain;
 
 
-import java.br.dev.domain.Post;
-import java.br.dev.domain.User;
+import br.dev.domain.Post;
+import br.dev.domain.User;
 
 public interface UserInterface {
 
@@ -10,11 +10,12 @@ public interface UserInterface {
 
     default Post addPost(Long userId, String title, String content) {
         System.out.println("Adding post for user ID " + userId + " CLASS: " + this.getClass().getSimpleName());
-        Post post = new Post();
-        post.setTitle(title);
-        post.setContent(content);
-        post.setAuthor(new User());
-        return post;
+//        Post post = new Post();
+//        post.setTitle(title);
+//        post.setContent(content);
+//        post.setAuthor(new User());
+//        return post;
+        return null;
     }
 
 }

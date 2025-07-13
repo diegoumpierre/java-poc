@@ -1,14 +1,15 @@
-package java.br.dev.old.domain.impl;
+package br.dev.old.domain.impl;
 
-import java.br.dev.domain.Post;
-import java.br.dev.domain.User;
-import java.br.dev.old.domain.PostInterface;
-import java.br.dev.old.domain.UserInterface;
+import br.dev.domain.Post;
+import br.dev.domain.User;
+import br.dev.old.domain.PostInterface;
+import br.dev.old.domain.UserInterface;
 
 public class UserPostInterfaceImpl implements PostInterface, UserInterface {
     @Override
     public User createUser(String name, String email, String passwordHash) {
-        return new User(name, email, passwordHash);
+      //  return new User(name, email, passwordHash);
+        return null;
     }
 
 
@@ -19,8 +20,9 @@ public class UserPostInterfaceImpl implements PostInterface, UserInterface {
 
     @Override
     public User getAuthor() {
-        User user = new User();
-        user.setEmail("other@umpierre.com.br");
-        return user;
+//        User user = new User();
+//        user.setEmail("other@umpierre.com.br");
+//        return user;
+        return null;
     }
 }

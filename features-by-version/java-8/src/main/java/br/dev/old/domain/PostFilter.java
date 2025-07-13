@@ -1,6 +1,6 @@
-package java.br.dev.old.domain;
+package br.dev.old.domain;
 
-import java.br.dev.domain.Post;
+import br.dev.domain.Post;
 
 @FunctionalInterface
 public interface PostFilter {

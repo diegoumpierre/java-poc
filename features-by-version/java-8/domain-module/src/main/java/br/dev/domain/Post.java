@@ -1,10 +1,15 @@
-package java.br.dev.domain;
+package br.dev.domain;
 
 public class Post {
     private String title;
     private String content;
 
-    private User author;
+
+    public Post(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
 
     public String getTitle() {
         return title;
@@ -22,11 +27,4 @@ public class Post {
         this.content = content;
     }
 
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
 }

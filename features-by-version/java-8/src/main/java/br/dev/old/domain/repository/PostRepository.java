@@ -1,6 +1,6 @@
-package java.br.dev.old.domain.repository;
+package br.dev.old.domain.repository;
 
-import java.br.dev.domain.Post;
+import br.dev.domain.Post;
 
 import java.util.Optional;
 
