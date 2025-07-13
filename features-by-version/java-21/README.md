@@ -1,59 +1,66 @@
 # Java 21 Overview
 
 ## 🗓️ Release Info
-- **Version**: Java SE 21 (JDK 21)  
-- **Release Date**: **September 19, 2023**  
-- **LTS**: Yes (Long-Term Support)  
-- **Maintained by**: Oracle, OpenJDK, Adoptium, others
+
+- **Version**: Java SE 21 (JDK 21)
+- **Release Date**: **September 19, 2023**
+- **LTS**: Yes (Long-Term Support)
+- **Maintained by**: Oracle, OpenJDK
 
 ---
 
 ## 🚀 Why Java 21 Matters
-Java 21 is the **latest LTS** version and marks a major step forward for modern Java. It finalizes several features introduced in preview since Java 17 and delivers powerful enhancements for **concurrency**, **immutability**, and **pattern matching**.
+
+Java 21 is a powerful LTS release with many finalized language features and a mature platform for modern development. It solidifies efforts from versions 12 to 20.
 
 ---
 
 ## ⭐ Key Goals
-- Finalize modern language features (records, sealed classes, pattern matching)
-- Introduce **virtual threads** for scalable concurrency
-- Make Java more expressive and concise
-- Improve developer productivity and runtime performance
+
+- Finalize **preview features** introduced in prior versions
+- Improve **developer productivity** with modern language constructs
+- Enhance **performance**, **security**, and **native interop**
+- Deliver on the long-term vision of **simplified Java**
 
 ---
 
 ## 🧩 Major Features
 
-| Feature                     | Description                                                |
-|----------------------------|------------------------------------------------------------|
-| **Virtual Threads (JEP 444)**      | Lightweight, scalable threads via Project Loom         |
-| **Record Patterns (JEP 440)**      | Pattern matching for records                           |
-| **Pattern Matching for switch (JEP 441)** | Pattern-based switch logic with type checks          |
-| **Sequenced Collections (JEP 431)** | New interfaces: `SequencedCollection`, `SequencedSet`, etc. |
-| **String Templates (Preview - JEP 430)** | Safer and cleaner string interpolation                 |
-| **Unnamed Patterns and Variables (JEP 443)** | `_` as a discard variable in pattern matching         |
-| **Scoped Values (JEP 446 - Preview)** | Safer alternative to thread-local variables           |
-| **Deprecation of the Finalization Mechanism (JEP 421)** | Prepares for removal of object finalizers            |
-
----
-
-## 🆚 Improvements Over Java 17
-
-| Category         | Java 17                        | Java 21                                      |
-|------------------|--------------------------------|----------------------------------------------|
-| Concurrency       | Platform threads               | **Virtual threads** (lightweight)             |
-| Pattern Matching  | `instanceof` patterns only     | `switch` and **record patterns**              |
-| Memory Handling   | Traditional GC tuning          | Loom-based concurrency + **Scoped Values**    |
-| Collections       | Standard Collections           | **Sequenced Collections**                    |
-| Strings           | Text blocks                    | **String templates** (preview)                |
+| Feature                             | Description                                            |
+| ----------------------------------- | ------------------------------------------------------ |
+| **Pattern Matching for switch**     | Type-safe and expressive switch cases                 |
+| **Record Patterns**                 | Destructure record values inline                      |
+| **String Templates (Preview)**      | Embedded expressions in string literals               |
+| **Sequenced Collections**           | New collection interfaces with order-sensitive access |
+| **Virtual Threads**                | Lightweight threads for scalable concurrency           |
+| **Scoped Values**                   | Thread-local-like values for virtual threads          |
+| **Unnamed Classes and Instance Main Methods (Preview)** | Simplify entry-point programs       |
+| **Foreign Function & Memory API**   | Stable support for calling native code                |
 
 ---
 
 ## 📦 Adoption
-- Strong candidate for long-term adoption after Java 17
-- Ideal for cloud-native and high-concurrency applications
-- Supported by major vendors (Oracle, Eclipse Temurin, Amazon Corretto, etc.)
+
+- Recommended LTS for all new Java development
+- Adopted for cloud-native and high-performance systems
+- Aligns with modern concurrency models
 
 ---
 
 ## 🔗 Related
-- [Java 21 API Documentation](https://)
+
+- [Java 21 API Documentation](https://docs.oracle.com/en/java/javase/21/docs/api/)
+- [Java SE 21 Release Notes](https://www.oracle.com/java/technologies/javase/21-relnote.html)
+
+## 📚 Full Feature Table with Example Ideas
+
+| Feature                                          | Description                                              | Example Ideas (Best Related)                                  | Major Feature? |
+|--------------------------------------------------|----------------------------------------------------------|----------------------------------------------------------------|----------------|
+| **Pattern Matching for switch**                  | Type-safe, expressive switch cases                       | Use type + guard patterns in switch                            | ✅ Yes         |
+| **Record Patterns**                              | Deconstruct record objects                               | `case User(String name, int age)` in switch                    | ✅ Yes         |
+| **String Templates (Preview)**                   | Embed expressions in strings                             | `STR."Hello \{name}!"`                                         | ✅ Yes         |
+| **Sequenced Collections**                        | New interfaces with defined element order                | Use `SequencedSet`, `SequencedMap`                             | ✅ Yes         |
+| **Virtual Threads**                              | Lightweight threads for massive concurrency              | Replace thread pools with `Executors.newVirtualThreadPerTaskExecutor()` | ✅ Yes  |
+| **Scoped Values**                                | Immutable values tied to virtual thread scopes           | Replace ThreadLocal in virtual threads                         | ❌ No          |
+| **Unnamed Classes and Instance Main Methods**    | Simplify writing small programs                          | Create programs without class names or main boilerplate        | ❌ No          |
+| **Foreign Function & Memory API**                | Stable access to native code and memory                  | Call C libraries using `Linker` and `MemorySegment`            | ✅ Yes         |
