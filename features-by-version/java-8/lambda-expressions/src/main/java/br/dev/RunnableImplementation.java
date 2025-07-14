@@ -1,4 +1,4 @@
-package br.dev.lambda_examples;
+package br.dev;
 
 import br.dev.domain.DataService;
 import br.dev.domain.User;

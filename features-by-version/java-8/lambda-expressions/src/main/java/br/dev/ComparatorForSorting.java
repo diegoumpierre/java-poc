@@ -1,4 +1,4 @@
-package br.dev.lambda_examples;
+package br.dev;
 
 import br.dev.domain.DataService;
 import br.dev.domain.User;
@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class LambdaSort {
+public class ComparatorForSorting {
 
     public static void main(String[] args) {
         //get a user list from DataService

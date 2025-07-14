@@ -1,4 +1,4 @@
-package br.dev.lambda_examples;
+package br.dev;
 
 import br.dev.domain.DataService;
 import br.dev.domain.User;
@@ -6,7 +6,7 @@ import br.dev.domain.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LambdaFilter {
+public class FilteringCollection {
 
 
     public static void main(String[] args) {

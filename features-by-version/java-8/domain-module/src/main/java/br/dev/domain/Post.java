@@ -3,11 +3,12 @@ package br.dev.domain;
 public class Post {
     private String title;
     private String content;
+    private boolean published;
 
-
-    public Post(String title, String content) {
+    public Post(String title, String content, boolean published) {
         this.title = title;
         this.content = content;
+        this.published = published;
     }
 
 
@@ -27,4 +28,5 @@ public class Post {
         this.content = content;
     }
 
+    public boolean isPublished(){return this.published;}
 }

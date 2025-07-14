@@ -9,7 +9,7 @@ Lambda expressions in Java 8 allow concise function implementations without the 
 | 3  | **Filtering a Collection**       | Remove unwanted elements from a collection                     | `users.stream().filter(User::isActive).collect(...)`                                   |
 | 4  | **Mapping a Collection**         | Transform one value to another (e.g., object → field)          | `posts.stream().map(Post::getTitle).collect(...)`                                      |
 | 5  | **Combining Stream Operations**  | Chain filter, map, and forEach                                 | `posts.stream().filter(...).map(...).forEach(...)`                                     |
-| 6  | **forEach Loop**                 | Iterate and execute a lambda for each element                  | `list.forEach(u -> System.out.println(u.getName()));`                                  |
+| 6  | **ForEach Loop**                 | Iterate and execute a lambda for each element                  | `list.forEach(u -> System.out.println(u.getName()));`                                  |
 | 7  | **Method References**            | Shorthand for lambdas calling a single method                  | `users.sort(Comparator.comparing(User::getName));`                                     |
 | 8  | **Function Interface Usage**     | Replace custom logic with `Function`, `Predicate`, etc.        | `Function<User, String> nameFn = u -> u.getName();`                                    |
 | 9  | **Predicate Filtering**          | Use lambdas with `Predicate<T>` to encapsulate conditions      | `Predicate<Post> published = p -> p.isPublished();`                                     |
