@@ -8,30 +8,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.*;
 
-
-/**
- * | Interface           | Description                      | Example                                |
- * | ------------------- | -------------------------------- | -------------------------------------- |
- * | `Function<T,R>`     | Transform input to output        | `u -> u.getName()`                     |
- * | `Predicate<T>`      | Boolean condition check          | `u -> u.isActive()`                    |
- * | `Consumer<T>`       | Process without returning        | `u -> System.out.println(u.getName())` |
- * | `Supplier<T>`       | Generate a value without input   | `() -> new User(...)`                  |
- * | `BiFunction<T,U,R>` | Use two inputs to produce result | `(u, t) -> new Post(t, u)`             |
- * | `UnaryOperator<T>`  | Unary operation of same type     | `s -> s.toUpperCase()`                 |
- * | `BinaryOperator<T>` | Combine two of same type         | `(a, b) -> a + " & " + b`              |
- */
-
-
 public class FunctionInterfaceUsage {
 
     public static void main(String[] args) {
         //get a user list from DataService
         DataService dataService = new DataService();
         List<User> userList = dataService.getUserWithPost();
-
-        // Function<T, R>: Convert User to String (name)
-        Function<User, String> nameAndEmailFunction = user -> user.getName() +" - "+ user.getEmail();
-        userList.forEach(user -> System.out.println("Name and Email: " + nameAndEmailFunction.apply(user)));
 
         // Predicate<T>: Filter active users
         Predicate<Post> postIsPublished = post -> post.isPublished();
@@ -60,17 +42,24 @@ public class FunctionInterfaceUsage {
 
 
         // BiFunction<T, U, R>: Combine user and title into a Post
-        BiFunction<User, String, Post> createPost = (user, title) -> new Post(title, user);
-        Post post = createPost.apply(users.get(0), "Hello Lambda");
-        System.out.println("Post by " + post.getAuthor().getName() + ": " + post.getTitle());
+        BiFunction<User, String, Post> createPost = (user, title) -> new Post(title, user.getName()+"-"+user.getEmail(),false);
+        userList.forEach(user -> {
+            Post post = createPost.apply(user, "title for " + user.getName());
+            user.getPosts().add(post);
+        });
 
-        // ✅ UnaryOperator<T>: Uppercase user name
+        // UnaryOperator<T>: Uppercase username
         UnaryOperator<String> toUpperCase = name -> name.toUpperCase();
-        System.out.println("Upper: " + toUpperCase.apply(users.get(0).getName()));
+        userList.forEach(user ->
+            System.out.println("Upper: " + toUpperCase.apply(user.getName()))
+        );
 
-        // ✅ BinaryOperator<T>: Combine names
-        BinaryOperator<String> concatNames = (n1, n2) -> n1 + " & " + n2;
-        System.out.println("Pair: " + concatNames.apply(users.get(0).getName(), users.get(1).getName()));
+
+        // BinaryOperator<T>: Combine names
+        BinaryOperator<String> concatNames = (string1, string2) -> string1 + " & email: " + string2;
+        userList.forEach(user ->
+                System.out.println("Pair: " + concatNames.apply(user.getName(), user.getEmail()))
+        );
 
 
 
