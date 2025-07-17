@@ -15,6 +15,13 @@ public class User {
         this.posts = new ArrayList<>();
     }
 
+    public User(String name, String email, List<Post> posts) {
+        this.name = name;
+        this.email = email;
+        this.posts = posts;
+    }
+
+
     public String getName() {
         return name;
     }
