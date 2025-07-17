@@ -11,6 +11,11 @@ public class Post {
         this.published = published;
     }
 
+    public Post(String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.published = true;
+    }
 
     public String getTitle() {
         return title;
