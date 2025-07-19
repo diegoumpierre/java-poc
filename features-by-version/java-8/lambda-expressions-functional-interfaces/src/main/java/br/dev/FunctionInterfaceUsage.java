@@ -18,11 +18,6 @@ public class FunctionInterfaceUsage {
 
 
 
-        // UnaryOperator<T>: Uppercase username
-        UnaryOperator<String> toUpperCase = name -> name.toUpperCase();
-        userList.forEach(user ->
-            System.out.println("Upper: " + toUpperCase.apply(user.getName()))
-        );
 
 
         // BinaryOperator<T>: Combine names
