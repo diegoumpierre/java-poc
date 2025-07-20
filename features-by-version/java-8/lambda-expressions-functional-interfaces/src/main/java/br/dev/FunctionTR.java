@@ -10,6 +10,13 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * ✅ Function<T, R>
+ * A Function<T, R> represents a function that:
+ * Takes one input of type T
+ * Returns a result of type R
+ * Commonly used for mapping, transforming, or extracting values
+ */
 public class FunctionTR {
 
     public static void main(String[] args) {
@@ -40,7 +47,7 @@ public class FunctionTR {
         userList.forEach(user -> System.out.println("Post count: " + postCount.apply(user)));
 
 
-        // Post summary (title + truncated content)
+        // Post summary (title and truncated content)
         Function<Post, String> summary = post -> post.getTitle() + ": " + post.getContent().substring(0, 10) + "...";
         userList.stream()
                 .flatMap(user -> user.getPosts()

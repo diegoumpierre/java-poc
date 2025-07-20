@@ -7,6 +7,13 @@ import br.dev.domain.User;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * ✅ Consumer<T>
+ * A Consumer<T> represents an operation that:
+ * Takes one input of type T
+ * Returns no result (void)
+ * Commonly used for performing actions on objects, like printing or modifying them
+ */
 public class ConsumerT {
 
     public static void main(String[] args) {
@@ -18,7 +25,7 @@ public class ConsumerT {
         Consumer<User> printUser = user -> System.out.println("User: " + user.getName() + ", Number of posts: " + user.getPosts().size());
         userList.forEach(printUser);
 
-        // Print user name
+        // Print username
         Consumer<User> printUserName = user -> System.out.println("User: " + user.getName());
         userList.forEach(user -> printUserName.accept(user));
 
@@ -35,7 +42,7 @@ public class ConsumerT {
         userList.forEach(user -> user.getPosts().forEach(post -> printSummary.accept(post)));
 
 
-        // Modify post content to add a tag
+        // Modify post-content to add a tag
         Consumer<Post> addTagToContent = post -> post.setContent(post.getContent() + " #Java8");
         userList.forEach(user -> user.getPosts().forEach(addTagToContent));
 

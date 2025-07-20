@@ -8,6 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 
+/**
+ * ✅ BiFunction<T, U, R>
+ * Takes two inputs, one of type T and one of type U
+ *Returns a result of type R
+ * Used for composing two inputs into a single output, like merging or formatting
+ */
 public class BiFunctionTUR {
 
 

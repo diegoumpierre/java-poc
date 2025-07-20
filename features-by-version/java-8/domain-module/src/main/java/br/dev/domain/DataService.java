@@ -1,9 +1,19 @@
 package br.dev.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class DataService {
+
+    public Supplier<Post> randomPost = () -> {
+        String title = "Post #" + new Random().nextInt(1000);
+        String content = "Random content at " + new Date();
+        return new Post(title, content, true);
+    };
+
 
     public List<User> getUserWithPost() {
 

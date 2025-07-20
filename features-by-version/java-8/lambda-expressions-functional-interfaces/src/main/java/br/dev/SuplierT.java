@@ -7,6 +7,12 @@ import br.dev.domain.User;
 import java.util.*;
 import java.util.function.Supplier;
 
+/**
+ * ✅ Supplier<T>
+ * A Supplier<T> represents a supplier of results
+ * It does not take any input but returns a value of type T
+ * Commonly used for lazy evaluation, object creation, or providing default values
+ */
 public class SuplierT {
 
     public static void main(String[] args) {

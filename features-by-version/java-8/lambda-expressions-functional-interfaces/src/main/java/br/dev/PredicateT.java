@@ -7,6 +7,11 @@ import br.dev.domain.User;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * ✅ Predicate<T>
+ * A Predicate<T> represents a boolean-valued function of one argument
+ * It is commonly used for filtering or matching conditions
+ */
 public class PredicateT {
 
     public static void main(String[] args) {

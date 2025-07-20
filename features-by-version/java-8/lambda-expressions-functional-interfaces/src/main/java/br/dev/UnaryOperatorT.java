@@ -8,9 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
+/**
+ * ✅ UnaryOperator<T>
+ * A UnaryOperator<T> is a special case of Function<T, T>
+ * It takes one argument of type T and returns a result of the same type T
+ * Commonly used for operations that modify or transform an object in place
+ */
 public class UnaryOperatorT {
-
-
 
     public static void main(String[] args) {
         //get a user list from DataService
