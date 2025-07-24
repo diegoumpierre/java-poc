@@ -13,10 +13,23 @@ public class ForEachLoop {
         DataService dataService = new DataService();
         List<User> userList = dataService.getUserWithPost();
 
+        // 1. Print usernames
+        userList.forEach(user -> System.out.println("User: " + user.getName()));
 
-        //Chain filter → map → forEach
-        userList.stream()
-                .forEach(user -> System.out.println("--> " + user.getName())); // print name
+        // 2. Print how many posts each user has
+        userList.forEach(user -> System.out.println(user.getName() + " has " + user.getPosts().size() + " posts"));
+
+        // 3. Print all post-titles for each user
+        userList.forEach(user -> {
+            System.out.println("Posts by " + user.getName() + ":");
+            user.getPosts().forEach(p -> System.out.println(" - " + p.getTitle()));
+        });
+
+
+    }
+
+    private static void printTitle(Post post) {
+        System.out.println(" -> " + post.getTitle());
     }
 
 }
