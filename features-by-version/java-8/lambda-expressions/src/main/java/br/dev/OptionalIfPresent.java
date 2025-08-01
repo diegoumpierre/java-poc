@@ -28,6 +28,9 @@ public class OptionalIfPresent {
         optionalUser.ifPresent(user -> System.out.println(user.getEmail()));
 
 
+        
+
+
 
     }
 
