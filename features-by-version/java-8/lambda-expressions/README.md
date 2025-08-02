@@ -14,6 +14,6 @@ Lambda expressions in Java 8 allow concise function implementations without the 
 | 8.  | **Function Interface Usage**     | Replace custom logic with `Function`, `Predicate`, etc.        | `Function<User, String> nameFn = u -> u.getName();`                                    |
 | 9.  | **Predicate Filtering**          | Use lambdas with `Predicate<T>` to encapsulate conditions      | `Predicate<Post> published = p -> p.isPublished();`                                     |
 | 10. | **Grouping with Collectors**     | Count, sum, or group items using lambda grouping               | `groupingBy(p -> p.getAuthor().getName(), counting())`                                 |
-| 11  | **Optional ifPresent()**         | Handle presence of value using lambda                          | `optional.ifPresent(value -> System.out.println(value));`                              |
-| 12  | **Custom Functional Interfaces** | Define your own `@FunctionalInterface`                         | `MyFn fn = x -> x + 1;`                                                                |
+| 11. | **Optional ifPresent()**         | Handle presence of value using lambda                          | `optional.ifPresent(value -> System.out.println(value));`                              |
+| 12. | **Custom Functional Interfaces** | Define your own `@FunctionalInterface`                         | `MyFn fn = x -> x + 1;`                                                                |
 
