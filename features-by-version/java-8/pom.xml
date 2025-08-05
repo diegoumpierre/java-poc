@@ -20,7 +20,8 @@
     <modules>
         <module>domain-module</module>
         <module>lambda-expressions</module>
-        <module>lambda-expressions-functional-interfaces</module>
+        <module>functional-interfaces</module>
+        <module>stream-api</module>
     </modules>
 
     <build>
