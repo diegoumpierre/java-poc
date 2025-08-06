@@ -3,7 +3,7 @@
 | #  | Feature Category          | Description                                                                                  | Example / Notes                                                                 |
 |----|---------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
 | 1. | Stream Creation           | Create a stream from collections, arrays, builders, or generators                           | `list.stream()`, `Stream.of(...)`, `Stream.generate(...)`                        |
-| 2  | Lazy Evaluation           | Intermediate operations are only evaluated when a terminal operation is called              | Execution is deferred until `collect()`, `forEach()`, etc.                      |
+| 2. | Lazy Evaluation           | Intermediate operations are only evaluated when a terminal operation is called              | Execution is deferred until `collect()`, `forEach()`, etc.                      |
 | 3  | Intermediate Operations   | Transform or filter data; return a new stream                                                | `filter()`, `map()`, `flatMap()`, `distinct()`, `sorted()`, `limit()`, `skip()` |
 | 4  | Terminal Operations       | Produce a result or side-effect, and end the stream pipeline                                | `collect()`, `forEach()`, `reduce()`, `count()`, `findFirst()`                  |
 | 5  | Collectors Utility        | Use `Collectors` class for reduction to collections or summaries                            | `toList()`, `groupingBy()`, `partitioningBy()`, `joining()`, `counting()`       |
