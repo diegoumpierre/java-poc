@@ -22,17 +22,9 @@ public class OptionalIfPresent {
                         user -> System.out.println(user.getName()))
         );
 
-
         //Using Optional.ifPresent with a single User
         Optional<User> optionalUser = Optional.ofNullable(userList.get(0));
         optionalUser.ifPresent(user -> System.out.println(user.getEmail()));
 
-
-        
-
-
-
     }
-
-
 }
