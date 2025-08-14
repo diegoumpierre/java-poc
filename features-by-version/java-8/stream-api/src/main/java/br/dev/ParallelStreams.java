@@ -31,24 +31,26 @@ public class ParallelStreams {
         // 2. Parallel filtering and mapping
         List<String> javaTitles = userList.get(0).getPosts().stream()
                 .parallel()
-                .filter(p -> p.getTitle().startsWith("Java"))
+                .filter(post -> post.getTitle().startsWith("Java"))
                 .map(Post::getTitle)
                 .collect(Collectors.toList());
 
         System.out.println("\nPosts starting with 'Java': " + javaTitles);
 
         // 3. Parallel sorting
-        List<Post> sortedParallel = userList.get(0).getPosts().stream().parallel()
+        List<Post> sortedParallel = userList.get(0).getPosts().stream()
+                .parallel()
                 .sorted(Comparator.comparing(Post::getTitle))
                 .collect(Collectors.toList());
 
         System.out.println("\nSorted in parallel:");
-        sortedParallel.forEach(p -> System.out.println(" - " + p.getTitle()));
+        sortedParallel.forEach(post -> System.out.println(" - " + post.getTitle()));
 
         // 4. Parallel reduction
-        String combinedTitles = userList.get(0).getPosts().stream().parallel()
+        String combinedTitles = userList.get(0).getPosts().stream()
+                .parallel()
                 .map(Post::getTitle)
-                .reduce("", (a, b) -> a.isEmpty() ? b : a + " | " + b);
+                .reduce("", (postA, postB) -> postA.isEmpty() ? postB : postA + " | " + postB);
 
         System.out.println("\nCombined Titles (Parallel Reduce): " + combinedTitles);
 
