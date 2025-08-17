@@ -1,17 +1,17 @@
 # ✅ Java 8 – Streams API Features (Table Format)
 
-| #  | Feature Category          | Description                                                                                  | Example / Notes                                                                 |
-|----|---------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| 1. | Stream Creation           | Create a stream from collections, arrays, builders, or generators                           | `list.stream()`, `Stream.of(...)`, `Stream.generate(...)`                        |
-| 2. | Lazy Evaluation           | Intermediate operations are only evaluated when a terminal operation is called              | Execution is deferred until `collect()`, `forEach()`, etc.                      |
-| 3. | Intermediate Operations   | Transform or filter data; return a new stream                                                | `filter()`, `map()`, `flatMap()`, `distinct()`, `sorted()`, `limit()`, `skip()` |
-| 4. | Terminal Operations       | Produce a result or side-effect, and end the stream pipeline                                | `collect()`, `forEach()`, `reduce()`, `count()`, `findFirst()`                  |
-| 5. | Collectors Utility        | Use `Collectors` class for reduction to collections or summaries                            | `toList()`, `groupingBy()`, `partitioningBy()`, `joining()`, `counting()`       |
-| 6  | Parallel Streams          | Stream operations executed in parallel for performance gains                                | `list.parallelStream().map(...).collect(...)`                                   |
-| 7  | Primitive Streams         | Special streams for primitives to avoid boxing                                               | `IntStream`, `LongStream`, `DoubleStream`, `IntStream.range(1, 10)`             |
-| 8  | Stream Pipelining         | Chain multiple operations into a readable and efficient pipeline                            | `stream().filter().map().collect(...)`                                          |
-| 9  | Infinite Streams          | Streams that generate unlimited data, usually limited manually                              | `Stream.generate(...)`, `Stream.iterate(...)` + `limit()`                       |
-| 10 | One-time Use              | Streams cannot be reused after a terminal operation                                          | Use a new stream if you need to process again                                   |
+| #   | Feature Category          | Description                                                                                  | Example / Notes                                                                 |
+|-----|---------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| 1.  | Stream Creation           | Create a stream from collections, arrays, builders, or generators                           | `list.stream()`, `Stream.of(...)`, `Stream.generate(...)`                        |
+| 2.  | Lazy Evaluation           | Intermediate operations are only evaluated when a terminal operation is called              | Execution is deferred until `collect()`, `forEach()`, etc.                      |
+| 3.  | Intermediate Operations   | Transform or filter data; return a new stream                                                | `filter()`, `map()`, `flatMap()`, `distinct()`, `sorted()`, `limit()`, `skip()` |
+| 4.  | Terminal Operations       | Produce a result or side-effect, and end the stream pipeline                                | `collect()`, `forEach()`, `reduce()`, `count()`, `findFirst()`                  |
+| 5.  | Collectors Utility        | Use `Collectors` class for reduction to collections or summaries                            | `toList()`, `groupingBy()`, `partitioningBy()`, `joining()`, `counting()`       |
+| 6.  | Parallel Streams          | Stream operations executed in parallel for performance gains                                | `list.parallelStream().map(...).collect(...)`                                   |
+| 7.  | Primitive Streams         | Special streams for primitives to avoid boxing                                               | `IntStream`, `LongStream`, `DoubleStream`, `IntStream.range(1, 10)`             |
+| 8.  | Stream Pipelining         | Chain multiple operations into a readable and efficient pipeline                            | `stream().filter().map().collect(...)`                                          |
+| 9.  | Infinite Streams          | Streams that generate unlimited data, usually limited manually                              | `Stream.generate(...)`, `Stream.iterate(...)` + `limit()`                       |
+| 10. | One-time Use              | Streams cannot be reused after a terminal operation                                          | Use a new stream if you need to process again                                   |
 
 
 
