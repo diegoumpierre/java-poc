@@ -1,4 +1,4 @@
-// Example for Period and Duration in Java 8 Date and Time API
+package br.dev;
 
 import java.time.Period;
 import java.time.Duration;

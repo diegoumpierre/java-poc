@@ -1,11 +1,4 @@
-// Example for Adjusters in Java 8 Date and Time API
-//
-// TemporalAdjusters are utility methods that allow you to perform complex date manipulations
-// in a readable and concise way. They are used with the 'with' method of LocalDate (and other
-// temporal types) to return a new instance with the adjusted value. Common use cases include
-// finding the first or last day of a month, the next or previous occurrence of a specific day
-// of the week, or the first/last day of a year.
-//
+package br.dev;
 // All operations are immutable: they return a new LocalDate instance and do not modify the original.
 //
 // Example outputs (assuming today is 2025-08-16):
