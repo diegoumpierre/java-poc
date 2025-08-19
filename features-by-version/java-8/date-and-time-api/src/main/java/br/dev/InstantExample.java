@@ -1,4 +1,4 @@
-// Example for Instant in Java 8 Date and Time API
+package br.dev;
 
 import java.time.Instant;
 
