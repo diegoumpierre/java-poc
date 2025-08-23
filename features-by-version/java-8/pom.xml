@@ -19,10 +19,10 @@
 
     <modules>
         <module>domain-module</module>
-        <module>lambda-expressions</module>
-        <module>functional-interfaces</module>
-        <module>stream-api</module>
-        <module>date-and-time-api</module>
+        <module>java-lambda-expressions</module>
+        <module>java-functional-interfaces</module>
+        <module>java-stream-api</module>
+        <module>java-date-and-time-api</module>
     </modules>
 
     <build>

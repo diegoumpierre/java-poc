@@ -12,15 +12,7 @@
     </parent>
 
     <groupId>com.br.dev </groupId>
-    <artifactId>stream-api</artifactId>
+    <artifactId>java-date-and-time-api</artifactId>
     <version>1.0.0</version>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.br.dev</groupId>
-            <artifactId>domain-module</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
 
 </project>

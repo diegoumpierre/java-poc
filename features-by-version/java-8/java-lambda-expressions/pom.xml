@@ -12,7 +12,16 @@
     </parent>
 
     <groupId>com.br.dev </groupId>
-    <artifactId>Date-and-time-api</artifactId>
+    <artifactId>java-lambda-expressions</artifactId>
     <version>1.0.0</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.br.dev</groupId>
+            <artifactId>domain-module</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
