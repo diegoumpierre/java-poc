@@ -27,17 +27,17 @@ Java 8 was one of the most significant updates to the language, introducing func
 
 ## 🧩 Major Features
 
-| Feature                      | Description                                        |
-|------------------------------| -------------------------------------------------- |
-| **.Lambda Expressions**      | Concise functions without class declarations       |
-| **.Functional Interfaces**   | One-method interfaces for lambdas                  |
-| **.Streams API**             | Functional-style operations on collections         |
-| **.Date and Time API**       | Clean and immutable time handling (`java.time`)    |
-| **Optional&lt;T&gt;**        | Container for null-safe value handling             |
-| **Default & Static Methods** | Interfaces with default and static implementations |
-| **CompletableFuture**        | Advanced asynchronous programming model            |
-| **Nashorn Engine**           | Embedded JavaScript engine in the JVM              |
-| **Base64 API**               | Built-in encoder/decoder for Base64                |
+| Feature                       | Description                                        |
+|-------------------------------| -------------------------------------------------- |
+| **.Lambda Expressions**       | Concise functions without class declarations       |
+| **.Functional Interfaces**    | One-method interfaces for lambdas                  |
+| **.Streams API**              | Functional-style operations on collections         |
+| **.Date and Time API**        | Clean and immutable time handling (`java.time`)    |
+| **.Optional&lt;T&gt;**        | Container for null-safe value handling             |
+| **.Default & Static Methods** | Interfaces with default and static implementations |
+| **.CompletableFuture**        | Advanced asynchronous programming model            |
+| **Nashorn Engine**            | Embedded JavaScript engine in the JVM              |
+| **Base64 API**                | Built-in encoder/decoder for Base64                |
 
 ---
 
