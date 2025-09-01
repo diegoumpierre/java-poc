@@ -58,21 +58,21 @@ Java 8 was one of the most significant updates to the language, introducing func
 
 ## 📚 Full Feature Table with Example Ideas
 
-| Feature                                      | Description                                              | Example Ideas (Best Related)                                 | Major Feature? |
-|---------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------|----------------|
-| **Lambda Expressions**                      | Concise functions without class declarations             | Sorting lists, filtering, `Runnable`, `Comparator`            | ✅ Yes         |
-| **Functional Interfaces**                   | One-method interfaces for lambdas                        | Custom `@FunctionalInterface`, use `Predicate`, `Function`    | ✅ Yes         |
-| **Streams API**                             | Functional-style operations on collections               | `filter`, `map`, `reduce`, collect to list/map                | ✅ Yes         |
-| **Optional<T>**                              | Container for null-safe value handling                   | Null-checks, chaining with `map()`, `.orElse()`               | ✅ Yes         |
-| **Default Methods in Interfaces**           | Default method logic in interfaces                       | Add default behavior, override optionally                     | ✅ Yes         |
-| **Static Methods in Interfaces**            | Utility methods in interfaces                            | Interface-level utility methods like `MyInterface.isValid()`  | ✅ Yes         |
-| **Method References**                       | Shorthand for lambdas using `Class::method`              | `System.out::println`, `String::toUpperCase` in streams       | ❌ No          |
-| **Collectors**                              | Utility class to collect stream results                  | Grouping, partitioning, joining strings, averaging            | ❌ No          |
-| **Date and Time API (java.time)**           | Modern, immutable date and time handling                 | `LocalDate`, `Duration`, formatting, time zones               | ✅ Yes         |
-| **Base64 API**                              | Built-in Base64 encoding and decoding                    | Encode/decode strings or files                                | ❌ No          |
-| **CompletableFuture**                       | Asynchronous programming model                           | Run async tasks, combine futures, handle errors               | ✅ Yes         |
-| **Nashorn JavaScript Engine**               | Run JavaScript inside the JVM                            | Evaluate JS, pass Java objects to JS                          | ✅ Yes         |
-| **Repeatable Annotations**                  | Apply the same annotation multiple times                 | Custom annotations for logging, metrics, etc.                 | ❌ No          |
-| **Type Annotations**                        | Annotations on type uses (JSR 308)                       | Annotate `@NonNull List<String>`, improve static analysis     | ❌ No          |
+| Feature                            | Description                                              | Example Ideas (Best Related)                                 | Major Feature? |
+|------------------------------------|----------------------------------------------------------|---------------------------------------------------------------|----------------|
+| **.Lambda Expressions**            | Concise functions without class declarations             | Sorting lists, filtering, `Runnable`, `Comparator`            | ✅ Yes         |
+| **.Functional Interfaces**         | One-method interfaces for lambdas                        | Custom `@FunctionalInterface`, use `Predicate`, `Function`    | ✅ Yes         |
+| **.Streams API**                   | Functional-style operations on collections               | `filter`, `map`, `reduce`, collect to list/map                | ✅ Yes         |
+| **.Optional<T>**                   | Container for null-safe value handling                   | Null-checks, chaining with `map()`, `.orElse()`               | ✅ Yes         |
+| **.Default Methods in Interfaces** | Default method logic in interfaces                       | Add default behavior, override optionally                     | ✅ Yes         |
+| **.Static Methods in Interfaces**  | Utility methods in interfaces                            | Interface-level utility methods like `MyInterface.isValid()`  | ✅ Yes         |
+| **.Method References**             | Shorthand for lambdas using `Class::method`              | `System.out::println`, `String::toUpperCase` in streams       | ❌ No          |
+| **.Collectors**                    | Utility class to collect stream results                  | Grouping, partitioning, joining strings, averaging            | ❌ No          |
+| **.Date and Time API (java.time)** | Modern, immutable date and time handling                 | `LocalDate`, `Duration`, formatting, time zones               | ✅ Yes         |
+| **.Base64 API**                    | Built-in Base64 encoding and decoding                    | Encode/decode strings or files                                | ❌ No          |
+| **.CompletableFuture**             | Asynchronous programming model                           | Run async tasks, combine futures, handle errors               | ✅ Yes         |
+| **.Nashorn JavaScript Engine**     | Run JavaScript inside the JVM                            | Evaluate JS, pass Java objects to JS                          | ✅ Yes         |
+| **.Repeatable Annotations**        | Apply the same annotation multiple times                 | Custom annotations for logging, metrics, etc.                 | ❌ No          |
+| **.Type Annotations**              | Annotations on type uses (JSR 308)                       | Annotate `@NonNull List<String>`, improve static analysis     | ❌ No          |
 
 ---
