@@ -27,16 +27,16 @@ Java 11 is the first LTS version after Java 8 and marked the start of Oracle's 6
 
 ## 🧩 Major Features
 
-| Feature                            | Description                                              |
-| ---------------------------------- | -------------------------------------------------------- |
-| **Local-Variable Syntax for Lambda** | `var` can be used in lambda parameters                    |
-| **HttpClient (Standardized)**     | Modern HTTP client with async and reactive capabilities  |
-| **Flight Recorder**               | Low-overhead data collection for profiling               |
-| **ZGC (Experimental)**            | Low-latency garbage collector                            |
-| **Nest-Based Access Control**     | Better encapsulation for nested classes                  |
-| **Unicode 10 Support**            | Enhanced Unicode character support                       |
-| **Removal of Java EE & CORBA**    | Modular and streamlined JDK                              |
-| **Launch Single-File Source Code**| Run `.java` files without compiling manually              |
+| Feature                               | Description                                              |
+|---------------------------------------| -------------------------------------------------------- |
+| **.Local-Variable Syntax for Lambda** | `var` can be used in lambda parameters                    |
+| **HttpClient (Standardized)**         | Modern HTTP client with async and reactive capabilities  |
+| **Flight Recorder**                   | Low-overhead data collection for profiling               |
+| **ZGC (Experimental)**                | Low-latency garbage collector                            |
+| **Nest-Based Access Control**         | Better encapsulation for nested classes                  |
+| **Unicode 10 Support**                | Enhanced Unicode character support                       |
+| **Removal of Java EE & CORBA**        | Modular and streamlined JDK                              |
+| **Launch Single-File Source Code**    | Run `.java` files without compiling manually              |
 
 ---
 
