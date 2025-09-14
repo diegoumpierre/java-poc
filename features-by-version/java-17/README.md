@@ -29,7 +29,7 @@ Java 17 is the second LTS after Java 11 and includes many enhancements and final
 | Feature                                       | Description                                             |
 |-----------------------------------------------| ------------------------------------------------------- |
 | **.Sealed Classes**                           | Control which classes can extend or implement others    |
-| **Pattern Matching for `instanceof`**         | Simplifies type checks and casting                  |
+| **.Pattern Matching for `instanceof`**        | Simplifies type checks and casting                  |
 | **Switch Expressions (Preview)**              | Allows expressions with switch statements               |
 | **Text Blocks**                               | Multi-line string literals                              |
 | **Records**                                   | Immutable data carriers with minimal syntax             |
