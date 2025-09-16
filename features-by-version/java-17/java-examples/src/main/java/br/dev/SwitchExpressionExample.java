@@ -5,7 +5,7 @@ public class SwitchExpressionExample {
         System.out.println(dayType(DayOfWeek.MONDAY));
         System.out.println(dayType(DayOfWeek.SATURDAY));
         System.out.println(dayType(DayOfWeek.SUNDAY));
-        System.out.println(dayType(null));
+
     }
 
     enum DayOfWeek {
@@ -17,7 +17,7 @@ public class SwitchExpressionExample {
         return switch (day) {
             case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "Weekday";
             case SATURDAY, SUNDAY -> "Weekend";
-            case null -> "Unknown";
+
         };
     }
 }
