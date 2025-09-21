@@ -64,3 +64,35 @@ Java 21 is a powerful LTS release with many finalized language features and a ma
 | **Scoped Values**                                | Immutable values tied to virtual thread scopes           | Replace ThreadLocal in virtual threads                         | ❌ No          |
 | **Unnamed Classes and Instance Main Methods**    | Simplify writing small programs                          | Create programs without class names or main boilerplate        | ❌ No          |
 | **Foreign Function & Memory API**                | Stable access to native code and memory                  | Call C libraries using `Linker` and `MemorySegment`            | ✅ Yes         |
+
+---
+
+## 🧑‍💻 Pattern Matching for switch Example
+
+See [`PatternMatchingForSwitch.java`](java-examples/src/main/java/br/dev/PatternMatchingForSwitch.java) for a real-world example using your `Post` and `User` classes:
+
+```java
+public static String describe(Object obj) {
+    return switch (obj) {
+        case Post p when p.isPublished() -> "Published Post: '" + p.getTitle() + "'";
+        case Post p -> "Draft Post: '" + p.getTitle() + "'";
+        case User u when !u.getPosts().isEmpty() -> "User: " + u.getName() + " with " + u.getPosts().size() + " posts";
+        case User u -> "User: " + u.getName() + " with no posts";
+        default -> "Unknown object";
+    };
+}
+```
+
+**Demo output:**
+```
+User: John Doe with 3 posts
+  - Published Post: 'First Post'
+  - Draft Post: 'Second Post'
+  - Published Post: 'Third Post'
+User: Jane Doe with 2 posts
+  - Draft Post: 'Jane's First Post'
+  - Published Post: 'Jane's Second Post'
+Unknown object
+```
+
+This demonstrates type and guard patterns in a switch, leveraging Java 21's pattern matching capabilities.
