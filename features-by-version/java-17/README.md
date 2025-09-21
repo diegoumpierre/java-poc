@@ -34,8 +34,8 @@ Java 17 is the second LTS after Java 11 and includes many enhancements and final
 | **.Text Blocks**                               | Multi-line string literals                              |
 | **.Records**                                   | Immutable data carriers with minimal syntax             |
 | **.Foreign Function & Memory API (Incubator)** | Interact with native code                  |
-| **New macOS Rendering Pipeline**               | Enhanced performance on Apple systems                   |
-| **Deprecations and Removals**                  | Deprecated Applet API, removed experimental features    |
+| **.New macOS Rendering Pipeline**              | Enhanced performance on Apple systems                   |
+| **.Deprecations and Removals**                 | Deprecated Applet API, removed experimental features    |
 
 ---
 
@@ -53,13 +53,13 @@ Java 17 is the second LTS after Java 11 and includes many enhancements and final
 
 ## 📚 Full Feature Table with Example Ideas
 
-| Feature                             | Description                                              | Example Ideas (Best Related)                                  | Major Feature? |
-|-------------------------------------|----------------------------------------------------------|----------------------------------------------------------------|----------------|
-| **Sealed Classes**                  | Restrict which classes can extend a type                 | Create sealed hierarchies like `sealed interface Shape`        | ✅ Yes         |
-| **Pattern Matching for instanceof** | Simplify type checks and casting                         | Use `if (obj instanceof String s)`                             | ✅ Yes         |
-| **Switch Expressions (Preview)**    | Use switch as expression with return value               | `switch (value) -> case 1 -> "one"`                            | ✅ Yes         |
-| **Text Blocks**                     | Multi-line string literals                               | Format JSON/XML easily in strings                              | ✅ Yes         |
-| **Records**                         | Immutable data carriers with minimal syntax              | Replace DTOs with `record User(String name, int age)`          | ✅ Yes         |
-| **Foreign Function & Memory API**   | Access native code and memory safely                     | Call C functions from Java                                     | ✅ Yes         |
-| **New macOS Rendering Pipeline**    | Improved graphics performance                            | UI rendering improvements (e.g., JavaFX)                       | ❌ No          |
-| **Deprecations and Removals**       | Remove legacy/unused APIs                                | Removed Applet API                                             | ❌ No          |
+| Feature                              | Description                                              | Example Ideas (Best Related)                                  | Major Feature? |
+|--------------------------------------|----------------------------------------------------------|----------------------------------------------------------------|----------------|
+| **.Sealed Classes**                  | Restrict which classes can extend a type                 | Create sealed hierarchies like `sealed interface Shape`        | ✅ Yes         |
+| **.Pattern Matching for instanceof** | Simplify type checks and casting                         | Use `if (obj instanceof String s)`                             | ✅ Yes         |
+| **.Switch Expressions (Preview)**    | Use switch as expression with return value               | `switch (value) -> case 1 -> "one"`                            | ✅ Yes         |
+| **.Text Blocks**                     | Multi-line string literals                               | Format JSON/XML easily in strings                              | ✅ Yes         |
+| **.Records**                         | Immutable data carriers with minimal syntax              | Replace DTOs with `record User(String name, int age)`          | ✅ Yes         |
+| **.Foreign Function & Memory API**   | Access native code and memory safely                     | Call C functions from Java                                     | ✅ Yes         |
+| **.New macOS Rendering Pipeline**    | Improved graphics performance                            | UI rendering improvements (e.g., JavaFX)                       | ❌ No          |
+| **.Deprecations and Removals**       | Remove legacy/unused APIs                                | Removed Applet API                                             | ❌ No          |
