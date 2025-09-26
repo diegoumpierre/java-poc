@@ -60,7 +60,7 @@ Java 21 is a powerful LTS release with many finalized language features and a ma
 | **.Record Patterns**                          | Deconstruct record objects                               | `case User(String name, int age)` in switch                    | ✅ Yes         |
 | **String Templates (Preview)**                | Embed expressions in strings                             | `STR."Hello \{name}!"`                                         | ✅ Yes         |
 | **.Sequenced Collections**                    | New interfaces with defined element order                | Use `SequencedSet`, `SequencedMap`                             | ✅ Yes         |
-| **Virtual Threads**                           | Lightweight threads for massive concurrency              | Replace thread pools with `Executors.newVirtualThreadPerTaskExecutor()` | ✅ Yes  |
+| **.Virtual Threads**                          | Lightweight threads for massive concurrency              | Replace thread pools with `Executors.newVirtualThreadPerTaskExecutor()` | ✅ Yes  |
 | **Scoped Values**                             | Immutable values tied to virtual thread scopes           | Replace ThreadLocal in virtual threads                         | ❌ No          |
 | **Unnamed Classes and Instance Main Methods** | Simplify writing small programs                          | Create programs without class names or main boilerplate        | ❌ No          |
 | **Foreign Function & Memory API**             | Stable access to native code and memory                  | Call C libraries using `Linker` and `MemorySegment`            | ✅ Yes         |
