@@ -1,0 +1,26 @@
+meta {
+  name: /users/me
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8005/users/me
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaWVnb0B1bXBpZXJyZS5jb20uYnIiLCJpYXQiOjE3NTkwMjM2MzgsImV4cCI6MTc1OTAyNzIzOH0.fnLFGv79_2o5F6lXrzDChgofAinS-fYCiIpP6_QoWXI
+}
+
+body:json {
+  {
+    "email": "diego@umpierre.com.br",
+    "password":"1234"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
