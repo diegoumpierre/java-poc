@@ -26,16 +26,16 @@ Java 25 continues the rapid evolution of the platform, introducing new language 
 
 ## 🧩 Major Features
 
-| Feature                                | Description                                              |
-|----------------------------------------| -------------------------------------------------------- |
-| **.Pattern Matching for Collections**  | Match and destructure collections in switch/case         |
-| *.*Value Objects (Preview)**           | Immutable, identity-less objects for performance         |
-| **.String Templates (Stable)**         | Embedded expressions in string literals                  |
-| **.Universal Generics**                | Enhanced generics for primitives and value types         |
-| **Structured Concurrency Enhancements** | Improved APIs for concurrent task management             |
-| **Foreign Function & Memory API v2**   | Expanded native interop and memory safety                |
-| **Scoped Threads**                     | Fine-grained thread scoping for concurrency              |
-| **JEP: Data Classes**                  | Concise syntax for data-centric classes                  |
+| Feature                                  | Description                                              |
+|------------------------------------------| -------------------------------------------------------- |
+| **.Pattern Matching for Collections**    | Match and destructure collections in switch/case         |
+| *.*Value Objects (Preview)**             | Immutable, identity-less objects for performance         |
+| **.String Templates (Stable)**           | Embedded expressions in string literals                  |
+| **.Universal Generics**                  | Enhanced generics for primitives and value types         |
+| **.Structured Concurrency Enhancements** | Improved APIs for concurrent task management             |
+| **.Foreign Function & Memory API v2**    | Expanded native interop and memory safety                |
+| **Scoped Threads**                       | Fine-grained thread scoping for concurrency              |
+| **JEP: Data Classes**                    | Concise syntax for data-centric classes                  |
 
 ---
 

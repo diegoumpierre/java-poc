@@ -1,4 +1,4 @@
-package br.dev.concurrent;
+package br.dev;
 
 import java.util.concurrent.StructuredTaskScope;
 import br.dev.domain.User;
