@@ -8,11 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 
 @RequestMapping("/users")
 @RestController
+@Tag(name = "User", description = "Endpoints for user information")
 public class UserController {
     private final UserService userService;
 
@@ -21,6 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
+    @Operation(summary = "Get authenticated user", description = "Returns the currently authenticated user")
     public ResponseEntity<User> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -30,6 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/")
+    @Operation(summary = "Get all users", description = "Returns a list of all users")
     public ResponseEntity<List<User>> allUsers() {
         List <User> users = userService.allUsers();
 
