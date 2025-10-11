@@ -7,6 +7,8 @@ public class RegisterUserDto {
 
     private String fullName;
 
+    private String tenantId;
+
     // getters and setters here...
 
     public String getEmail() {
@@ -32,5 +34,12 @@ public class RegisterUserDto {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-}
 
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+}

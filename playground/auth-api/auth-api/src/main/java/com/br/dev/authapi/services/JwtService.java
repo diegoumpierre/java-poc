@@ -40,6 +40,16 @@ public class JwtService {
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
+    public String generateTokenWithTenant(UserDetails userDetails, String tenantId) {
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("tenantId", tenantId);
+        return generateToken(extraClaims, userDetails);
+    }
+
+    public String extractTenantId(String token) {
+        return extractClaim(token, claims -> claims.get("tenantId", String.class));
+    }
+
     public long getExpirationTime() {
         return jwtExpiration;
     }

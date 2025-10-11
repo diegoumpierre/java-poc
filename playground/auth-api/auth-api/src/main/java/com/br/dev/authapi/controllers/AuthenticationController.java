@@ -30,6 +30,7 @@ public class AuthenticationController {
     @Operation(summary = "Register a new user", description = "Creates a new user account")
     public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
         User registeredUser = authenticationService.signup(registerUserDto);
+        // Optionally associate tenantId with user here if needed
         return ResponseEntity.ok(registeredUser);
     }
 
@@ -37,7 +38,7 @@ public class AuthenticationController {
     @Operation(summary = "Authenticate user", description = "Authenticates user and returns JWT token")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
-        String jwtToken = jwtService.generateToken(authenticatedUser);
+        String jwtToken = jwtService.generateTokenWithTenant(authenticatedUser, loginUserDto.getTenantId());
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setToken(jwtToken);
         loginResponse.setExpiresIn(jwtService.getExpirationTime());
