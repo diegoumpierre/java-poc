@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -39,6 +40,9 @@ public class User implements UserDetails {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
+
+    @ManyToOne
+    private Tenant tenant;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -118,5 +122,13 @@ public class User implements UserDetails {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 }
