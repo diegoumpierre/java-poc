@@ -34,7 +34,7 @@ Java 25 continues the rapid evolution of the platform, introducing new language 
 | **.Universal Generics**                  | Enhanced generics for primitives and value types         |
 | **.Structured Concurrency Enhancements** | Improved APIs for concurrent task management             |
 | **.Foreign Function & Memory API v2**    | Expanded native interop and memory safety                |
-| **Scoped Threads**                       | Fine-grained thread scoping for concurrency              |
+| **.Scoped Threads**                      | Fine-grained thread scoping for concurrency              |
 | **JEP: Data Classes**                    | Concise syntax for data-centric classes                  |
 
 ---
