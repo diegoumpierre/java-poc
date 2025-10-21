@@ -45,4 +45,15 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(loginResponse);
     }
+
+    @PostMapping("/reset-password")
+    @Operation(summary = "Reset user password", description = "Resets the password for a user by email")
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto) {
+        boolean success = authenticationService.resetPassword(resetPasswordDto.getEmail(), resetPasswordDto.getNewPassword());
+        if (success) {
+            return ResponseEntity.ok("Password reset successful");
+        } else {
+            return ResponseEntity.badRequest().body("User not found");
+        }
+    }
 }
