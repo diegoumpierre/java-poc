@@ -1,0 +1,431 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+  # Limit request sizes (WebFlux/Netty)
+  codec:
+    max-in-memory-size: 10MB
+
+  # Redis Configuration
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 5000ms
+      connect-timeout: 5000ms
+
+# Gateway Routes Configuration
+# IMPORTANT: Order matters! More specific routes MUST come before general ones.
+# The first matching route wins (LinkedHashMap + findFirst).
+gateway:
+  routes:
+    # User Service (MUST be before auth-service: /api/profile/settings/** must match before /api/profile/**)
+    user-service:
+      url: ${USER_SERVICE_URL:http://localhost:8101}
+      paths:
+        - /api/users/**
+        - /api/roles/**
+        - /api/permissions/**
+        - /api/profile/settings/**
+
+    # Auth Service
+    auth-service:
+      url: ${AUTH_SERVICE_URL:http://localhost:8091}
+      paths:
+        - /api/auth/**
+        - /api/profile/**
+        - /api/system/**
+        - /api/settings/**
+        - /api/onboarding/**
+        - /api/invites/**
+        - /api/access-requests/**
+      public-paths:
+        - /api/auth/login
+        - /api/auth/register
+        - /api/auth/forgot-password
+        - /api/auth/verify-code
+        - /api/auth/reset-password
+        - /api/auth/verify-2fa
+        - /api/profile/avatar/view
+        - /api/system/**
+        - /api/onboarding/**
+        - /api/invites/**
+        - /api/access-requests/**
+      rate-limited-paths:
+        /api/auth/login: 5
+        /api/auth/register: 3
+        /api/auth/forgot-password: 2
+        /api/auth/verify-code: 5
+        /api/auth/reset-password: 2
+        /api/auth/verify-2fa: 5
+
+    # Tenant Hierarchy (MUST be before tenant-service for specific matching)
+    tenant-hierarchy:
+      url: ${TENANT_SERVICE_URL:http://localhost:8094}
+      paths:
+        - /api/tenants/hierarchy/**
+      required-features:
+        - RESELLER_MODULE
+
+    # Tenant Service (general routes)
+    tenant-service:
+      url: ${TENANT_SERVICE_URL:http://localhost:8094}
+      paths:
+        - /api/tenants/**
+        - /api/menus/**
+      public-paths:
+        - /api/tenants/actuator/health
+
+    # Stripe Webhook (MUST be before billing-service - Stripe sends webhooks without auth)
+    billing-webhooks:
+      url: ${BILLING_SERVICE_URL:http://localhost:8087}
+      paths:
+        - /api/webhooks/stripe
+      public-paths:
+        - /api/webhooks/stripe
+
+    # EFI Webhook (MUST be before billing-service - EFI sends webhooks without auth)
+    billing-efi-webhooks:
+      url: ${BILLING_SERVICE_URL:http://localhost:8087}
+      paths:
+        - /api/webhooks/efi/**
+      public-paths:
+        - /api/webhooks/efi/**
+
+    # Billing Service
+    billing-service:
+      url: ${BILLING_SERVICE_URL:http://localhost:8087}
+      paths:
+        - /api/billing/**
+      public-paths:
+        - /api/billing/actuator/health
+        - /api/billing/public/**
+
+    # Email routes (served by notification-service, feature-gated)
+    email-service:
+      url: ${NOTIFICATION_SERVICE_URL:http://localhost:8095}
+      paths:
+        - /api/email/**
+      required-features:
+        - EMAIL_MODULE
+
+    # Notification Service
+    notification-service:
+      url: ${NOTIFICATION_SERVICE_URL:http://localhost:8095}
+      paths:
+        - /api/notifications/**
+        - /api/notification/**
+        - /api/mail/**
+        - /api/calendar/**
+      public-paths:
+        - /api/notifications/actuator/health
+
+    # Storage Service
+    storage-service:
+      url: ${STORAGE_SERVICE_URL:http://localhost:8086}
+      paths:
+        - /api/files/**
+        - /api/storage/**
+      public-paths:
+        - /api/storage/actuator/health
+
+    # Kanban Service
+    kanban-service:
+      url: ${KANBAN_SERVICE_URL:http://localhost:8081}
+      paths:
+        - /api/kanban/**
+        - /api/boards/**
+        - /api/tasks/**
+      public-paths:
+        - /api/kanban/actuator/health
+      required-features:
+        - KANBAN_MODULE
+
+    # Codegen Service (strip-prefix only applies to /api/codegen/*, not /api/tables or /api/columns)
+    codegen-service:
+      url: ${CODEGEN_SERVICE_URL:http://localhost:8083}
+      paths:
+        - /api/codegen/**
+        - /api/tables/**
+        - /api/columns/**
+      public-paths:
+        - /api/codegen/actuator/health
+      strip-prefix: /api/codegen
+
+    # Help Desk Service
+    helpdesk-service:
+      url: ${HELPDESK_SERVICE_URL:http://localhost:8089}
+      paths:
+        - /api/helpdesk/**
+        - /api/portal/**
+      public-paths:
+        - /api/helpdesk/actuator/health
+        - /api/portal/**
+      required-features:
+        - HELPDESK_MODULE
+
+    # Finance Service
+    finance-service:
+      url: ${FINANCE_SERVICE_URL:http://localhost:8088}
+      paths:
+        - /api/finance/**
+      public-paths:
+        - /api/finance/actuator/health
+      strip-prefix: /api/finance
+      required-features:
+        - FINANCE_MODULE
+
+    # BPF Service
+    bpf-service:
+      url: ${BPF_SERVICE_URL:http://localhost:8092}
+      paths:
+        - /api/bpf/**
+      public-paths:
+        - /api/bpf/actuator/health
+      strip-prefix: /api/bpf
+      required-features:
+        - BPF_MODULE
+
+    # RH Service
+    rh-service:
+      url: ${RH_SERVICE_URL:http://localhost:8093}
+      paths:
+        - /api/rh/**
+      public-paths:
+        - /api/rh/actuator/health
+      strip-prefix: /api/rh
+      required-features:
+        - RH_MODULE
+
+    # Pericia Service
+    pericia-service:
+      url: ${PERICIA_SERVICE_URL:http://localhost:8090}
+      paths:
+        - /api/pericia/**
+      public-paths:
+        - /api/pericia/actuator/health
+      strip-prefix: /api/pericia
+      required-features:
+        - PERICIA_MODULE
+
+    # LGPD Service
+    lgpd-service:
+      url: ${LGPD_SERVICE_URL:http://localhost:8099}
+      paths:
+        - /api/lgpd/**
+      public-paths:
+        - /api/lgpd/actuator/health
+      required-features:
+        - LGPD_MODULE
+
+    # Chat LiveChat Widget (public - no auth, no feature gate)
+    chat-livechat-widget:
+      url: ${CHAT_SERVICE_URL:http://localhost:8096}
+      paths:
+        - /api/chat/livechat/widget/**
+      public-paths:
+        - /api/chat/livechat/widget/**
+
+    # Chat Service
+    chat-service:
+      url: ${CHAT_SERVICE_URL:http://localhost:8096}
+      paths:
+        - /api/chat/**
+      public-paths:
+        - /api/chat/actuator/health
+      required-features:
+        - CHAT_MODULE
+
+    # Chat Service WebSocket
+    chat-service-ws:
+      url: ${CHAT_SERVICE_WS_URL:ws://localhost:8096}
+      paths:
+        - /ws/chat/**
+      public-paths:
+        - /ws/chat/**
+
+    # Platform Catalog (served by ecommerce-service, no feature gate - global)
+    catalog-service:
+      url: ${ECOMMERCE_SERVICE_URL:http://localhost:8105}
+      paths:
+        - /api/catalog/**
+      public-paths:
+        - /api/catalog/public/**
+
+    # Ecommerce Service
+    ecommerce-service:
+      url: ${ECOMMERCE_SERVICE_URL:http://localhost:8105}
+      paths:
+        - /api/ecommerce/**
+      public-paths:
+        - /api/ecommerce/actuator/health
+        - /api/ecommerce/webhook/**
+      required-features:
+        - ECOMMERCE_CATALOG
+
+    # CRM Service
+    crm-service:
+      url: ${CRM_SERVICE_URL:http://localhost:8107}
+      paths:
+        - /api/crm/**
+      public-paths:
+        - /api/crm/actuator/health
+      required-features:
+        - CRM_MODULE
+
+    # OS Service (Service Orders)
+    os-service:
+      url: ${OS_SERVICE_URL:http://localhost:8109}
+      paths:
+        - /api/os/**
+      public-paths:
+        - /api/os/actuator/health
+      required-features:
+        - OS_MODULE
+
+    # Agenda Service (public booking)
+    agenda-booking-public:
+      url: ${AGENDA_SERVICE_URL:http://localhost:8106}
+      paths:
+        - /api/agenda/booking/**
+      public-paths:
+        - /api/agenda/booking/**
+
+    # Agenda Service
+    agenda-service:
+      url: ${AGENDA_SERVICE_URL:http://localhost:8106}
+      paths:
+        - /api/agenda/**
+      public-paths:
+        - /api/agenda/actuator/health
+      required-features:
+        - AGENDA_MODULE
+
+    # CMS Service (public content - MUST be before cms-service)
+    cms-public:
+      url: ${CMS_SERVICE_URL:http://localhost:8097}
+      paths:
+        - /api/cms/public/**
+      public-paths:
+        - /api/cms/public/**
+
+    # CMS Service
+    cms-service:
+      url: ${CMS_SERVICE_URL:http://localhost:8097}
+      paths:
+        - /api/cms/**
+      public-paths:
+        - /api/cms/actuator/health
+      required-features:
+        - CMS_MODULE
+
+    # Simulado Service
+    simulado-service:
+      url: ${SIMULADO_SERVICE_URL:http://localhost:8098}
+      paths:
+        - /api/simulado/**
+      public-paths:
+        - /api/simulado/actuator/health
+      required-features:
+        - SIMULADO_MODULE
+
+    # Lar Service
+    lar-service:
+      url: ${LAR_SERVICE_URL:http://localhost:8100}
+      paths:
+        - /api/lar/**
+      public-paths:
+        - /api/lar/actuator/health
+      required-features:
+        - LAR_MODULE
+
+    # WhatsApp Service
+    whatsapp-service:
+      url: ${WHATSAPP_SERVICE_URL:http://localhost:8104}
+      paths:
+        - /api/whatsapp/**
+      public-paths:
+        - /api/whatsapp/actuator/health
+        - /api/whatsapp/webhook/**
+      required-features:
+        - WHATSAPP_MODULE
+
+    # Signature Service
+    signature-service:
+      url: ${SIGNATURE_SERVICE_URL:http://localhost:8102}
+      paths:
+        - /api/signature/**
+      public-paths:
+        - /api/signature/actuator/health
+      required-features:
+        - SIGNATURE_MODULE
+
+# Entitlement Enforcement Configuration
+entitlement:
+  enabled: true
+  tenant-url: ${TENANT_SERVICE_URL:http://localhost:8094}
+  cache-ttl-minutes: 5
+
+# Permission Enrichment Configuration
+permission:
+  auth-url: ${AUTH_SERVICE_URL:http://localhost:8091}
+  cache-ttl-minutes: 5
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:change-this-jwt-secret-key-in-production}
+  secret-old: ${JWT_SECRET_OLD:}
+  expiration: 86400000
+
+# Rate Limiter Configuration
+rate-limiter:
+  default:
+    requests-per-second: 10
+    burst-capacity: 20
+  auth:
+    requests-per-second: 5
+    burst-capacity: 10
+
+# Circuit Breaker Configuration (per-service, via Resilience4jConfig)
+circuit-breaker:
+  failure-rate-threshold: 50
+  wait-duration-in-open-state: 30
+  sliding-window-size: 10
+  permitted-calls-in-half-open: 3
+
+# CORS Configuration
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3001,http://localhost:4173}
+  allowed-methods: GET,POST,PUT,DELETE,PATCH,OPTIONS
+  allowed-headers: "*"
+  exposed-headers: Authorization,X-User-Id,X-User-Email,X-User-Role,Content-Disposition,X-Correlation-ID
+  allow-credentials: true
+  max-age: 3600
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+    jmx:
+      exposure:
+        exclude: "*"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.poc.gateway: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{correlationId:-}] %-5level %logger{36} - %msg%n"
