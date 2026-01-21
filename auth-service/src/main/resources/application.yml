@@ -1,0 +1,235 @@
+server:
+  port: 8091
+  # Security: Limit request sizes to prevent DoS attacks
+  tomcat:
+    max-http-form-post-size: 2MB
+    max-swallow-size: 2MB
+  error:
+    include-stacktrace: never  # Don't expose stack traces
+
+spring:
+  application:
+    name: auth-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+  main:
+    allow-bean-definition-overriding: true
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 10000
+      circuitbreaker:
+        enabled: true
+
+  # Security: Limit file upload sizes
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+      enabled: true
+
+  # Database Configuration - Use environment variables or application-local.yml
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/101_softwares?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: ${DB_USER:101_user}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # Hikari Connection Pool - Security & Performance
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000      # 30 seconds
+      idle-timeout: 120000           # 2 minutes
+      max-lifetime: 180000           # 3 minutes - menor que wait_timeout do MySQL
+      keepalive-time: 30000          # 30 seconds - mantém conexões vivas
+      leak-detection-threshold: 60000 # 1 minute - detect connection leaks
+      validation-timeout: 5000       # 5 seconds
+      connection-test-query: SELECT 1
+
+  # Redis Configuration for caching
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
+  # Liquibase Configuration
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  # JDBC Configuration
+  jdbc:
+    template:
+      query-timeout: 30
+
+  # Kafka Configuration for event publishing and consuming
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:127.0.0.1:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+    consumer:
+      group-id: auth-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+# Circuit Breaker Configuration (Feign clients)
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 3
+    instances:
+      user-service:
+        base-config: default
+      tenant-service:
+        base-config: default
+      storage-service:
+        base-config: default
+  retry:
+    configs:
+      default:
+        maxAttempts: 3
+        waitDuration: 500ms
+        retryExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+          - feign.FeignException.ServiceUnavailable
+          - feign.FeignException.InternalServerError
+    instances:
+      tenant-service:
+        base-config: default
+      user-service:
+        base-config: default
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 15s
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:change-this-jwt-secret-change-in-production}
+  secret-old: ${JWT_SECRET_OLD:}  # For key rotation - old secret for validation only
+  expiration-ms: 86400000  # 24 hours in milliseconds
+  refresh-expiration-ms: 604800000  # 7 days in milliseconds
+
+# App Configuration
+app:
+  security:
+    enabled: false  # Gateway handles authentication
+    cookie:
+      secure: ${COOKIE_SECURE:false}  # Set to true in production (HTTPS required)
+      max-age: ${COOKIE_MAX_AGE:604800}  # 7 days in seconds
+    rate-limit:
+      # Rate limiting to prevent brute force attacks
+      enabled: ${RATE_LIMIT_ENABLED:true}
+      capacity: ${RATE_LIMIT_CAPACITY:5}  # Maximum 5 requests
+      refill-tokens: ${RATE_LIMIT_REFILL_TOKENS:5}  # Refill 5 tokens
+      refill-duration-minutes: ${RATE_LIMIT_REFILL_DURATION:1}  # Every 1 minute
+    account-lockout:
+      # Account lockout after failed login attempts
+      max-attempts: ${ACCOUNT_LOCKOUT_MAX_ATTEMPTS:5}  # Lock after 5 failed attempts
+      lockout-duration-minutes: ${ACCOUNT_LOCKOUT_DURATION:15}  # Lock for 15 minutes
+    password:
+      # Password strength requirements
+      min-length: ${PASSWORD_MIN_LENGTH:8}  # Minimum 8 characters
+      require-uppercase: ${PASSWORD_REQUIRE_UPPERCASE:true}  # At least 1 uppercase
+      require-lowercase: ${PASSWORD_REQUIRE_LOWERCASE:true}  # At least 1 lowercase
+      require-digit: ${PASSWORD_REQUIRE_DIGIT:true}  # At least 1 digit
+      require-special: ${PASSWORD_REQUIRE_SPECIAL:true}  # At least 1 special char
+    two-factor:
+      # Two-factor authentication settings
+      code-expiration-minutes: ${TWO_FACTOR_CODE_EXPIRATION:5}  # Code valid for 5 minutes
+      max-attempts-per-hour: ${TWO_FACTOR_MAX_ATTEMPTS:5}  # Max 5 attempts per hour
+    session:
+      # Session management settings
+      max-concurrent: ${SESSION_MAX_CONCURRENT:5}  # Max 5 concurrent sessions
+      notify-new-device: ${SESSION_NOTIFY_NEW_DEVICE:true}  # Notify on new device login
+  storage:
+    enabled: ${STORAGE_ENABLED:true}
+    url: ${STORAGE_SERVICE_URL:http://localhost:8086}
+    bucket: auth-files
+    presignedUrlExpiryMinutes: ${STORAGE_PRESIGNED_URL_EXPIRY_MINUTES:30}  # Avatar URL validity (30 minutes)
+  notification:
+    enabled: ${NOTIFICATION_ENABLED:false}
+  user:
+    url: ${USER_SERVICE_URL:http://localhost:8101}
+  tenant:
+    url: ${TENANT_SERVICE_URL:http://localhost:8094}
+  kafka:
+    enabled: ${KAFKA_ENABLED:true}
+    topics:
+      user-events: user-events
+      membership-events: membership-events
+      entitlement-events: entitlement-events
+      notification-events: notification-events
+  cache:
+    enabled: ${CACHE_ENABLED:true}  # Enable Redis caching for presigned URLs
+    avatar:
+      enabled: ${AVATAR_CACHE_ENABLED:true}  # Enable avatar URL caching
+      ttl: ${AVATAR_CACHE_TTL:30}  # Cache TTL in minutes (30 min, same as URL validity)
+    tenant:
+      enabled: ${TENANT_CACHE_ENABLED:true}  # Enable tenant caching
+      ttl: ${TENANT_CACHE_TTL:15}  # Cache TTL in minutes (15 min - tenants rarely change)
+    membership:
+      enabled: ${MEMBERSHIP_CACHE_ENABLED:true}  # Enable membership caching
+      ttl: ${MEMBERSHIP_CACHE_TTL:5}  # Cache TTL in minutes (5 min default)
+    entitlement:
+      enabled: ${ENTITLEMENT_CACHE_ENABLED:true}  # Enable entitlement caching
+      ttl: ${ENTITLEMENT_CACHE_TTL:10}  # Cache TTL in minutes (10 min - entitlements change less frequently)
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+    jmx:
+      exposure:
+        exclude: "*"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+
+# CORS Configuration (disabled by default - Gateway handles CORS in production)
+# Enable in application-local.yml for direct service access during development
+cors:
+  enabled: ${CORS_ENABLED:false}
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3001,http://localhost:4173}
+  allowed-methods: GET,POST,PUT,DELETE,PATCH,OPTIONS
+  allowed-headers: "*"
+  exposed-headers: Authorization,Content-Disposition
+  allow-credentials: true
+  max-age: 3600
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.poc: DEBUG
+    org.springframework.jdbc: DEBUG
+    org.springframework.security: INFO
+  pattern:
+    # Include correlation ID and request ID for distributed tracing
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{correlationId:-}] [%X{requestId:-}] %-5level %logger{36} - %msg%n"
