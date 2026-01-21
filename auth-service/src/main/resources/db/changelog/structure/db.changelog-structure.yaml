@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/structure/001-users.sql
+  - include:
+      file: db/changelog/structure/003-tokens.sql
+  - include:
+      file: db/changelog/structure/004-two-factor.sql
+  - include:
+      file: db/changelog/structure/005-sessions.sql
+  - include:
+      file: db/changelog/structure/006-audit.sql
+  - include:
+      file: db/changelog/structure/007-remove-auth-users.sql
