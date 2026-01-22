@@ -1,0 +1,46 @@
+# Observability Configuration Profile
+# Activate with: --spring.profiles.active=observability
+
+spring:
+  application:
+    name: auth-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,env,loggers
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+        http.client.requests: true
+    tags:
+      application: ${spring.application.name}
+      environment: ${ENVIRONMENT:development}
+  tracing:
+    sampling:
+      probability: 1.0  # Sample 100% of traces in development
+  otlp:
+    tracing:
+      endpoint: ${OTLP_ENDPOINT:http://localhost:4318/v1/traces}
+      timeout: 10s
+      compression: gzip
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    root: INFO
+    com.poc: DEBUG
+
+# Loki logging (via loki4j appender configured in logback-spring.xml)
+# Use LOKI_URL env var to override (e.g., for remote: http://127.0.0.1:3100/loki/api/v1/push)
+loki:
+  enabled: true
+  url: ${LOKI_URL:http://localhost:3100/loki/api/v1/push}
