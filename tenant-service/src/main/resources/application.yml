@@ -1,0 +1,156 @@
+server:
+  port: 8094
+
+spring:
+  application:
+    name: tenant-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 10000
+      circuitbreaker:
+        enabled: true
+
+  datasource:
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3307}/101_tenant?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: ${DB_USER:101_user}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      max-lifetime: 180000
+      idle-timeout: 120000
+      connection-timeout: 30000
+      keepalive-time: 30000
+      validation-timeout: 5000
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+  # Kafka Configuration for event publishing and consuming
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:127.0.0.1:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+    consumer:
+      group-id: tenant-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+# Circuit Breaker Configuration (Feign clients)
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 3
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 15s
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+    jmx:
+      exposure:
+        exclude: "*"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+        db.query.duration: true
+    tags:
+      application: ${spring.application.name}
+      environment: development
+
+  # OpenTelemetry tracing for Tempo
+  tracing:
+    sampling:
+      probability: 1.0  # 100% sampling for demo (reduce in production)
+  otlp:
+    tracing:
+      endpoint: ${OTLP_ENDPOINT:http://localhost:4318/v1/traces}
+
+
+# Logging
+logging:
+  level:
+    com.poc: DEBUG
+    org.springframework.jdbc: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{correlationId:-}] [%X{requestId:-}] %-5level %logger{36} - %msg%n"
+
+# OpenAPI/Swagger
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+# Application Configuration
+app:
+  security:
+    enabled: false
+
+  # Redis cache
+  cache:
+    enabled: ${CACHE_ENABLED:true}
+    menu:
+      ttl: ${MENU_CACHE_TTL:1}
+
+  # Outbox pattern configuration
+  outbox:
+    poll-interval-ms: ${OUTBOX_POLL_INTERVAL:5000}
+
+  # Kafka events
+  kafka:
+    enabled: ${KAFKA_ENABLED:true}
+    topics:
+      entitlement-events: entitlement-events
+      membership-events: membership-events
+      tenant-provisioning-events: tenant-provisioning-events
+      user-events: user-events
+      billing-events: billing-events
+      notification-events: notification-events
+
+
+# JWT Configuration (same secret across all services)
+jwt:
+  secret: ${JWT_SECRET:change-this-jwt-secret-key-in-production}
+
+# CORS
+cors:
+  enabled: true
+  allowed-origins: http://localhost:3000,http://localhost:3001
