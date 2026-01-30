@@ -1,0 +1,78 @@
+server:
+  port: 0  # Random port for tests
+
+spring:
+  application:
+    name: auth-service-test
+
+  main:
+    allow-bean-definition-overriding: true
+
+  # H2 In-memory database
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;NON_KEYWORDS=VALUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  # Disable Liquibase for tests
+  liquibase:
+    enabled: false
+
+  # Usa schema.sql para criar tabelas
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+  # Disable Redis for tests
+  data:
+    redis:
+      repositories:
+        enabled: false
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+# App Configuration
+app:
+  security:
+    enabled: false
+    cookie:
+      secure: false
+      max-age: 3600
+    cors:
+      allowed-origins: http://localhost:3000
+      allowed-methods: GET,POST,PUT,DELETE
+      allowed-headers: "*"
+      allow-credentials: true
+    rate-limit:
+      enabled: false
+
+  storage:
+    enabled: false
+    url: http://localhost:8084
+    bucket: auth-files
+
+  notification:
+    url: http://localhost:8086
+
+  cache:
+    enabled: false
+    avatar:
+      enabled: false
+
+# JWT Configuration
+jwt:
+  secret: change-this-jwt-secret-key-in-production
+  expiration-ms: 3600000
+  refresh-expiration-ms: 86400000
+
+# Logging Configuration - Simple for tests
+logging:
+  level:
+    root: WARN
+    com.poc: INFO
+    org.springframework: WARN
+    org.hibernate: WARN
