@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/structure/001-core.sql
+  - include:
+      file: db/changelog/structure/002-acc.sql
+  - include:
+      file: db/changelog/structure/003-menu.sql
+  - include:
+      file: db/changelog/structure/004-mtr.sql
+  - include:
+      file: db/changelog/structure/005-menu-items.sql
+  - include:
+      file: db/changelog/test/006-membership-schema.sql
