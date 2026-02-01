@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/data/001-seed-platform.sql
+  - include:
+      file: db/changelog/data/002-seed-menus.sql
+  - include:
+      file: db/changelog/data/003-ensure-platform-entitlements.sql
