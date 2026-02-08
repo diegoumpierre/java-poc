@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/structure/001-create-kanb-tables.sql
+  - include:
+      file: db/changelog/structure/002-add-gtd-tables.sql
+  - include:
+      file: db/changelog/structure/003-create-kanb-arq-projects.sql
+  - include:
+      file: db/changelog/structure/004-drop-kanb-arq-projects.sql
+  - include:
+      file: db/changelog/structure/005-create-engine-tables.sql
+  - include:
+      file: db/changelog/structure/006-create-kanb-acceptance-criteria.sql
