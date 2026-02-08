@@ -1,0 +1,151 @@
+server:
+  port: 8081
+  # Security: Limit request sizes to prevent DoS attacks
+  tomcat:
+    max-http-form-post-size: 2MB
+    max-swallow-size: 2MB
+  error:
+    include-stacktrace: never  # Don't expose stack traces
+
+spring:
+  application:
+    name: kanban-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+  main:
+    allow-bean-definition-overriding: true
+
+  # Security: Limit file upload sizes
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 15MB
+      enabled: true
+
+  # Database Configuration - 101_softwares
+  datasource:
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/101_softwares?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: ${DB_USER:101_user}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # Hikari Connection Pool - Security & Performance
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000      # 30 seconds
+      idle-timeout: 120000           # 2 minutes
+      max-lifetime: 180000           # 3 minutes - menor que wait_timeout do MySQL
+      keepalive-time: 30000          # 30 seconds - mantém conexões vivas
+      leak-detection-threshold: 60000 # 1 minute - detect connection leaks
+      validation-timeout: 5000       # 5 seconds
+      connection-test-query: SELECT 1
+
+  # Liquibase Configuration
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  # JDBC Configuration
+  jdbc:
+    template:
+      query-timeout: 30
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:127.0.0.1:9092}
+    consumer:
+      group-id: kanban-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      ack-mode: manual
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 10000
+      circuitbreaker:
+        enabled: true
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 3
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 15s
+
+# App Configuration
+app:
+  security:
+    enabled: false  # Set to true to enable JWT authentication
+  storage:
+    enabled: ${STORAGE_ENABLED:true}
+    url: ${STORAGE_SERVICE_URL:http://localhost:8086}
+    bucket: kanban-files
+  kafka:
+    enabled: ${KAFKA_ENABLED:true}
+    topics:
+      billing-events: billing-events
+      pericia-events: pericia-events
+      bpf-events: bpf-events
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:change-this-jwt-secret-key-in-production}
+  secret-old: ${JWT_SECRET_OLD:}  # For key rotation - old secret for validation only
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}  # 24 hours
+
+# SpringDoc Configuration
+springdoc:
+  enable-kotlin: false
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+    jmx:
+      exposure:
+        exclude: "*"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+
+# CORS Configuration (disabled by default - Gateway handles CORS in production)
+# Enable in application-local.yml for direct service access during development
+cors:
+  enabled: ${CORS_ENABLED:false}
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3001,http://localhost:4173}
+  allowed-methods: GET,POST,PUT,DELETE,PATCH,OPTIONS
+  allowed-headers: "*"
+  exposed-headers: Authorization,Content-Disposition
+  allow-credentials: true
+  max-age: 3600
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.poc: DEBUG
+    org.springframework.jdbc: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{correlationId:-}] [%X{requestId:-}] %-5level %logger{36} - %msg%n"
