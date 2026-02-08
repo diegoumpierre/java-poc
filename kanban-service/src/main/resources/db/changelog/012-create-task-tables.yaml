@@ -1,0 +1,174 @@
+databaseChangeLog:
+  - changeSet:
+      id: 012-create-task-tables
+      author: claude-code
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: KANB_TASKS
+      changes:
+        # Create tasks table
+        - createTable:
+            tableName: KANB_TASKS
+            columns:
+              - column:
+                  name: ID
+                  type: CHAR(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: USER_ID
+                  type: CHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TENANT_ID
+                  type: CHAR(36)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: DESCRIPTION
+                  type: TEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: STATUS
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: COMPLETED
+                  type: TINYINT(1)
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: START_DATE
+                  type: DATE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: END_DATE
+                  type: DATE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: POSITION
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CREATED_AT
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: UPDATED_AT
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        # Create task assignees table
+        - createTable:
+            tableName: KANB_TASK_ASSIGNEES
+            columns:
+              - column:
+                  name: ID
+                  type: CHAR(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: TASK_ID
+                  type: CHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: USER_ID
+                  type: CHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: POSITION
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+
+        # Add foreign keys
+        - addForeignKeyConstraint:
+            baseTableName: KANB_TASKS
+            baseColumnNames: USER_ID
+            referencedTableName: KANB_USERS
+            referencedColumnNames: ID
+            constraintName: fk_tasks_user
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: KANB_TASK_ASSIGNEES
+            baseColumnNames: TASK_ID
+            referencedTableName: KANB_TASKS
+            referencedColumnNames: ID
+            constraintName: fk_task_assignees_task
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: KANB_TASK_ASSIGNEES
+            baseColumnNames: USER_ID
+            referencedTableName: KANB_USERS
+            referencedColumnNames: ID
+            constraintName: fk_task_assignees_user
+            onDelete: CASCADE
+
+        # Add indexes
+        - createIndex:
+            indexName: idx_tasks_user_id
+            tableName: KANB_TASKS
+            columns:
+              - column:
+                  name: USER_ID
+
+        - createIndex:
+            indexName: idx_tasks_tenant_id
+            tableName: KANB_TASKS
+            columns:
+              - column:
+                  name: TENANT_ID
+
+        - createIndex:
+            indexName: idx_tasks_status
+            tableName: KANB_TASKS
+            columns:
+              - column:
+                  name: STATUS
+
+        - createIndex:
+            indexName: idx_task_assignees_task
+            tableName: KANB_TASK_ASSIGNEES
+            columns:
+              - column:
+                  name: TASK_ID
+
+        - createIndex:
+            indexName: idx_task_assignees_user
+            tableName: KANB_TASK_ASSIGNEES
+            columns:
+              - column:
+                  name: USER_ID
+
+        # Unique constraint to prevent duplicate assignee assignment
+        - addUniqueConstraint:
+            tableName: KANB_TASK_ASSIGNEES
+            columnNames: TASK_ID, USER_ID
+            constraintName: uk_task_assignee
