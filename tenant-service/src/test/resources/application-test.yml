@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-test.yaml
+    enabled: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+
+app:
+  security:
+    enabled: false
+  kafka:
+    enabled: false
+  cache:
+    enabled: false
+  user:
+    url: http://localhost:8101
+  billing:
+    url: http://localhost:8087
+
+jwt:
+  secret: change-this-jwt-secret-key-in-production
+
+logging:
+  level:
+    com.poc: DEBUG
+    org.springframework.jdbc: DEBUG
