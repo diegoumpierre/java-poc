@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: kanban-service-test
+
+  # In-memory H2 Database for tests
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;NON_KEYWORDS=VALUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # Disable Liquibase for tests
+  liquibase:
+    enabled: false
+
+  # Usa schema.sql para criar tabelas
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+  # Spring Data JDBC Configuration
+  data:
+    jdbc:
+      repositories:
+        enabled: true
+
+  # JPA/Hibernate for H2
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+# Disable external dependencies for tests
+app:
+  minio:
+    enabled: false
+  email:
+    enabled: false
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.poc: DEBUG
