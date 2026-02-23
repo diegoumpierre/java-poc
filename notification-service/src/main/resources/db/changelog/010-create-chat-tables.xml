@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- Chat User (local cache of users from auth-service) -->
+    <changeSet id="010-1-create-chat-user-table" author="claude">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="NOTF_CHAT_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="NOTF_CHAT_USER">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="EXTERNAL_USER_ID" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AVATAR_URL" type="VARCHAR(500)"/>
+            <column name="STATUS" type="VARCHAR(20)" defaultValue="OFFLINE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_SEEN_AT" type="TIMESTAMP"/>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="NOTF_CHAT_USER" indexName="IDX_CHAT_USER_EXTERNAL_ID">
+            <column name="EXTERNAL_USER_ID"/>
+        </createIndex>
+        <createIndex tableName="NOTF_CHAT_USER" indexName="IDX_CHAT_USER_TENANT">
+            <column name="TENANT_ID"/>
+        </createIndex>
+        <addUniqueConstraint tableName="NOTF_CHAT_USER"
+                             columnNames="EXTERNAL_USER_ID,TENANT_ID"
+                             constraintName="UK_CHAT_USER_EXT_TENANT"/>
+    </changeSet>
+
+    <!-- Chat Conversation (1:1 conversations between two users) -->
+    <changeSet id="010-2-create-chat-conversation-table" author="claude">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="NOTF_CHAT_CONVERSATION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="NOTF_CHAT_CONVERSATION">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARTICIPANT_ONE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARTICIPANT_TWO_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_MESSAGE_AT" type="TIMESTAMP"/>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="NOTF_CHAT_CONVERSATION"
+                                 baseColumnNames="PARTICIPANT_ONE_ID"
+                                 referencedTableName="NOTF_CHAT_USER"
+                                 referencedColumnNames="ID"
+                                 constraintName="FK_CONV_PARTICIPANT_ONE"/>
+        <addForeignKeyConstraint baseTableName="NOTF_CHAT_CONVERSATION"
+                                 baseColumnNames="PARTICIPANT_TWO_ID"
+                                 referencedTableName="NOTF_CHAT_USER"
+                                 referencedColumnNames="ID"
+                                 constraintName="FK_CONV_PARTICIPANT_TWO"/>
+
+        <createIndex tableName="NOTF_CHAT_CONVERSATION" indexName="IDX_CONV_TENANT">
+            <column name="TENANT_ID"/>
+        </createIndex>
+        <createIndex tableName="NOTF_CHAT_CONVERSATION" indexName="IDX_CONV_PARTICIPANT_ONE">
+            <column name="PARTICIPANT_ONE_ID"/>
+        </createIndex>
+        <createIndex tableName="NOTF_CHAT_CONVERSATION" indexName="IDX_CONV_PARTICIPANT_TWO">
+            <column name="PARTICIPANT_TWO_ID"/>
+        </createIndex>
+        <addUniqueConstraint tableName="NOTF_CHAT_CONVERSATION"
+                             columnNames="TENANT_ID,PARTICIPANT_ONE_ID,PARTICIPANT_TWO_ID"
+                             constraintName="UK_CONV_PARTICIPANTS"/>
+    </changeSet>
+
+    <!-- Chat Message -->
+    <changeSet id="010-3-create-chat-message-table" author="claude">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="NOTF_CHAT_MESSAGE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="NOTF_CHAT_MESSAGE">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONVERSATION_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SENDER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEXT" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="READ_AT" type="TIMESTAMP"/>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="NOTF_CHAT_MESSAGE"
+                                 baseColumnNames="CONVERSATION_ID"
+                                 referencedTableName="NOTF_CHAT_CONVERSATION"
+                                 referencedColumnNames="ID"
+                                 constraintName="FK_MSG_CONVERSATION"/>
+        <addForeignKeyConstraint baseTableName="NOTF_CHAT_MESSAGE"
+                                 baseColumnNames="SENDER_ID"
+                                 referencedTableName="NOTF_CHAT_USER"
+                                 referencedColumnNames="ID"
+                                 constraintName="FK_MSG_SENDER"/>
+
+        <createIndex tableName="NOTF_CHAT_MESSAGE" indexName="IDX_MSG_CONVERSATION">
+            <column name="CONVERSATION_ID"/>
+        </createIndex>
+        <createIndex tableName="NOTF_CHAT_MESSAGE" indexName="IDX_MSG_SENDER">
+            <column name="SENDER_ID"/>
+        </createIndex>
+        <createIndex tableName="NOTF_CHAT_MESSAGE" indexName="IDX_MSG_CREATED_AT">
+            <column name="CREATED_AT"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

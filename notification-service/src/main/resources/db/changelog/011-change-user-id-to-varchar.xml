@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- Change USER_ID from BIGINT to VARCHAR(36) to support UUIDs -->
+
+    <changeSet id="011-change-email-history-user-id-to-varchar" author="claude-code">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="NOTF_EMAIL_HISTORY"/>
+        </preConditions>
+        <modifyDataType tableName="NOTF_EMAIL_HISTORY" columnName="USER_ID" newDataType="VARCHAR(36)"/>
+    </changeSet>
+
+    <changeSet id="011-change-calendar-event-user-id-to-varchar" author="claude-code">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="NOTF_CALENDAR_EVENT"/>
+        </preConditions>
+        <modifyDataType tableName="NOTF_CALENDAR_EVENT" columnName="USER_ID" newDataType="VARCHAR(36)"/>
+    </changeSet>
+
+</databaseChangeLog>

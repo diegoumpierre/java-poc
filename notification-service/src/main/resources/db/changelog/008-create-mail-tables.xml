@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="008-create-mail-tables" author="claude-code">
+        <!-- Create NOTF_MAILS table for user inbox/sent messages -->
+        <createTable tableName="NOTF_MAILS">
+            <column name="ID" type="CHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USER_ID" type="CHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TENANT_ID" type="CHAR(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SENDER_NAME" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SENDER_EMAIL" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SENDER_IMAGE" type="VARCHAR(500)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="TO_NAME" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="TO_EMAIL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MESSAGE" type="TEXT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DATE" type="VARCHAR(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="IMPORTANT" type="TINYINT(1)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STARRED" type="TINYINT(1)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TRASH" type="TINYINT(1)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SPAM" type="TINYINT(1)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ARCHIVED" type="TINYINT(1)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SENT" type="TINYINT(1)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="READ_STATUS" type="TINYINT(1)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Indexes for performance -->
+        <createIndex indexName="idx_mails_user_id" tableName="NOTF_MAILS">
+            <column name="USER_ID"/>
+        </createIndex>
+
+        <createIndex indexName="idx_mails_tenant_id" tableName="NOTF_MAILS">
+            <column name="TENANT_ID"/>
+        </createIndex>
+
+        <createIndex indexName="idx_mails_sent" tableName="NOTF_MAILS">
+            <column name="SENT"/>
+        </createIndex>
+
+        <createIndex indexName="idx_mails_starred" tableName="NOTF_MAILS">
+            <column name="STARRED"/>
+        </createIndex>
+
+        <createIndex indexName="idx_mails_important" tableName="NOTF_MAILS">
+            <column name="IMPORTANT"/>
+        </createIndex>
+
+        <createIndex indexName="idx_mails_trash" tableName="NOTF_MAILS">
+            <column name="TRASH"/>
+        </createIndex>
+
+        <createIndex indexName="idx_mails_spam" tableName="NOTF_MAILS">
+            <column name="SPAM"/>
+        </createIndex>
+
+        <createIndex indexName="idx_mails_archived" tableName="NOTF_MAILS">
+            <column name="ARCHIVED"/>
+        </createIndex>
+
+        <createIndex indexName="idx_mails_created_at" tableName="NOTF_MAILS">
+            <column name="CREATED_AT"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

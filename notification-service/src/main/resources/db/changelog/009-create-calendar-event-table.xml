@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="009-create-calendar-event-table" author="claude-code">
+        <!-- Create NOTF_CALENDAR_EVENT table for user calendar events -->
+        <createTable tableName="NOTF_CALENDAR_EVENT">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="TEXT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="LOCATION" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="START_TIME" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_TIME" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ALL_DAY" type="TINYINT(1)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TAG" type="VARCHAR(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="BACKGROUND_COLOR" type="VARCHAR(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="BORDER_COLOR" type="VARCHAR(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="TEXT_COLOR" type="VARCHAR(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Indexes for performance -->
+        <createIndex indexName="idx_calendar_event_tenant_id" tableName="NOTF_CALENDAR_EVENT">
+            <column name="TENANT_ID"/>
+        </createIndex>
+
+        <createIndex indexName="idx_calendar_event_user_id" tableName="NOTF_CALENDAR_EVENT">
+            <column name="USER_ID"/>
+        </createIndex>
+
+        <createIndex indexName="idx_calendar_event_tenant_user" tableName="NOTF_CALENDAR_EVENT">
+            <column name="TENANT_ID"/>
+            <column name="USER_ID"/>
+        </createIndex>
+
+        <createIndex indexName="idx_calendar_event_start_time" tableName="NOTF_CALENDAR_EVENT">
+            <column name="START_TIME"/>
+        </createIndex>
+
+        <createIndex indexName="idx_calendar_event_tag" tableName="NOTF_CALENDAR_EVENT">
+            <column name="TAG"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
