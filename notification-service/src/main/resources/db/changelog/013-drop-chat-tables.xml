@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- Drop chat tables - chat functionality moved to chat-service -->
+
+    <!-- Drop NOTF_CHAT_MESSAGE first (has FK to NOTF_CHAT_CONVERSATION and NOTF_CHAT_USER) -->
+    <changeSet id="013-1-drop-chat-message-table" author="system">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="NOTF_CHAT_MESSAGE"/>
+        </preConditions>
+        <dropTable tableName="NOTF_CHAT_MESSAGE"/>
+    </changeSet>
+
+    <!-- Drop NOTF_CHAT_CONVERSATION (has FK to NOTF_CHAT_USER) -->
+    <changeSet id="013-2-drop-chat-conversation-table" author="system">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="NOTF_CHAT_CONVERSATION"/>
+        </preConditions>
+        <dropTable tableName="NOTF_CHAT_CONVERSATION"/>
+    </changeSet>
+
+    <!-- Drop NOTF_CHAT_USER (parent table, no FKs to other tables) -->
+    <changeSet id="013-3-drop-chat-user-table" author="system">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="NOTF_CHAT_USER"/>
+        </preConditions>
+        <dropTable tableName="NOTF_CHAT_USER"/>
+    </changeSet>
+
+</databaseChangeLog>

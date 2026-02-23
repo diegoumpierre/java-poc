@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="012-create-arq-events-table" author="my-platform">
+        <createTable tableName="NOTF_ARQ_EVENTS">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROJECT_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="IDX_NOTF_ARQ_EVENTS_TENANT_ID" tableName="NOTF_ARQ_EVENTS">
+            <column name="TENANT_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_NOTF_ARQ_EVENTS_TYPE" tableName="NOTF_ARQ_EVENTS">
+            <column name="TYPE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_NOTF_ARQ_EVENTS_DATE" tableName="NOTF_ARQ_EVENTS">
+            <column name="DATE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_NOTF_ARQ_EVENTS_TENANT_DATE" tableName="NOTF_ARQ_EVENTS">
+            <column name="TENANT_ID"/>
+            <column name="DATE"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
