@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- Drop ArquiGestao events table - migrated to os-service -->
+    <changeSet id="014-drop-arq-events-table" author="system">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="NOTF_ARQ_EVENTS"/>
+        </preConditions>
+        <dropTable tableName="NOTF_ARQ_EVENTS"/>
+    </changeSet>
+
+</databaseChangeLog>

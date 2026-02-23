@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- Create EMAIL_HISTORY table with UPPERCASE names -->
+    <include file="db/changelog/003-uppercase-schema-refactor.xml"/>
+
+    <!-- Add missing columns for existing databases -->
+    <include file="db/changelog/004-add-scheduled-at-column.xml"/>
+
+    <!-- Runs always to ensure table exists even after database resets -->
+    <include file="db/changelog/006-create-email-history-if-missing.xml"/>
+
+    <!-- Add NOTF_ prefix to all tables -->
+    <include file="db/changelog/007-add-notf-prefix-to-tables.xml"/>
+
+    <!-- Mail inbox/sent module -->
+    <include file="db/changelog/008-create-mail-tables.xml"/>
+
+    <!-- Calendar events module -->
+    <include file="db/changelog/009-create-calendar-event-table.xml"/>
+
+    <!-- Chat module -->
+    <include file="db/changelog/010-create-chat-tables.xml"/>
+
+    <!-- Change USER_ID from BIGINT to VARCHAR(36) to support UUIDs -->
+    <include file="db/changelog/011-change-user-id-to-varchar.xml"/>
+
+    <!-- ArquiGestao events module -->
+    <include file="db/changelog/012-create-arq-events-table.xml"/>
+
+    <!-- Drop chat tables (chat moved to chat-service) -->
+    <include file="db/changelog/013-drop-chat-tables.xml"/>
+
+    <!-- Drop ArquiGestao events table (migrated to os-service) -->
+    <include file="db/changelog/014-drop-arq-events-table.xml"/>
+
+    <!-- Unify notification + email service -->
+    <include file="db/changelog/015-unify-notification-email.xml"/>
+
+</databaseChangeLog>

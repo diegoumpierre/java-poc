@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- ====================================================================== -->
+    <!-- UNIFY NOTIFICATION + EMAIL SERVICE                                     -->
+    <!-- Adds email-service capabilities into notification-service              -->
+    <!-- ====================================================================== -->
+
+    <!-- 1. Create NOTF_TENANT_CONFIG -->
+    <changeSet id="015-01-create-tenant-config" author="system">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="NOTF_TENANT_CONFIG"/></not>
+        </preConditions>
+        <createTable tableName="NOTF_TENANT_CONFIG">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONFIG_TYPE" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SMTP_HOST" type="VARCHAR(255)"/>
+            <column name="SMTP_PORT" type="INT" defaultValueNumeric="587"/>
+            <column name="SMTP_USERNAME" type="VARCHAR(255)"/>
+            <column name="SMTP_PASSWORD" type="VARCHAR(500)"/>
+            <column name="SMTP_USE_TLS" type="TINYINT" defaultValueNumeric="1"/>
+            <column name="IMAP_HOST" type="VARCHAR(255)"/>
+            <column name="IMAP_PORT" type="INT" defaultValueNumeric="993"/>
+            <column name="IMAP_USERNAME" type="VARCHAR(255)"/>
+            <column name="IMAP_PASSWORD" type="VARCHAR(500)"/>
+            <column name="IMAP_USE_TLS" type="TINYINT" defaultValueNumeric="1"/>
+            <column name="IMAP_FOLDER" type="VARCHAR(100)" defaultValue="INBOX"/>
+            <column name="FROM_ADDRESS" type="VARCHAR(255)"/>
+            <column name="FROM_NAME" type="VARCHAR(255)"/>
+            <column name="REPLY_TO" type="VARCHAR(255)"/>
+            <column name="BASE_URL" type="VARCHAR(500)" defaultValue="http://localhost:3001"/>
+            <column name="POLL_INTERVAL_SECONDS" type="INT" defaultValueNumeric="30"/>
+            <column name="LAST_POLL_AT" type="TIMESTAMP"/>
+            <column name="MAX_EMAILS_PER_MINUTE" type="INT" defaultValueNumeric="10"/>
+            <column name="MAX_EMAILS_PER_HOUR" type="INT" defaultValueNumeric="100"/>
+            <column name="MAX_EMAILS_PER_DAY" type="INT" defaultValueNumeric="500"/>
+            <column name="COOLDOWN_SECONDS" type="INT" defaultValueNumeric="5"/>
+            <column name="ENABLED" type="TINYINT" defaultValueNumeric="0"/>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+        <addUniqueConstraint tableName="NOTF_TENANT_CONFIG"
+                             columnNames="TENANT_ID, CONFIG_TYPE"
+                             constraintName="UK_NOTF_TENANT_CONFIG"/>
+        <createIndex tableName="NOTF_TENANT_CONFIG" indexName="IDX_NOTF_TC_TENANT">
+            <column name="TENANT_ID"/>
+        </createIndex>
+    </changeSet>
+
+    <!-- 2. Evolve NOTF_EMAIL_HISTORY: add CONFIG_TYPE, CONTENT_*, CONVERSATION_ID, threading, provider -->
+    <changeSet id="015-02-evolve-email-history" author="system">
+        <preConditions onFail="MARK_RAN">
+            <not><columnExists tableName="NOTF_EMAIL_HISTORY" columnName="CONFIG_TYPE"/></not>
+        </preConditions>
+        <addColumn tableName="NOTF_EMAIL_HISTORY">
+            <column name="CONFIG_TYPE" type="VARCHAR(20)" defaultValue="NOTIFICATION">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONVERSATION_ID" type="BIGINT"/>
+            <column name="CONTENT_TEXT" type="TEXT"/>
+            <column name="CONTENT_HTML" type="TEXT"/>
+            <column name="IN_REPLY_TO" type="VARCHAR(500)"/>
+            <column name="REFERENCES_HEADER" type="TEXT"/>
+            <column name="PROVIDER_MESSAGE_ID" type="VARCHAR(500)"/>
+        </addColumn>
+        <createIndex tableName="NOTF_EMAIL_HISTORY" indexName="IDX_NOTF_EH_CONFIG_TYPE">
+            <column name="CONFIG_TYPE"/>
+        </createIndex>
+        <createIndex tableName="NOTF_EMAIL_HISTORY" indexName="IDX_NOTF_EH_CONVERSATION">
+            <column name="CONVERSATION_ID"/>
+        </createIndex>
+    </changeSet>
+
+    <!-- 3. Create NOTF_CONVERSATIONS -->
+    <changeSet id="015-03-create-conversations" author="system">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="NOTF_CONVERSATIONS"/></not>
+        </preConditions>
+        <createTable tableName="NOTF_CONVERSATIONS">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONTACT_EMAIL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONTACT_NAME" type="VARCHAR(255)"/>
+            <column name="SUBJECT" type="VARCHAR(500)"/>
+            <column name="THREAD_ID" type="VARCHAR(255)"/>
+            <column name="LAST_MESSAGE_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="LAST_MESSAGE_PREVIEW" type="VARCHAR(500)"/>
+            <column name="UNREAD_COUNT" type="INT" defaultValueNumeric="0"/>
+            <column name="STATUS" type="VARCHAR(20)" defaultValue="ACTIVE"/>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+        <addUniqueConstraint tableName="NOTF_CONVERSATIONS"
+                             columnNames="TENANT_ID, CONTACT_EMAIL, THREAD_ID"
+                             constraintName="UK_NOTF_CONV"/>
+        <createIndex tableName="NOTF_CONVERSATIONS" indexName="IDX_NOTF_CONV_TENANT">
+            <column name="TENANT_ID"/>
+        </createIndex>
+    </changeSet>
+
+    <!-- 4. Create NOTF_INBOUND_MESSAGES -->
+    <changeSet id="015-04-create-inbound-messages" author="system">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="NOTF_INBOUND_MESSAGES"/></not>
+        </preConditions>
+        <createTable tableName="NOTF_INBOUND_MESSAGES">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONVERSATION_ID" type="BIGINT"/>
+            <column name="FROM_EMAIL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FROM_NAME" type="VARCHAR(255)"/>
+            <column name="SUBJECT" type="VARCHAR(500)"/>
+            <column name="CONTENT_TEXT" type="TEXT"/>
+            <column name="CONTENT_HTML" type="TEXT"/>
+            <column name="PROVIDER_MESSAGE_ID" type="VARCHAR(500)"/>
+            <column name="IN_REPLY_TO" type="VARCHAR(500)"/>
+            <column name="REFERENCES_HEADER" type="TEXT"/>
+            <column name="HAS_ATTACHMENTS" type="TINYINT" defaultValueNumeric="0"/>
+            <column name="IS_READ" type="TINYINT" defaultValueNumeric="0"/>
+            <column name="RECEIVED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="NOTF_INBOUND_MESSAGES" baseColumnNames="CONVERSATION_ID"
+                                 referencedTableName="NOTF_CONVERSATIONS" referencedColumnNames="ID"
+                                 constraintName="FK_NOTF_INBOUND_CONV"/>
+        <createIndex tableName="NOTF_INBOUND_MESSAGES" indexName="IDX_NOTF_INBOUND_TENANT">
+            <column name="TENANT_ID"/>
+        </createIndex>
+        <createIndex tableName="NOTF_INBOUND_MESSAGES" indexName="IDX_NOTF_INBOUND_CONV">
+            <column name="CONVERSATION_ID"/>
+        </createIndex>
+    </changeSet>
+
+    <!-- 5. Create NOTF_RATE_LIMIT_TRACKER -->
+    <changeSet id="015-05-create-rate-limit-tracker" author="system">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="NOTF_RATE_LIMIT_TRACKER"/></not>
+        </preConditions>
+        <createTable tableName="NOTF_RATE_LIMIT_TRACKER">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONFIG_TYPE" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MINUTE_COUNT" type="INT" defaultValueNumeric="0"/>
+            <column name="MINUTE_WINDOW_START" type="TIMESTAMP"/>
+            <column name="HOUR_COUNT" type="INT" defaultValueNumeric="0"/>
+            <column name="HOUR_WINDOW_START" type="TIMESTAMP"/>
+            <column name="DAY_COUNT" type="INT" defaultValueNumeric="0"/>
+            <column name="DAY_WINDOW_START" type="TIMESTAMP"/>
+            <column name="IS_THROTTLED" type="TINYINT" defaultValueNumeric="0"/>
+            <column name="THROTTLED_UNTIL" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+        <addUniqueConstraint tableName="NOTF_RATE_LIMIT_TRACKER"
+                             columnNames="TENANT_ID, CONFIG_TYPE"
+                             constraintName="UK_NOTF_RATE_LIMIT"/>
+    </changeSet>
+
+</databaseChangeLog>
