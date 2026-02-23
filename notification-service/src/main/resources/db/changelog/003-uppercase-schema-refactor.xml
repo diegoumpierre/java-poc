@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- Create EMAIL_HISTORY table with UPPERCASE names (skip if exists) -->
+    <changeSet id="003-create-EMAIL-HISTORY-table" author="system">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="EMAIL_HISTORY"/>
+            </not>
+        </preConditions>
+        <createTable tableName="EMAIL_HISTORY">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="MESSAGE_ID" type="VARCHAR(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="USER_ID" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="RECIPIENT" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUBJECT" type="VARCHAR(500)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="TEMPLATE" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VARIABLES" type="CLOB">
+                <constraints nullable="true"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RETRY_COUNT" type="INT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ERROR_MESSAGE" type="TEXT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SCHEDULED_AT" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SENT_AT" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_AT" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="EMAIL_HISTORY" indexName="IDX_EMAIL_USER_ID">
+            <column name="USER_ID"/>
+        </createIndex>
+        <createIndex tableName="EMAIL_HISTORY" indexName="IDX_EMAIL_TENANT_ID">
+            <column name="TENANT_ID"/>
+        </createIndex>
+        <createIndex tableName="EMAIL_HISTORY" indexName="IDX_EMAIL_STATUS">
+            <column name="STATUS"/>
+        </createIndex>
+        <createIndex tableName="EMAIL_HISTORY" indexName="IDX_EMAIL_SCHEDULED">
+            <column name="SCHEDULED_AT"/>
+        </createIndex>
+        <createIndex tableName="EMAIL_HISTORY" indexName="IDX_EMAIL_MESSAGE_ID">
+            <column name="MESSAGE_ID"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
