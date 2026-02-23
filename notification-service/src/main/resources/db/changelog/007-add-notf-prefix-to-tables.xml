@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- Add NOTF_ prefix to all notification service tables -->
+
+    <changeSet id="007-rename-email-history-table" author="system">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="EMAIL_HISTORY"/>
+            <not>
+                <tableExists tableName="NOTF_EMAIL_HISTORY"/>
+            </not>
+        </preConditions>
+        <renameTable oldTableName="EMAIL_HISTORY" newTableName="NOTF_EMAIL_HISTORY"/>
+    </changeSet>
+
+</databaseChangeLog>

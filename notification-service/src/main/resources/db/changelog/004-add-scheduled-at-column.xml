@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!-- Add SCHEDULED_AT column if missing (for databases that had older migrations) -->
+    <changeSet id="004-add-scheduled-at-column" author="system">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="EMAIL_HISTORY" columnName="SCHEDULED_AT"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="EMAIL_HISTORY">
+            <column name="SCHEDULED_AT" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+        <createIndex tableName="EMAIL_HISTORY" indexName="IDX_EMAIL_SCHEDULED">
+            <column name="SCHEDULED_AT"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
