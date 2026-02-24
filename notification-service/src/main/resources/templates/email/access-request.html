@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Access Request</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #6366f1;
+        }
+        .content {
+            padding: 30px 0;
+        }
+        .button {
+            display: inline-block;
+            background-color: #6366f1;
+            color: white !important;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .button:hover {
+            background-color: #4f46e5;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid #eee;
+        }
+        .request-box {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #6366f1;
+        }
+        .request-info {
+            margin: 10px 0;
+        }
+        .request-label {
+            font-weight: bold;
+            color: #666;
+        }
+        .request-value {
+            color: #333;
+        }
+        .message-box {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border: 1px solid #e5e7eb;
+            font-style: italic;
+        }
+        .alert-box {
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 style="color: #6366f1; margin: 0;">Softwares101</h1>
+    </div>
+
+    <div class="content">
+        <h2>New Access Request</h2>
+
+        <p>Hello,</p>
+
+        <p>Someone has requested to join your team on <strong th:text="${tenantName}">Company Name</strong>.</p>
+
+        <div class="request-box">
+            <div class="request-info">
+                <span class="request-label">Name:</span>
+                <span class="request-value" th:text="${userName ?: 'Not provided'}">John Doe</span>
+            </div>
+            <div class="request-info">
+                <span class="request-label">Email:</span>
+                <span class="request-value" th:text="${userEmail}">user@example.com</span>
+            </div>
+            <div class="request-info">
+                <span class="request-label">Requested at:</span>
+                <span class="request-value" th:text="${#temporals.format(requestedAt, 'dd/MM/yyyy HH:mm')}">01/01/2026 12:00</span>
+            </div>
+            <div th:if="${message != null and !message.isEmpty()}" class="message-box">
+                <strong>Message from requester:</strong><br/>
+                <span th:text="${message}">I would like to join your team...</span>
+            </div>
+        </div>
+
+        <div class="alert-box">
+            <strong>Action Required:</strong> Please review this request and approve or reject it.
+        </div>
+
+        <p style="text-align: center;">
+            <a th:href="${reviewLink}" class="button">Review Request</a>
+        </p>
+
+        <p>You can also review this request by going to Settings &gt; Team &gt; Access Requests.</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Softwares101. All rights reserved.</p>
+        <p>This is an automated message, please do not reply.</p>
+    </div>
+</body>
+</html>

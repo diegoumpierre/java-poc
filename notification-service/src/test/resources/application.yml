@@ -1,0 +1,72 @@
+server:
+  port: 0  # Random port for tests
+
+spring:
+  application:
+    name: notification-service-test
+
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL;CASE_INSENSITIVE_IDENTIFIERS=TRUE;NON_KEYWORDS=VALUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  # Use schema.sql for tests (Liquibase doesn't run in @DataJdbcTest slice tests)
+  liquibase:
+    enabled: false
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+      group-id: test-notification-consumer
+    producer:
+      retries: 0
+
+  mail:
+    host: localhost
+    port: 25
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+
+jwt:
+  secret: change-this-jwt-secret-key-in-production
+
+app:
+  security:
+    enabled: false
+
+  notification:
+    enabled: false  # Disable actual email sending in tests
+    from-address: test@example.com
+    from-name: Test
+    base-url: http://localhost:3001
+
+  kafka:
+    topics:
+      email-queue: test-notification-email-queue
+    consumer:
+      group-id: test-notification-consumer
+
+  scheduler:
+    scheduled-rate: 60000
+    retry-rate: 300000
+
+  rate-limit:
+    max-per-window: 10
+    window-minutes: 60
+
+logging:
+  level:
+    com.poc.notification: DEBUG
+    org.springframework.jdbc: DEBUG

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatura Vencida</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #dc2626;
+        }
+        .content {
+            padding: 30px 0;
+        }
+        .highlight {
+            background: #fef2f2;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #dc2626;
+        }
+        .highlight-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #fecaca;
+        }
+        .highlight-item:last-child {
+            border-bottom: none;
+        }
+        .btn {
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+        .warning {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 style="color: #6366f1; margin: 0;">Softwares101</h1>
+    </div>
+    <div class="content">
+        <h2 class="warning">Fatura Vencida - Acao Necessaria</h2>
+
+        <p>Ola <span th:text="${tenantName}">Organizacao</span>,</p>
+
+        <p>Sua fatura esta vencida ha <strong th:text="${daysPastDue}">0</strong> dia(s). Efetue o pagamento o mais rapido possivel para evitar a suspensao da sua conta.</p>
+
+        <div class="highlight">
+            <div class="highlight-item">
+                <span><strong>Valor:</strong></span>
+                <span th:text="${amount}">R$ 0,00</span>
+            </div>
+            <div class="highlight-item">
+                <span><strong>Dias em atraso:</strong></span>
+                <span th:text="${daysPastDue}">0</span>
+            </div>
+        </div>
+
+        <p class="warning">Atencao: Contas com faturas vencidas podem ter seus servicos suspensos sem aviso previo.</p>
+
+        <p style="text-align: center;">
+            <a th:href="${paymentLink}" class="btn">Regularizar Agora</a>
+        </p>
+
+        <p>Se voce ja efetuou o pagamento, aguarde ate 48 horas para a confirmacao automatica ou entre em contato com nosso suporte.</p>
+    </div>
+    <div class="footer">
+        <p>Softwares101. Todos os direitos reservados.</p>
+        <p>Esta e uma mensagem automatica, por favor nao responda.</p>
+    </div>
+</body>
+</html>
