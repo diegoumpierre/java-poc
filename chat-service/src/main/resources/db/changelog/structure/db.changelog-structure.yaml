@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/structure/001-create-chat-tables.sql
+  - include:
+      file: db/changelog/structure/003-chat-presence-enhancements.sql
+  - include:
+      file: db/changelog/structure/004-chat-channels.sql
+  - include:
+      file: db/changelog/structure/007-chat-threads-reactions.sql
+  - include:
+      file: db/changelog/structure/008-chat-mentions-attachments.sql
+  - include:
+      file: db/changelog/structure/009-chat-search-notifications.sql
+  - include:
+      file: db/changelog/structure/010-livechat-tables.sql
+  - include:
+      file: db/changelog/structure/011-livechat-widget-source-service.sql
+  - include:
+      file: db/changelog/structure/012-livechat-omnichannel.sql
