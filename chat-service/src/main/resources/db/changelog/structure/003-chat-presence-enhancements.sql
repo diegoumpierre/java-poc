@@ -1,0 +1,5 @@
+--liquibase formatted sql
+
+--changeset chat:003-1-add-custom-status-to-user
+ALTER TABLE CHAT_USER ADD COLUMN CUSTOM_STATUS VARCHAR(100) NULL AFTER STATUS;
+--rollback ALTER TABLE CHAT_USER DROP COLUMN CUSTOM_STATUS;
