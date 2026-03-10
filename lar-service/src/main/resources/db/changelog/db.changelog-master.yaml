@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/structure/db.changelog-structure.yaml
+  - include:
+      file: db/changelog/data/db.changelog-data.yaml
